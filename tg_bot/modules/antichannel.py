@@ -41,4 +41,11 @@ def eliminate_channel(update: Update, context: CallbackContext):
         sender_chat = message.sender_chat
         bot.ban_chat_sender_chat(sender_chat_id=sender_chat.id, chat_id=chat.id)
 
+__help__ = """
+Available commands:
+• /antichannel <on/off>: Bans and deletes anyone who tries to talk as channel and forces em to talk as themselves
+• /antilinkedchan <on/off>: Makes Kigyo automatically delete linked channel posts from chatroom
+• /antichannelpin <on/off>: Makes Kigyo automatically unpin linked channel posts from chatroom
+"""
+
 __mod_name__ = "Anti-channel"
