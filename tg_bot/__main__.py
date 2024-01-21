@@ -1,9 +1,3 @@
-"""#TODO
-
-Dank-del
-2020-12-29
-"""
-
 import importlib
 import re
 import threading
@@ -388,7 +382,7 @@ def get_help(update: Update, context: CallbackContext):
                         [
                             [
                                 InlineKeyboardButton(
-                                    text="Help",
+                                    text="❔How to use / Commands help",
                                     url="t.me/{}?start=ghelp_{}".format(
                                         context.bot.username, module
                                     ),
@@ -410,7 +404,7 @@ def get_help(update: Update, context: CallbackContext):
                 [
                     [
                         InlineKeyboardButton(
-                            text="Help",
+                            text="❔How to use / Commands help",
                             url="t.me/{}?start=help".format(context.bot.username),
                         )
                     ]
@@ -677,10 +671,10 @@ def main():
         updater.start_webhook(listen="0.0.0.0", port=PORT, url_path=TOKEN, allowed_updates=Update.ALL_TYPES, 
                             webhook_url=URL+TOKEN, drop_pending_updates=KInit.DROP_UPDATES, 
                             cert=CERT_PATH if CERT_PATH else None)
-        log.info(f"Kigyo started, Using webhooks. | BOT: [@{dispatcher.bot.username}]")
+        log.info(f"started, Using webhooks. | BOT: [@{dispatcher.bot.username}]")
 
     else:
-        log.info(f"Kigyo started, Using long polling. | BOT: [@{dispatcher.bot.username}]")
+        log.info(f"started, Using long polling. | BOT: [@{dispatcher.bot.username}]")
         KigyoINIT.bot_id = dispatcher.bot.id
         KigyoINIT.bot_username = dispatcher.bot.username
         KigyoINIT.bot_name = dispatcher.bot.first_name
@@ -691,6 +685,6 @@ def main():
 
 
 if __name__ == "__main__":
-    log.info("[KIGYO] Successfully loaded modules: " + str(ALL_MODULES))
+    log.info("Successfully loaded modules: " + str(ALL_MODULES))
     telethn.start(bot_token=TOKEN)
     threading.Thread(target=main).start()
