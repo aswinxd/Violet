@@ -218,7 +218,7 @@ Setting the log channel is done by:
 • forwarding the `/setlog` to the group
 """
 
-    __mod_name__ = "Logger"
+    __mod_name__ = "Logs"
 
 else:
     # run anyway if module not loaded
