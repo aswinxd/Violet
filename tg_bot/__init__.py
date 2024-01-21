@@ -9,7 +9,6 @@ from telethon import TelegramClient
 from telethon.sessions import MemorySession
 from configparser import ConfigParser
 from logging.handlers import RotatingFileHandler
-from telegram import Client
 StartTime = time.time()
 
 
