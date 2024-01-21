@@ -118,20 +118,6 @@ cust_filters_help: |
       *Note*: Filters also support markdown formatters like: {first}, {last} etc.. and buttons.
         Check `/markdownhelp` to know more!
 
-disable_help: |
-    Not everyone wants every feature that the bot offers. Some commands are best
-    left unused; to avoid spam and abuse.
-
-    This allows you to disable some commonly used commands, so noone can use them.
-    It'll also allow you to autodelete them, stopping people from bluetexting.
-
-     • /cmds: Check the current status of disabled commands
-
-     *Admin only:*
-     • /enable <cmd name>: Enable that command
-     • /disable <cmd name>: Disable that command
-     • /listcmds: List all possible disablable commands
-
 feds_help: |
     Everything is fun, until a spammer starts entering your group, and you have to block it. Then you need to start banning more, and more, and it hurts.
     But then you have many groups, and you don't want this spammer to be in one of your groups - how can you deal? Do you have to manually block it, in all your groups?
@@ -174,7 +160,7 @@ FED_USER_HELP: |
     • `/frules`*:* See Federation regulations
 
 formt_help_bse: |
-    Kigyo supports a large number of formatting options to make your messages more expressive. Take a look!
+    Elsandra supports a large number of formatting options to make your messages more expressive. Take a look!
 
 md_help: |
     <b>Markdown Formatting</b>
@@ -204,20 +190,6 @@ filling_help: |
       - <code>{mention}</code>: Mentions the user with their firstname.
       - <code>{id}</code>: The user's ID.
       - <code>{chatname}</code>: The chat's name.
-
-antispam_help: |
-     *Admins only:*
-      • `/antispam <on/off/yes/no>`*:* Will toggle our antispam tech or return your current settings.
-
-     Anti-Spam, used by bot devs to ban spammers across all groups. This helps protect
-     you and your groups by removing spam flooders as quickly as possible.
-     *Note:* Users can appeal gbans or report spammers at @YorkTownEagleUnion
-
-     Kigyo also integrates @Spamwatch API to remove Spammers as much as possible from your chatroom!
-     *What is SpamWatch?*
-     SpamWatch maintains a large constantly updated ban-list of spambots, trolls, bitcoin spammers and unsavoury characters.
-     Constantly help banning spammers off from your group automatically So, you wont have to worry about spammers storming your group.
-     *Note:* Users can appeal spamwatch bans at @SpamwatchSupport
 
 gtranslate_help: |
      Use this module to translate stuff... duh!
@@ -368,16 +340,6 @@ greetings_help: |
 
       *Welcome markdown:*
        • `/welcomehelp`*:* view more formatting information for custom welcome/goodbye messages.
-
-
-sticker_blacklist_help: |
-       **Only admin:**
-         • `/addblsticker <sticker link>**`:** Add the sticker trigger to the black list. Can be added via reply sticker
-         • `/unblsticker <sticker link>**`:** Remove triggers from blacklist. The same newline logic applies here, so you can delete multiple triggers at once
-         • `/rmblsticker <sticker link>**`:** Same as above
-         • `/blstickermode <delete/ban/tban/mute/tmute>**`:** sets up a default action on what to do if users use blacklisted stickers
-       Note:
-         • `<sticker link>` can be `https://t.me/addstickers/<sticker>` or just `<sticker>` or reply to the sticker message
 
 
 raid_help: |
