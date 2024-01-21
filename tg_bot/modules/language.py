@@ -47,8 +47,8 @@ def set_lang(update: Update, _) -> None:
     keyb.append(
         [
             InlineKeyboardButton(
-                text="Help us in translations",
-                url="https://poeditor.com/join/project?hash=oJISpjNcEx",
+                text="To Add More Languages",
+                url="t.me/XenonSupportChat",
             )
         ]
     )
