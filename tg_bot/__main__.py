@@ -160,7 +160,7 @@ def start(update: Update, context: CallbackContext):  # sourcery no-metrics
                     ],
                     [
                         InlineKeyboardButton(text="©️ credits", callback_data="fallen_"),
-                        InlineKeyboardButton(text="❕Support", url=f"https://t.me/{SUPPORT_CHAT}"),
+                        InlineKeyboardButton(text="❕Support", url=f"https://t.me/xenonbots"),
                     ],
                 ])
             )
@@ -234,7 +234,7 @@ def start(update: Update, context: CallbackContext):  # sourcery no-metrics
                     ],
                     [
                         InlineKeyboardButton(text="©️ credits", callback_data="fallen_"),
-                        InlineKeyboardButton(text="❕Support", url=f"https://t.me/{SUPPORT_CHAT}"),
+                        InlineKeyboardButton(text="❕Support", url=f"https://t.me/xenonbots"),
                     ],
                 ])
             )
