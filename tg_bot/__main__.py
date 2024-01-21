@@ -152,15 +152,15 @@ def start(update: Update, context: CallbackContext):  # sourcery no-metrics
                     [
                         InlineKeyboardButton(
                             text="➕Add Me To Your Groups➕",
-                            url=f"https://t.me/elsarobot?startgroup=true",
+                            url=f"https://t.me/ElsaRobot?startgroup=true",
                         ),
                     ],
                     [
                         InlineKeyboardButton(text="❓How to use? / Commands Help", callback_data="help_back"),
                     ],
                     [
-                        InlineKeyboardButton(text="©️ credits", callback_data="fallen_"),
-                        InlineKeyboardButton(text="❕Support", url=f"https://t.me/xenonbots"),
+                        InlineKeyboardButton(text="X1 News", url=f"XenonBots"),
+                        InlineKeyboardButton(text="❕Support", url=f"https://t.me/xenonsupportchat"),
                     ],
                 ])
             )
@@ -187,7 +187,7 @@ def start(update: Update, context: CallbackContext):  # sourcery no-metrics
                 text = "Here is the help for the *{}* module:\n".format(HELPABLE[mod].__mod_name__) + help_text
                 help_buttons.append(
                     [InlineKeyboardButton(text="Back", callback_data="help_back"),
-                     InlineKeyboardButton(text='Support', url='https://t.me/YorkTownEagleUnion')]
+                     InlineKeyboardButton(text='Support', url='https://t.me/XenonSUpportChat')]
                 )
                 send_help(
                     chat.id,
@@ -226,14 +226,14 @@ def start(update: Update, context: CallbackContext):  # sourcery no-metrics
                     [
                         InlineKeyboardButton(
                             text="➕Add Me To Your Groups➕",
-                            url=f"https://t.me/elsarobot?startgroup=true",
+                            url=f"https://t.me/Elsarobot?startgroup=true",
                         ),
                     ],
                     [
                         InlineKeyboardButton(text="❓How to use? / Commands Help", callback_data="help_back"),
                     ],
                     [
-                        InlineKeyboardButton(text="©️ credits", callback_data="fallen_"),
+                        InlineKeyboardButton(text="X1 News", url=f"XenonBots"),
                         InlineKeyboardButton(text="❕Support", url=f"https://t.me/xenonbots"),
                     ],
                 ])
@@ -312,7 +312,7 @@ def help_button(update: Update, context: CallbackContext):
             )
             help_buttons.append(
                 [InlineKeyboardButton(text="Back", callback_data="help_back"),
-                 InlineKeyboardButton(text='Support', url='https://t.me/YorkTownEagleUnion')]
+                 InlineKeyboardButton(text='Support', url='https://t.me/XEnonsupportchat')]
             )
             query.message.edit_text(
                 text=text,
