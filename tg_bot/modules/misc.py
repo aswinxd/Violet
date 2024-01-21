@@ -355,7 +355,7 @@ def stats(update, context):
     status += f"*• Database size:* {str(db_size)}" + "\n"
     kb = [
           [
-           InlineKeyboardButton('Ping', callback_data='pingCB')
+           InlineKeyboardButton('back', callback_data='start_back')
           ]
     ]
     try:
@@ -388,28 +388,3 @@ def stats(update, context):
             reply_markup=InlineKeyboardMarkup(kb),
             disable_web_page_preview=True,
         )
-
-@kigcmd(command='ping')
-@rate_limit(40, 60)
-def ping(update: Update, _):
-    msg = update.effective_message
-    start_time = time.time()
-    message = msg.reply_text("Pinging...")
-    end_time = time.time()
-    ping_time = round((end_time - start_time) * 1000, 3)
-    message.edit_text(
-        "*Pong!!!*\n`{}ms`".format(ping_time), parse_mode=ParseMode.MARKDOWN
-    )
-
-
-@kigcallback(pattern=r'^pingCB')
-@rate_limit(40, 60)
-def pingCallback(update: Update, context: CallbackContext):
-    query = update.callback_query
-    start_time = time.time()
-    requests.get('https://api.telegram.org')
-    end_time = time.time()
-    ping_time = round((end_time - start_time) * 1000, 3)
-    query.answer(f'Pong! {ping_time}ms'
-
-
