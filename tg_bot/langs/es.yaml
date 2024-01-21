@@ -10,20 +10,11 @@ pm_start_text: |
   Soy un bot para gestionar grupos con cosas divertidas.
   
   Puedes encontrar una lista con los comandos disponibles escribiendo /help
-grp_start_text: "Hola, soy Kigyo."
+grp_start_text: "Hola, soy Elsandra."
 pm_help_text: |
-  Que pasa! Me llamo *Elsandra*. Soy un bot para gestionar grupos con extras divertidos! Estos comandos principales te ayudarán a iniciar el bot.
-  • /help: Te envía este mensaje.
-  • /language: Cambia el idioma del bot.
-  • /settings:
-   - por PM: Te enviara tus configuraciones con todos los comandos disponibles.
-   - en el grupo: Te enviará por PM la configuración del grupo.
-  
+  Que pasa! Me llamo *Elsandra*. Soy un bot para gestionar grupos con extras divertidos! Estos comandos principales te ayudarán a iniciar el bot. 
   Click en los botones que hay a continuación para obtener documentación acerca de los módulos.
-add_bot_to_group_btn: "Añade Kigyo a tu grupo"
-support_chat_link_btn: "Chat de soporte"
-updates_channel_link_btn: "Canal de actualizaciones de Kgyo"
-src_btn: "Código fuente (Licensed under GPLv3)"
+  
 admin_help: |
   • /admins: lista de administradores del canal.
   
