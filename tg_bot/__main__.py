@@ -164,6 +164,7 @@ buttons = [
         InlineKeyboardButton(text="❕Support", url=f"https://t.me/{SUPPORT_CHAT}"),
     ],
 ]
+                )
             context.bot.answer_callback_query(query.id)
             return
 
