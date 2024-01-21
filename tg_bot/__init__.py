@@ -86,7 +86,7 @@ class KigyoINIT:
         self.DROP_UPDATES: bool = self.parser.getboolean("DROP_UPDATES", True)
         self.BOT_API_URL: str = self.parser.get('BOT_API_URL', "https://api.telegram.org/bot")
         self.BOT_API_FILE_URL: str = self.parser.get('BOT_API_FILE_URL', "https://api.telegram.org/file/bot")
-
+        self.SUPPORT_CHAT = "XenonSupportChat"
 
     def init_sw(self):
         if self.spamwatch_api is None:
@@ -139,6 +139,7 @@ CF_API_KEY = KInit.CF_API_KEY
 BOT_NAME = KInit.BOT_NAME
 BOT_USERNAME = KInit.BOT_USERNAME
 LOGGER = KInit.GBAN_LOGS
+SUPPORT_CHAT = KInit.SUPPORT_CHAT
 # SpamWatch
 sw = KInit.init_sw()
 
