@@ -373,4 +373,4 @@ def get_help(chat):
     return gs(chat, "admin_help")
 
 
-__mod_name__ = "Admin"
+__mod_name__ = "Admins"
