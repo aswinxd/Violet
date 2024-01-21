@@ -9,9 +9,11 @@ set_chat_lang: "Great, {} it is from now on!"
 
 
 pm_start_text: |
-      Hey there! My name is Elsandra - Im here to help you manage your groups! Hit Help and commands to find out more about how to use me to my full potential.
+      Hey there! My name is Elsandra - I'm here to help you manage your groups! Hit /help to find out more about how to use me to my full potential.
 
-      Join my news channel to get information on all the latest updates.
+      Join my news channel (http://t.me/xmusicbots) to get information on all the latest updates.
+
+       Use the /language command to change bot language
 grp_start_text: "Heya :) PM me if you have any questions on how to use me!"
 
 pm_help_text: |
