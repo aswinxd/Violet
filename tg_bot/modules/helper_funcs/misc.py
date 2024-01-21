@@ -47,7 +47,7 @@ def split_message(msg: str) -> List[str]:
 
 def paginate_modules(page_n: int, module_dict: Dict, prefix, chat=None) -> List:
     if not chat:
-            modules = sorted(
+        modules = sorted(
             [
                 EqInlineKeyboardButton(
                     x.__mod_name__,
@@ -59,8 +59,8 @@ def paginate_modules(page_n: int, module_dict: Dict, prefix, chat=None) -> List:
             ]
         )
     else:
-            modules = sorted(
-                 [
+        modules = sorted(
+            [
                 EqInlineKeyboardButton(
                     x.__mod_name__,
                     callback_data="{}_module({},{})".format(
@@ -69,7 +69,7 @@ def paginate_modules(page_n: int, module_dict: Dict, prefix, chat=None) -> List:
                 )
                 for x in module_dict.values()
             ]
-             )
+        )
 
     pairs = list(zip(modules[::3], modules[1::3], modules[2::3]))
     i = 0
@@ -86,33 +86,25 @@ def paginate_modules(page_n: int, module_dict: Dict, prefix, chat=None) -> List:
             )
         )
 
-    COLUMN_SIZE = 4
+    COLUMN_SIZE = 12
 
     max_num_pages = ceil(len(pairs) / COLUMN_SIZE)
     modulo_page = page_n % max_num_pages
 
     # can only have a certain amount of buttons side by side
     if len(pairs) > COLUMN_SIZE:
-        pairs = pairs[
-            modulo_page * COLUMN_SIZE : COLUMN_SIZE * (modulo_page + 1)
-        ] + [
+        # Keep only the "Back" button
+        pairs = [
             (
-                EqInlineKeyboardButton(
-                    "❮",
-                    callback_data="{}_prev({})".format(prefix, modulo_page),
-                ),
                 EqInlineKeyboardButton(
                     "Back",
                     callback_data="start_back",
-                ),
-                EqInlineKeyboardButton(
-                    "❯",
-                    callback_data="{}_next({})".format(prefix, modulo_page),
                 ),
             )
         ]
 
     return pairs
+
 
 def article(
     title: str = "",
