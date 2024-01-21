@@ -15,16 +15,8 @@ pm_start_text: |
 grp_start_text: "Heya :) PM me if you have any questions on how to use me!"
 
 pm_help_text: |
-   Hello there! My name is *Kigyo*. A part of *Eagle Union*.
-   I'm a modular group management bot with a few fun extras! Have a look at the following for an idea of some of
-   the things I can help you with.
-   *Main* commands available:
-    • /start: Starts me, can be used to check I'm alive or not.
-    • /help: PM's you this message.
-    • /language: Change bot language.
-    • /settings:
-      - in PM: will send you your settings for all supported modules.
-      - in a group: will redirect you to pm, with all that chat's settings.
+   This is the help module of elsandra
+    • /language: Change bot language..
     Click on the buttons below to get documentation about specific modules!
 
 admin_help: |
@@ -341,10 +333,7 @@ rules_help: |
       • `/clearrules`*:* clear the rules for this chat.
 
 userinfo_help: |
-      - /setbio <text>: while replying, will save another user's bio
-      - /bio: will get your or another user's bio. This cannot be set by yourself.
-      - /setme <text>: will set your info
-      - /me: will get your or another user's info
+      - /info: will get your or another user's info
 
 warns_help: |
       • `/warns <userhandle>`*:* get a user's number, and reason, of warns.
@@ -377,15 +366,6 @@ greetings_help: |
 
       *Welcome markdown:*
        • `/welcomehelp`*:* view more formatting information for custom welcome/goodbye messages.
-
-nation_help: |
-      - /eagle - Lists all Eagle Union members.
-      - /royals - Lists all Royal Nations.
-      - /sakuras - Lists all Sakura Nations.
-      - /sardegnas - Lists all Sardegnas Nations.
-      - /neptunians - Lists all Neptunia Nations.
-      Note: These commands list users with special bot priveleges and can only be used by them.
-      You can visit @YorktownEagleUnion to query more about these.
 
 
 sticker_blacklist_help: |
