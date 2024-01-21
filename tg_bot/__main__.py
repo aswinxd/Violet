@@ -153,7 +153,7 @@ def start(update: Update, context: CallbackContext):  # sourcery no-metrics
                         InlineKeyboardButton(text="❓How to use? / Commands Help", callback_data="help_back"),
                     ],
                     [
-                        InlineKeyboardButton(text="X1 News", url=f"XenonBots"),
+                        InlineKeyboardButton(text="X1 News", url=f"t.me/XenonBots"),
                         InlineKeyboardButton(text="❕Support", url=f"https://t.me/xenonsupportchat"),
                     ],
                 ])
@@ -227,7 +227,7 @@ def start(update: Update, context: CallbackContext):  # sourcery no-metrics
                         InlineKeyboardButton(text="❓How to use? / Commands Help", callback_data="help_back"),
                     ],
                     [
-                        InlineKeyboardButton(text="X1 News", url=f"XenonBots"),
+                        InlineKeyboardButton(text="X1 News", url=f"t.me/XenonBots"),
                         InlineKeyboardButton(text="❕Support", url=f"https://t.me/xenonbots"),
                     ],
                 ])
