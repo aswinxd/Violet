@@ -138,7 +138,7 @@ FED_OWNER_HELP: |
     • `/setfedlog <fed_id>`*:* Sets the group as a fed log report base for the federation
     • `/unsetfedlog <fed_id>`*:* Removed the group as a fed log report base for the federation
     • `/fbroadcast <message>`*:* Broadcasts a messages to all groups that have joined your fed
-    • `/fedsubs`*:* Shows the feds your group is subscribed to `(broken rn)`
+    • `/fedsubs`*:* Shows the feds your group is subscribed to 
 
 FED_ADMIN_HELP: |
     *Fed Admins:*
@@ -192,7 +192,6 @@ filling_help: |
       - <code>{chatname}</code>: The chat's name.
 
 gtranslate_help: |
-     Use this module to translate stuff... duh!
 
      *Commands:*
      • `/tl` (or `/tr`): as a reply to a message, translates it to English.
