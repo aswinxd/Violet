@@ -12,7 +12,7 @@ pm_start_text: |
   Puedes encontrar una lista con los comandos disponibles escribiendo /help
 grp_start_text: "Hola, soy Kigyo."
 pm_help_text: |
-  Que pasa! Me llamo *Kigyo*. Soy un bot para gestionar grupos con extras divertidos! Estos comandos principales te ayudarán a iniciar el bot.
+  Que pasa! Me llamo *Elsandra*. Soy un bot para gestionar grupos con extras divertidos! Estos comandos principales te ayudarán a iniciar el bot.
   • /help: Te envía este mensaje.
   • /language: Cambia el idioma del bot.
   • /settings:
