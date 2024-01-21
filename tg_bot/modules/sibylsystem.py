@@ -23,6 +23,9 @@ from .log_channel import loggable
 from .sql.users_sql import get_user_com_chats
 from .helper_funcs.chat_status import connection_status, is_user_admin, user_admin
 from .helper_funcs.extraction import extract_user
+import logging
+
+LOGGER = logging.getLogger(__name__)
 
 try:
     from .disable import DisableAbleCommandHandler
