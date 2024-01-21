@@ -1,7 +1,7 @@
 # Language name in their native
 language: "English 🇺🇲"
 # name of people(s) who worked on this translation
-authors: "@dank_as_fuck"
+authors: "@AIIRACK"
 
 # languages
 curr_chat_lang: "Hey. Your current language is {}, select the one you want from the buttons below :)"
@@ -12,7 +12,7 @@ pm_start_text: |
       Hey there! My name is Elsandra - Im here to help you manage your groups! Hit Help and commands to find out more about how to use me to my full potential.
 
       Join my news channel to get information on all the latest updates.
-grp_start_text: "Hi, I'm Kigyo."
+grp_start_text: "Heya :) PM me if you have any questions on how to use me!"
 
 pm_help_text: |
    Hello there! My name is *Kigyo*. A part of *Eagle Union*.
@@ -27,11 +27,6 @@ pm_help_text: |
       - in a group: will redirect you to pm, with all that chat's settings.
     Click on the buttons below to get documentation about specific modules!
 
-add_bot_to_group_btn: "Add Kigyo"
-support_chat_link_btn: "Support"
-updates_channel_link_btn: "Updates"
-src_btn: "Source code"
-
 admin_help: |
    • `/admins`*:* list of admins in the chat
 
@@ -42,19 +37,6 @@ admin_help: |
    • `/promote`*:* promotes the user replied to
    • `/demote`*:* demotes the user replied to
    • `/title <title here>`*:* sets a custom title for an admin that the bot promoted
-
-afk_help: |
-   - /afk <reason>: mark yourself as AFK(away from keyboard).
-   - brb <reason>: same as the afk command - but not a command.
-   When marked as AFK, any mentions will be replied to with a message to say you're not available!
-
-anilist_help: |
-    *AniList*
-    Get information about anime, manga or characters with the help of this module! All data is fetched from [AniList](anilist.co).
-    *Available commands:*
-     - /anime <anime>: returns information about the anime.
-     - /character <character>: returns information about the character.
-     - /manga <manga>: returns information about the manga.
 
 antiflood_help: |
     Antiflood allows you to take action on users that send more than x messages in a row. Exceeding the set flood
@@ -228,21 +210,6 @@ filling_help: |
       - <code>{mention}</code>: Mentions the user with their firstname.
       - <code>{id}</code>: The user's ID.
       - <code>{chatname}</code>: The chat's name.
-
-fun_help: |
-     • /runs: reply a random string from an array of replies.
-     • /pat: pat a person, cool thing to have for cute ones :3
-     • /slap: slap a user, or get slapped if not a reply.
-     • /shrug : get shrug XD.
-     • /table : get flip/unflip :v.
-     • /decide : Randomly answers yes/no/maybe
-     • /toss : Tosses A coin
-     • /roll : Roll a dice.
-     • /rlg : Join ears,nose,mouth and create an emo ;-;
-     • /shout <keyword>: write anything you want to give loud shout.
-     • /stickerid: reply to a sticker to get its ID.
-     • /getsticker: reply to a sticker to get the raw PNG image.
-     • /steal: reply to a sticker or image to add it to your pack.
 
 antispam_help: |
      *Admins only:*
