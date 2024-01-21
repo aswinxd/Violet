@@ -222,42 +222,22 @@ def start(update: Update, context: CallbackContext):  # sourcery no-metrics
                     OWNER_ID,
                 ),
                 parse_mode=ParseMode.MARKDOWN,
-                reply_markup=InlineKeyboardMarkup(
+                reply_markup=InlineKeyboardMarkup([
                     [
-                        [
-                            InlineKeyboardButton(
-                                text=gs(chat.id, "support_chat_link_btn"),
-                                url='https://t.me/YorktownEagleUnion',
-                            ),
-                            InlineKeyboardButton(
-                                text=gs(chat.id, "updates_channel_link_btn"),
-                                url="https://t.me/KigyoUpdates",
-                            ),
-                            InlineKeyboardButton(
-                                text=gs(chat.id, "src_btn"),
-                                url="https://github.com/Dank-del/EnterpriseALRobot",
-                            ),
-                        ],
-                        [
-                            InlineKeyboardButton(
-                                text="Try inline",
-                                switch_inline_query_current_chat="",
-                            ),
-                            InlineKeyboardButton(
-                                text="Help",
-                                callback_data="help_back",
-                            ),
-                            InlineKeyboardButton(
-                                text=gs(chat.id, "add_bot_to_group_btn"),
-                                url="t.me/{}?startgroup=true".format(
-                                    context.bot.username
-                                ),
-                            ),
-                        ],
-                    ]
-                ),
+                        InlineKeyboardButton(
+                            text="➕Add Me To Your Groups➕",
+                            url=f"https://t.me/{BOT_USERNAME}?startgroup=true",
+                        ),
+                    ],
+                    [
+                        InlineKeyboardButton(text="❓How to use? / Commands Help", callback_data="help_back"),
+                    ],
+                    [
+                        InlineKeyboardButton(text="©️ credits", callback_data="fallen_"),
+                        InlineKeyboardButton(text="❕Support", url=f"https://t.me/{SUPPORT_CHAT}"),
+                    ],
+                ])
             )
-
     else:
         update.effective_message.reply_text(gs(chat.id, "grp_start_text"))
 
