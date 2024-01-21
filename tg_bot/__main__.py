@@ -148,23 +148,22 @@ def start(update: Update, context: CallbackContext):  # sourcery no-metrics
                     OWNER_ID,
                 ),
                 parse_mode=ParseMode.MARKDOWN,
-                reply_markup=InlineKeyboardMarkup(
-buttons = [
-    [
-        InlineKeyboardButton(
-            text="➕Add Me To Your Groups➕",
-            url=f"https://t.me/{BOT_USERNAME}?startgroup=true",
-        ),
-    ],
-    [
-        InlineKeyboardButton(text="❓How to use? / Commands Help", callback_data="help_back"),
-    ],
-    [
-        InlineKeyboardButton(text="©️ credits", callback_data="fallen_"),
-        InlineKeyboardButton(text="❕Support", url=f"https://t.me/{SUPPORT_CHAT}"),
-    ],
-]
-                )
+                reply_markup=InlineKeyboardMarkup([
+                    [
+                        InlineKeyboardButton(
+                            text="➕Add Me To Your Groups➕",
+                            url=f"https://t.me/{BOT_USERNAME}?startgroup=true",
+                        ),
+                    ],
+                    [
+                        InlineKeyboardButton(text="❓How to use? / Commands Help", callback_data="help_back"),
+                    ],
+                    [
+                        InlineKeyboardButton(text="©️ credits", callback_data="fallen_"),
+                        InlineKeyboardButton(text="❕Support", url=f"https://t.me/{SUPPORT_CHAT}"),
+                    ],
+                ])
+            )
             context.bot.answer_callback_query(query.id)
             return
 
