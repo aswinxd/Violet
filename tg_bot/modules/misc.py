@@ -211,8 +211,6 @@ def get_user_info(chat: Chat, user: User) -> str:
             text += "<b>This person is banned in Spamwatch!</b>"
             text += f"\nReason: <pre>{spamwtc.reason}</pre>"
             text += "\nAppeal at @SpamWatchSupport"
-        else:
-            text += "<b>\n\nSpamWatch:</b>\n Not banned"
     Nation_level_present = False
     num_chats = sql.get_user_num_chats(user.id)
     text += f"\n<b>Chat count</b>: <code>{num_chats}</code>"
@@ -223,7 +221,7 @@ def get_user_info(chat: Chat, user: User) -> str:
             if result.custom_title:
                 text += f"\nThis user holds the title <b>{result.custom_title}</b> here."
     if user.id == OWNER_ID:
-        text += '\nThis person is my owner'
+        text += 'PMS HERE'
         Nation_level_present = True
     elif user.id in DEV_USERS:
         text += '\nThis Person is a part of Eagle Union'
@@ -241,7 +239,7 @@ def get_user_info(chat: Chat, user: User) -> str:
         text += '\nThe Nation level of this person is Neptunia'
         Nation_level_present = True
     if Nation_level_present:
-        text += f' [<a href="https://t.me/{bot.username}?start=nations">?</a>]'
+        text += f' [<a href="https://t.me/{bot.username}?start">?</a>]'
     text += "\n"
     for mod in USER_INFO:
         if mod.__mod_name__ == "Users":
@@ -337,7 +335,7 @@ def stats(update, context):
     db_size = SESSION.execute("SELECT pg_size_pretty(pg_database_size(current_database()))").scalar_one_or_none()
     uptime = datetime.datetime.fromtimestamp(boot_time()).strftime("%Y-%m-%d %H:%M:%S")
     botuptime = get_readable_time((time.time() - StartTime))
-    status = "*╒═══「 System statistics: 」*\n\n"
+    status = "*System statistics\n\n"
     status += f"*• System Start time:* {str(uptime)}" + "\n"
     uname = platform.uname()
     status += f"*• System:* {str(uname.system)}" + "\n"
@@ -371,8 +369,8 @@ def stats(update, context):
         update.effective_message.reply_text(status +
             "\n*Bot statistics*:\n"
             + "\n".join([mod.__stats__() for mod in STATS]) +
-            "\n\n[⍙ GitHub](https://github.com/Dank-del/EnterpriseALRobot) | [⍚ GitLab](https://gitlab.com/Dank-del/EnterpriseALRobot)\n\n" +
-            "╘══「 by [Dank-del](github.com/Dank-del) 」\n",
+            "\n\n[support](t.me/xenonsupportchat) | [channe](senonbots)\n\n" +
+            "[xenon](t.me/xenonbots)\n",
         parse_mode=ParseMode.MARKDOWN, reply_markup=InlineKeyboardMarkup(kb), disable_web_page_preview=True)
     except BaseException:
         update.effective_message.reply_text(
@@ -382,9 +380,9 @@ def stats(update, context):
                         "\n*Bot statistics*:\n"
                         + "\n".join(mod.__stats__() for mod in STATS)
                     )
-                    + "\n\n⍙ [GitHub](https://github.com/Dank-del/EnterpriseALRobot) | ⍚ [GitLab](https://gitlab.com/Dank-del/EnterpriseALRobot)\n\n"
+                    + "\n\n[support](t.me/xenonsupportchat) | [channel](t.me/xenonbots)\n\n"
                 )
-                + "╘══「 by [Dank-del](github.com/Dank-del) 」\n"
+                + "by [aiirack](t.me/lavosandre)\n"
             ),
             parse_mode=ParseMode.MARKDOWN,
             reply_markup=InlineKeyboardMarkup(kb),
