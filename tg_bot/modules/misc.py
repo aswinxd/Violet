@@ -410,11 +410,6 @@ def pingCallback(update: Update, context: CallbackContext):
     requests.get('https://api.telegram.org')
     end_time = time.time()
     ping_time = round((end_time - start_time) * 1000, 3)
-    query.answer(f'Pong! {ping_time}ms')
-
-
-def get_help(chat):
-    return gs(chat, "misc_help")
-
+    query.answer(f'Pong! {ping_time}ms'
 
 
