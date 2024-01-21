@@ -152,7 +152,7 @@ def start(update: Update, context: CallbackContext):  # sourcery no-metrics
                     [
                         InlineKeyboardButton(
                             text="➕Add Me To Your Groups➕",
-                            url=f"https://t.me/{BOT_USERNAME}?startgroup=true",
+                            url=f"https://t.me/elsarobot?startgroup=true",
                         ),
                     ],
                     [
@@ -226,7 +226,7 @@ def start(update: Update, context: CallbackContext):  # sourcery no-metrics
                     [
                         InlineKeyboardButton(
                             text="➕Add Me To Your Groups➕",
-                            url=f"https://t.me/{BOT_USERNAME}?startgroup=true",
+                            url=f"https://t.me/elsarobot?startgroup=true",
                         ),
                     ],
                     [
