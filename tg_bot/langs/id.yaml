@@ -15,13 +15,8 @@ pm_help_text: |
   Hai kak! Namaku *elsandra*. Anggota dari *Eagle Union*.
   Aku adalah bot untuk membantu grup dengan fitur-fitur yang mantul! Silahkan lihat-lihat dulu.
   Menu perintah *utama* yang tersedia:
-   • /start: Untuk bangunkan aku. Untuk mengecek aku hidup atau modar.
-   • /help: Untuk menampilkan menu.
-   • /language: Untuk mengganti bahasa.
-   • /settings:
-     - dalam PC: mengirim semua pengaturan.
-     - dalam grup: akan mengirim pesan ke private, dengan semua pengaturan.
-   Klik tombol dibawah untuk mengetahui lebih lanjut tentang semua fitur!
+
+ • /language: Untuk mengganti bahasa.
 add_bot_to_group_btn: "Tambah Kigyo ke dalam grup kamu"
 support_chat_link_btn: "Chat Bantuan // Eagle Union"
 updates_channel_link_btn: "Channel Kigyo Official"
@@ -36,6 +31,11 @@ admin_help: |
   • `/promote`*:* membuat member menjadi admin
   • `/demote`*:* membuat admin menjadi member
   • `/title <title here>`*:* kasih nama admin yang terpilih
+  • /antichannel <on/off>: Bans and deletes anyone who tries to talk as channel and forces em to talk as themselves
+  • /antilinkedchan <on/off>: Makes Elsandra automatically delete linked channel posts from chatroom
+  • /antichannelpin <on/off>: Makes Elsandra automatically unpin linked channel posts from chatroom
+
+
 afk_help: |
   - /afk <alasan>: kasih tau kalau kamu sedang AFK(away from keyboard).
   - brb <alasan>: sama kek AFK.
