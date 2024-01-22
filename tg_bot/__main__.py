@@ -427,7 +427,7 @@ def get_help(update: Update, context: CallbackContext):
             text = "Here is the available help for the *{}* module:\n".format(HELPABLE[module].__mod_name__) + help_text
             help_buttons.append(
                 [InlineKeyboardButton(text="Back", callback_data="help_back"),
-                 InlineKeyboardButton(text='Support', url='https://t.me/YorkTownEagleUnion')]
+                 InlineKeyboardButton(text='Support', url='https://t.me/xenonsupportchat')]
             )
             send_help(
                 chat.id,
