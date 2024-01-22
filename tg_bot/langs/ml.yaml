@@ -32,6 +32,11 @@ admin_help: |
     • /promote*:* മറുപടി നൽകിയ ഉപയോക്താവിനെ പ്രോത്സാഹിപ്പിക്കുന്നു
     • /demote*:* മറുപടി നൽകിയ ഉപയോക്താവിനെ തരംതാഴ്ത്തുന്നു
     • /title <ശീർഷകം ഇവിടെ>*:* ബോട്ട് പ്രമോട്ട് ചെയ്‌ത ഒരു അഡ്‌മിന് ഒരു ഇഷ്‌ടാനുസൃത ശീർഷകം സജ്ജമാക്കുന്നു
+    • /antichannel <on/off>: Bans and deletes anyone who tries to talk as channel and forces em to talk as themselves
+    • /antilinkedchan <on/off>: Makes Elsandra automatically delete linked channel posts from chatroom
+    • /antichannelpin <on/off>: Makes Elsandra automatically unpin linked channel posts from chatroom
+
+
 antiflood_help: |
    തുടർച്ചയായി x-ൽ കൂടുതൽ സന്ദേശങ്ങൾ അയയ്ക്കുന്ന ഉപയോക്താക്കളിൽ നടപടിയെടുക്കാൻ Antiflood നിങ്ങളെ അനുവദിക്കുന്നു.  സെറ്റ് വെള്ളപ്പൊക്കം കവിഞ്ഞു
      ആ ഉപയോക്താവിനെ നിയന്ത്രിക്കുന്നതിൽ കലാശിക്കും.
