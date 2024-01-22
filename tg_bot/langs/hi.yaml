@@ -33,8 +33,8 @@ admin_help: |
    • /title <शीर्षक यहां>*:* उस व्यवस्थापक के लिए एक कस्टम शीर्षक सेट करता है जिसे बॉट ने प्रचारित किया है
     Available commands:
    • /antichannel <on/off>: Bans and deletes anyone who tries to talk as channel and forces em to talk as themselves
-   • /antilinkedchan <on/off>: Makes Kigyo automatically delete linked channel posts from chatroom
-   • /antichannelpin <on/off>: Makes Kigyo automatically unpin linked channel posts from chatroom
+   • /antilinkedchan <on/off>: Makes Elsandra automatically delete linked channel posts from chatroom
+   • /antichannelpin <on/off>: Makes Elsandra automatically unpin linked channel posts from chatroom
 
 
 antiflood_help: |
