@@ -4,14 +4,13 @@ from typing import Dict, List
 
 import bleach
 import markdown2
-import emoji
-
+from emoji import unicode_codes
 from telegram import MessageEntity
 from telegram.utils.helpers import escape_markdown
 
-# NOTE: the url \ escape may cause double escapes
+# NOTE: the url \ escape may cause double escape
 # match * (bold) (don't escape if in url)
-# match _ (italics) (don't escape if in url)
+# match _ (italics) (don't escape if in url]
 # match ` (code)
 # match []() (markdown link)
 # else, escape *, _, `, and [
@@ -26,6 +25,7 @@ MATCH_MD = re.compile(
 # regex to find []() links -> hyperlinks/buttons
 LINK_REGEX = re.compile(r"(?<!\\)\[.+?\]\((.*?)\)")
 BTN_URL_REGEX = re.compile(r"(\[([^\[]+?)\]\(buttonurl:(?:/{0,2})(.+?)(:same)?\))")
+_EMOJI_REGEXP = None
 
 
 def _selective_escape(to_parse: str) -> str:
@@ -47,9 +47,17 @@ def _selective_escape(to_parse: str) -> str:
 
 
 # This is a fun one.
+def get_emoji_regexp():
+    global _EMOJI_REGEXP
+    if _EMOJI_REGEXP is None:
+        emojis = sorted(unicode_codes.EMOJI_DATA, key=len, reverse=True)
+        pattern = "(" + "|".join(re.escape(u) for u in emojis) + ")"
+    return re.compile(pattern)
+
+
 def _calc_emoji_offset(to_calc) -> int:
     # Get all emoji in text.
-    emoticons = emoji.get_emoji_regexp().finditer(to_calc)
+    emoticons = get_emoji_regexp().finditer(to_calc)
     # Check the utf16 length of the emoji to determine the offset it caused.
     # Normal, 1 character emoji don't affect; hence sub 1.
     # special, eg with two emoji characters (eg face, and skin col) will have length 2, so by subbing one we
@@ -205,35 +213,33 @@ START_CHAR = ("'", '"', SMART_OPEN)
 
 
 def split_quotes(text: str) -> List:
-    if any(text.startswith(char) for char in START_CHAR):
-        counter = 1  # ignore first char -> is some kind of quote
-        while counter < len(text):
-            if text[counter] == "\\":
-                counter += 1
-            elif text[counter] == text[0] or (
-                text[0] == SMART_OPEN and text[counter] == SMART_CLOSE
-            ):
-                break
+    if not any(text.startswith(char) for char in START_CHAR):
+        return text.split(None, 1)
+    counter = 1  # ignore first char -> is some kind of quote
+    while counter < len(text):
+        if text[counter] == "\\":
             counter += 1
-        else:
-            return text.split(None, 1)
-
-        # 1 to avoid starting quote, and counter is exclusive so avoids ending
-        key = remove_escapes(text[1:counter].strip())
-        # index will be in range, or `else` would have been executed and returned
-        rest = text[counter + 1 :].strip()
-        if not key:
-            key = text[0] + text[0]
-        return list(filter(None, [key, rest]))
+        elif text[counter] == text[0] or (
+            text[0] == SMART_OPEN and text[counter] == SMART_CLOSE
+        ):
+            break
+        counter += 1
     else:
         return text.split(None, 1)
 
+    # 1 to avoid starting quote, and counter is exclusive so avoids ending
+    key = remove_escapes(text[1:counter].strip())
+    # index will be in range, or `else` would have been executed and returned
+    rest = text[counter + 1 :].strip()
+    if not key:
+        key = text[0] + text[0]
+    return list(filter(None, [key, rest]))
+
 
 def remove_escapes(text: str) -> str:
-    counter = 0
     res = ""
     is_escaped = False
-    while counter < len(text):
+    for counter in range(len(text)):
         if is_escaped:
             res += text[counter]
             is_escaped = False
@@ -241,7 +247,6 @@ def remove_escapes(text: str) -> str:
             is_escaped = True
         else:
             res += text[counter]
-        counter += 1
     return res
 
 
