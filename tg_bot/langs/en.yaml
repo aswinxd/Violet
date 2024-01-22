@@ -31,6 +31,10 @@ admin_help: |
    • `/promote`*:* promotes the user replied to
    • `/demote`*:* demotes the user replied to
    • `/title <title here>`*:* sets a custom title for an admin that the bot promoted
+   • /antichannel <on/off>: Bans and deletes anyone who tries to talk as channel and forces em to talk as themselves
+   • /antilinkedchan <on/off>: Makes Kigyo automatically delete linked channel posts from chatroom
+   • /antichannelpin <on/off>: Makes Kigyo automatically unpin linked channel posts from chatroom
+
 
 antiflood_help: |
     Antiflood allows you to take action on users that send more than x messages in a row. Exceeding the set flood
