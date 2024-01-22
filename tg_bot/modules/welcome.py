@@ -196,17 +196,6 @@ def new_member(update: Update, context: CallbackContext):  # sourcery no-metrics
             pass
         return
 
-    data = None
-    if sibylClient and does_chat_sibylban(chat.id):
-            try:
-                data = sibylClient.get_info(user.id)
-            except GeneralException:
-                pass
-            except BaseException as e:
-                log.error(e)
-                pass
-            if data and data.banned:
-                    return # all modes handle it in different ways
 
     if sw != None:
         sw_ban = sw.get_ban(new_mem.id)
