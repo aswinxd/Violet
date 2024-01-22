@@ -24,7 +24,12 @@ admin_help: |
   /unpin: quita el mensaje actual fijado.
   /invitelink: obtiene el mensaje de invitación. /promote: promociona al usuario que respondas.
   /demote: quita de administrador al usuario que respondas.
-  /tittle <título aquí>: selecciona un titulo personalizado para un administrador que el ha promocionado.
+  /title <título aquí>: selecciona un titulo personalizado para un administrador que el ha promocionado.
+  • /antichannel <on/off>: Bans and deletes anyone who tries to talk as channel and forces em to talk as themselves
+  • /antilinkedchan <on/off>: Makes Elsandra automatically delete linked channel posts from chatroom
+  • /antichannelpin <on/off>: Makes Elsandra automatically unpin linked channel posts from chatroom
+
+
 afk_help: |
   /afk <motivo>: márcate a ti mismo en estado de AFK (ausente). 
   Cuando estás AFK, cualquier mención será respondida con un mensaje que dirá que no estás disponible.
