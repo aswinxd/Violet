@@ -15,8 +15,8 @@ pm_help_text: |
   Hai kak! Namaku *elsandra*. Anggota dari *Eagle Union*.
   Aku adalah bot untuk membantu grup dengan fitur-fitur yang mantul! Silahkan lihat-lihat dulu.
   Menu perintah *utama* yang tersedia:
-
- • /language: Untuk mengganti bahasa.
+  • /language: Untuk mengganti bahasa.
+  
 add_bot_to_group_btn: "Tambah Kigyo ke dalam grup kamu"
 support_chat_link_btn: "Chat Bantuan // Eagle Union"
 updates_channel_link_btn: "Channel Kigyo Official"
