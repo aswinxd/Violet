@@ -182,7 +182,7 @@ def del_fed(update, context):
             [
                 [
                     InlineKeyboardButton(
-                        text="⚠️ Remove Federation ⚠️",
+                        text="Remove Federation",
                         callback_data="rmfed_{}".format(fed_id),
                     )
                 ],
@@ -534,7 +534,7 @@ def fed_admin(update, context):
     info = sql.get_fed_info(fed_id)
 
     text = "<b>Federation Admin {}:</b>\n\n".format(info["fname"])
-    text += "👑 Owner:\n"
+    text += "Owner:\n"
     owner = context.bot.get_chat(info["owner"])
     try:
         owner_name = owner.first_name + " " + owner.last_name
@@ -544,9 +544,9 @@ def fed_admin(update, context):
 
     members = sql.all_fed_members(fed_id)
     if len(members) == 0:
-        text += "\n🔱 There is no admin in this federation"
+        text += "\nThere is no admin in this federation"
     else:
-        text += "\n🔱 Admin:\n"
+        text += "\nAdmin:\n"
         for x in members:
             user = context.bot.get_chat(x)
             name = user.first_name or 'Deleted'
@@ -741,7 +741,7 @@ def fed_ban(update, context):  # sourcery no-metrics
             try:
                 # Do not spam all fed chats
                 """
-				context.bot.send_message(chat, "<b>FedBan reason updated</b>" \
+				context.bot.send_message(chat, "<b>New Federation Ban</b>" \
 							 "\n<b>Federation:</b> {}" \
 							 "\n<b>Federation Admin:</b> {}" \
 							 "\n<b>User:</b> {}" \
@@ -814,34 +814,11 @@ def fed_ban(update, context):  # sourcery no-metrics
         # send_message(update.effective_message, "Fedban Reason has been updated.")
         return
 
-    fed_name = info["fname"]
-
-    starting = "Starting a federation ban for {} in the Federation <b>{}</b>.".format(
-        user_target, fed_name
-    )
-    update.effective_message.reply_text(starting, parse_mode=ParseMode.HTML)
-
-    if reason == "":
-        reason = "No reason given."
-
-    x = sql.fban_user(
-        fed_id,
-        fban_user_id,
-        fban_user_name,
-        fban_user_lname,
-        fban_user_uname,
-        reason,
-        int(time.time()),
-    )
-    if not x:
-        message.reply_text("Failed to ban from the federation!")
-        return
-
     fed_chats = sql.all_fed_chats(fed_id)
     # Will send to current chat
     context.bot.send_message(
         chat.id,
-        "<b>FedBan reason updated</b>"
+        "<b>FedBan</b>"
         "\n<b>Federation:</b> {}"
         "\n<b>Federation Admin:</b> {}"
         "\n<b>User:</b> {}"
@@ -859,7 +836,7 @@ def fed_ban(update, context):  # sourcery no-metrics
     if getfednotif:
         context.bot.send_message(
             info["owner"],
-            "<b>FedBan reason updated</b>"
+            "<b>FedBan</b>"
             "\n<b>Federation:</b> {}"
             "\n<b>Federation Admin:</b> {}"
             "\n<b>User:</b> {}"
@@ -903,7 +880,7 @@ def fed_ban(update, context):  # sourcery no-metrics
         try:
             # Do not spamming all fed chats
             """
-			context.bot.send_message(chat, "<b>FedBan reason updated</b>" \
+			context.bot.send_message(chat, "<b>FedBan</b>" \
 							"\n<b>Federation:</b> {}" \
 							"\n<b>Federation Admin:</b> {}" \
 							"\n<b>User:</b> {}" \
@@ -926,7 +903,7 @@ def fed_ban(update, context):  # sourcery no-metrics
         # Also do not spamming all fed admins
         """
 		send_to_list(bot, FEDADMIN,
-				 "<b>FedBan reason updated</b>" \
+				 "<b>FedBan</b>" \
 							 "\n<b>Federation:</b> {}" \
 							 "\n<b>Federation Admin:</b> {}" \
 							 "\n<b>User:</b> {}" \
