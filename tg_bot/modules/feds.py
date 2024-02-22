@@ -2515,6 +2515,7 @@ def rate_limit(limit, per):
 
     return decorate
 
+
 @rate_limit(40, 60)
 def fed_owner_help(update: Update, context: CallbackContext):
     update.effective_message.reply_text(
@@ -2537,6 +2538,17 @@ def fed_user_help(update: Update, context: CallbackContext):
         parse_mode=ParseMode.MARKDOWN,
     )
 
+
+def kigcallback(**kwargs):
+    """
+    Decorator to handle callback queries.
+    """
+    def decorator(func):
+        @wraps(func)
+        def wrapper(*args, **kw):
+            return func(*args, **kw)
+        return wrapper
+    return decorator
 
 @kigcallback(pattern=r"fed_help_")
 @rate_limit(40, 60)
