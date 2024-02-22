@@ -29,7 +29,7 @@ from tg_bot.modules.helper_funcs.extraction import (
     extract_user,
     extract_user_fban,
 )
-from tg_bot.modules.helper_funcs.string_handlingg import markdown_parser
+from tg_bot.modules.helper_funcs.string_handling import markdown_parser
 from telegram import (
     Chat, InlineKeyboardButton,
     InlineKeyboardMarkup,
