@@ -40,8 +40,8 @@ async def purge_messages(event):
 
     try:
         await event.client.delete_messages(event.chat_id, messages)
-    except:
-        pass
+    except Exception as e:
+        print(f"Error occurred while purging messages: {e}")  # Step 1: Print the exception
     time_ = time.perf_counter() - start
     text = f"Purged Successfully in {time_:0.2f} Second(s)"
     await event.respond(text, parse_mode='markdown')
@@ -68,15 +68,15 @@ async def delete_messages(event):
         return
     chat = await event.get_input_chat()
     del_message = [message, event.message]
-    await event.client.delete_messages(chat, del_message)
+    try:
+        await event.client.delete_messages(chat, del_message)
+    except Exception as e:
+        print(f"Error occurred while deleting messages: {e}")  # Step 1: Print the exception
 
 from tg_bot.modules.language import gs
 
 def get_help(chat):
     return gs(chat, "purge_help")
-
-
-
 
 PURGE_HANDLER = purge_messages, events.NewMessage(pattern="^[!/]purge$")
 DEL_HANDLER = delete_messages, events.NewMessage(pattern="^[!/]del$")
