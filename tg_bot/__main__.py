@@ -1,26 +1,14 @@
 import importlib
 import re
 import threading
-from sys import argv
-from typing import Optional
-
-from telegram import Update, ParseMode, InlineKeyboardMarkup, InlineKeyboardButton
-from telegram.error import (TelegramError, Unauthorized, BadRequest,
-                            TimedOut, ChatMigrated, NetworkError)
-from telegram.ext import (
-    CallbackContext,
-    Filters
-)
-from telegram.ext.dispatcher import DispatcherHandlerStop
+from telegram import Update
+from telegram.ext import CallbackContext
 from telegram.utils.helpers import escape_markdown
-
 from tg_bot import (
-    KInit,
     dispatcher,
     updater,
     TOKEN,
     WEBHOOK,
-    OWNER_ID,
     CERT_PATH,
     PORT,
     URL,
@@ -28,12 +16,9 @@ from tg_bot import (
     telethn,
     KigyoINIT
 )
-# needed to dynamically load modules
-# NOTE: Module order is not guaranteed, specify that in the config file!
 from tg_bot.modules import ALL_MODULES
 from tg_bot.modules.helper_funcs.chat_status import is_user_admin
 from tg_bot.modules.helper_funcs.decorators import kigcmd, kigcallback, kigmsg, rate_limit
-from tg_bot.modules.helper_funcs.misc import paginate_modules
 from tg_bot.modules.language import gs
 
 IMPORTED = {}
@@ -43,9 +28,9 @@ STATS = []
 USER_INFO = []
 DATA_IMPORT = []
 DATA_EXPORT = []
-
 CHAT_SETTINGS = {}
 USER_SETTINGS = {}
+
 
 for module_name in ALL_MODULES:
     imported_module = importlib.import_module("tg_bot.modules." + module_name)
