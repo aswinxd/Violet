@@ -4,6 +4,8 @@ import threading
 from telegram import Update
 from telegram.ext import CallbackContext
 from telegram.utils.helpers import escape_markdown
+from telegram.ext import Filters
+
 from tg_bot import (
     dispatcher,
     updater,
