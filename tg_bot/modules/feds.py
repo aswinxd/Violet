@@ -7,8 +7,8 @@ import time
 import uuid
 from io import BytesIO
 
-import FallenRobot.modules.sql.feds_sql as sql
-from FallenRobot import (
+import tg_bot.modules.sql.feds_sql as sql
+from tg_bot import (
     EVENT_LOGS,
     LOGGER,
     SUPPORT_CHAT,
@@ -17,19 +17,19 @@ from FallenRobot import (
     WOLVES,
     dispatcher,
 )
-from FallenRobot.modules.disable import DisableAbleCommandHandler
-from FallenRobot.modules.helper_funcs.admin_status import get_bot_member, user_is_admin
-from FallenRobot.modules.helper_funcs.alternate import send_message
-from FallenRobot.modules.helper_funcs.chat_status import (
+from tg_bot.modules.disable import DisableAbleCommandHandler
+from tg_bot.modules.helper_funcs.admin_status import get_bot_member, user_is_admin
+from tg_bot.modules.helper_funcs.alternate import send_message
+from tg_bot.modules.helper_funcs.chat_status import (
     is_user_admin,
     can_delete,
 )
-from FallenRobot.modules.helper_funcs.extraction import (
+from tg_bot.modules.helper_funcs.extraction import (
     extract_unt_fedban,
     extract_user,
     extract_user_fban,
 )
-from FallenRobot.modules.helper_funcs.string_handlingg import markdown_parser
+from tg_bot.modules.helper_funcs.string_handlingg import markdown_parser
 from telegram import (
     Chat, InlineKeyboardButton,
     InlineKeyboardMarkup,
