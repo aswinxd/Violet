@@ -55,7 +55,7 @@ from telegram.utils.helpers import mention_html, mention_markdown
 # Time spended on updating version to v2 = 26+ hours by @AyraHikari
 # Total spended for making this features is 68+ hours
 # LOGGER.info("Original federation module by MrYacha, reworked by Mizukito Akito (@peaktogoo) on Telegram.")
-from tg_bot.modules.sql.users_sqll import get_user_com_chats
+from tg_bot.modules.sql.users_sql import get_user_com_chats
 FBAN_ERRORS = {
     "User is an administrator of the chat",
     "Chat not found",
