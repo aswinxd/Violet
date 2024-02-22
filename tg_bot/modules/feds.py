@@ -1,3 +1,5 @@
+from io import BytesIO
+from typing import Optional
 import ast
 import csv
 import json
@@ -2485,6 +2487,33 @@ def get_chat(chat_id, chat_data):
 __mod_name__ = "Federations"
 
 from tg_bot.modules.language import gs
+import time
+from functools import wraps
+
+def rate_limit(limit, per):
+    """
+    Decorator to rate limit function calls.
+
+    :param limit: Number of allowed calls.
+    :param per: Time window (in seconds).
+    """
+    def decorate(func):
+        last_called = [0.0]
+
+        @wraps(func)
+        def rate_limited_function(*args, **kwargs):
+            elapsed = time.time() - last_called[0]
+            left_to_wait = per - elapsed
+
+            if left_to_wait > 0:
+                time.sleep(left_to_wait)
+
+            last_called[0] = time.time()
+            return func(*args, **kwargs)
+
+        return rate_limited_function
+
+    return decorate
 
 @rate_limit(40, 60)
 def fed_owner_help(update: Update, context: CallbackContext):
