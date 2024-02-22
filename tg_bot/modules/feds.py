@@ -622,7 +622,7 @@ def fed_ban(update: Update, context: CallbackContext):
         message.reply_text("God cannot be fed banned!")
         return
 
-    if int(user_id) inSUDO_USERS:
+    if int(user_id) in SUDO_USERS:
         message.reply_text("Sudo users cannot be fed banned!")
         return
 
