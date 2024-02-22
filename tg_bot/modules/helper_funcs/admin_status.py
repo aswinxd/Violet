@@ -22,7 +22,7 @@ def get_bot_member(chat_id: int) -> ChatMember:
 
 
 def user_is_admin(chat: Chat, user_id: int) -> bool:
-	if chat.type == "private" or user_id in DRAGONS:
+	if chat.type == "private" or user_id in SUDO_USERS:
 		return True
 
 	member: ChatMember = get_mem_from_cache(user_id, chat.id)
