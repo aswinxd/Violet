@@ -554,7 +554,6 @@ def fed_admin(update, context):
 
     update.effective_message.reply_text(text, parse_mode=ParseMode.HTML)
 
-
 @typing_action
 @kigcmd(command=['fban', 'fedban'], pass_args=True)
 @rate_limit(40, 60)
@@ -726,41 +725,34 @@ def fed_ban(update, context):  # sourcery no-metrics
                     "\n<b>Federation Admin:</b> {}"
                     "\n<b>User:</b> {}"
                     "\n<b>User ID:</b> <code>{}</code>"
-		    "\n<b>Initiated From:</b> <code>{}</code>"
+		"\n<b>Initiated From:</b> <code>{}</code>"
                     "\n<b>Reason:</b> {}".format(
                         fed_name,
                         mention_html(user.id, user.first_name),
                         user_target,
                         fban_user_id,
-			message.chat.title,
+		    message.chat.title,
                         reason,
                     ),
                     parse_mode="HTML",
                 )
+        chats_in_fed = 0
         for fedschat in fed_chats:
+            chats_in_fed += 1
             try:
-                # Do not spam all fed chats
+                # Do not spamming all fed chats
                 """
 				context.bot.send_message(chat, "<b>FedBan reason updated</b>" \
-							 "\n<b>Federation:</b> {}" \
-							 "\n<b>Federation Admin:</b> {}" \
-							 "\n<b>User:</b> {}" \
-							 "\n<b>User ID:</b> <code>{}</code>" \
-							 "\n<b>Reason:</b> {}".format(fed_name, mention_html(user.id, user.first_name), user_target, fban_user_id, reason), parse_mode="HTML")
+								"\n<b>Federation:</b> {}" \
+								"\n<b>Federation Admin:</b> {}" \
+								"\n<b>User:</b> {}" \
+								"\n<b>User ID:</b> <code>{}</code>" \
+								"\n<b>Reason:</b> {}".format(fed_name, mention_html(user.id, user.first_name), user_target, fban_user_id, reason), parse_mode="HTML")
 				"""
                 context.bot.kick_chat_member(fedschat, fban_user_id)
             except BadRequest as excp:
                 if excp.message in FBAN_ERRORS:
-                    try:
-                        dispatcher.bot.getChat(fedschat)
-                    except Unauthorized:
-                        sql.chat_leave_fed(fedschat)
-                        log.info(
-                            "Chat {} has leave fed {} because I was kicked".format(
-                                fedschat, info["fname"]
-                            )
-                        )
-                        continue
+                    pass
                 elif excp.message == "User_id_invalid":
                     break
                 else:
@@ -769,73 +761,76 @@ def fed_ban(update, context):  # sourcery no-metrics
                     )
             except TelegramError:
                 pass
-        # Also do not spam all fed admins
 
-        # send_to_list(bot, FEDADMIN,
-        # "<b>FedBan reason updated</b>" \
-        # "\n<b>Federation:</b> {}" \
-        # "\n<b>Federation Admin:</b> {}" \
-        # "\n<b>User:</b> {}" \
-        # "\n<b>User ID:</b> <code>{}</code>" \
-        # "\n<b>Reason:</b> {}".format(fed_name, mention_html(user.id, user.first_name), user_target, fban_user_id, reason),
-        # html=True)
+            # Also do not spamming all fed admins
+            """
+		send_to_list(bot, FEDADMIN,
+				 "<b>FedBan reason updated</b>" \
+							 "\n<b>Federation:</b> {}" \
+							 "\n<b>Federation Admin:</b> {}" \
+							 "\n<b>User:</b> {}" \
+							 "\n<b>User ID:</b> <code>{}</code>" \
+							 "\n<b>Reason:</b> {}".format(fed_name, mention_html(user.id, user.first_name), user_target, fban_user_id, reason),
+							html=True)
+		"""
 
-        # Fban for fed subscriber
-        subscriber = list(sql.get_subscriber(fed_id))
-        if len(subscriber) != 0:
-            for fedsid in subscriber:
-                all_fedschat = sql.all_fed_chats(fedsid)
-                for fedschat in all_fedschat:
-                    try:
-                        context.bot.kick_chat_member(fedschat, fban_user_id)
-                    except BadRequest as excp:
-                        if excp.message in FBAN_ERRORS:
-                            try:
-                                dispatcher.bot.getChat(fedschat)
-                            except Unauthorized:
-                                targetfed_id = sql.get_fed_id(fedschat)
-                                sql.unsubs_fed(fed_id, targetfed_id)
-                                log.info(
-                                    "Chat {} has unsub fed {} because I was kicked".format(
-                                        fedschat, info["fname"]
+            # Fban for fed subscriber
+            subscriber = list(sql.get_subscriber(fed_id))
+            if len(subscriber) != 0:
+                for fedsid in subscriber:
+                    all_fedschat = sql.all_fed_chats(fedsid)
+                    for fedschat in all_fedschat:
+                        try:
+                            context.bot.kick_chat_member(fedschat, fban_user_id)
+                        except BadRequest as excp:
+                            if excp.message in FBAN_ERRORS:
+                                try:
+                                    dispatcher.bot.getChat(fedschat)
+                                except Unauthorized:
+                                    targetfed_id = sql.get_fed_id(fedschat)
+                                    sql.unsubs_fed(fed_id, targetfed_id)
+                                    log.info(
+                                        "Chat {} has unsub fed {} because I was kicked".format(
+                                            fedschat, info["fname"]
+                                        )
+                                    )
+                                    continue
+                            elif excp.message == "User_id_invalid":
+                                break
+                            else:
+                                log.warning(
+                                    "Unable to fban on {} because: {}".format(
+                                        fedschat, excp.message
                                     )
                                 )
-                                continue
-                        elif excp.message == "User_id_invalid":
-                            break
-                        else:
-                            log.warning(
-                                "Unable to fban on {} because: {}".format(
-                                    fedschat, excp.message
-                                )
-                            )
-                    except TelegramError:
-                        pass
-        # send_message(update.effective_message, "Fedban Reason has been updated.")
+                        except TelegramError:
+                            pass
+        if chats_in_fed == 0:
+            send_message(update.effective_message, "Fedban affected 0 chats. ")
+        elif chats_in_fed > 0:
+            send_message(
+                update.effective_message,
+                "Fedban affected {} chats. ".format(chats_in_fed),
+            )
         return
 
-   fed_name = info["fname"]
+    fed_name = info["fname"]
 
-# Set starting to an empty string
-starting = ""
+    if reason == "":
+        reason = "No reason given."
 
-update.effective_message.reply_text(starting, parse_mode=ParseMode.HTML)
-
-if reason == "":
-    reason = "No reason given."
-
-x = sql.fban_user(
-    fed_id,
-    fban_user_id,
-    fban_user_name,
-    fban_user_lname,
-    fban_user_uname,
-    reason,
-    int(time.time()),
-)
-if not x:
-    message.reply_text("Failed to ban from the federation!")
-    return
+    x = sql.fban_user(
+        fed_id,
+        fban_user_id,
+        fban_user_name,
+        fban_user_lname,
+        fban_user_uname,
+        reason,
+        int(time.time()),
+    )
+    if not x:
+        message.reply_text("Failed to ban from the federation!")
+        return
 
     fed_chats = sql.all_fed_chats(fed_id)
     # Will send to current chat
