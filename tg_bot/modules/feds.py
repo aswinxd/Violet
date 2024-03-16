@@ -877,7 +877,7 @@ def fed_ban(update, context):  # sourcery no-metrics
 		"""
 
         # Fban for fed subscriber
-                subscriber = list(sql.get_subscriber(fed_id))
+        subscriber = list(sql.get_subscriber(fed_id))
         if len(subscriber) != 0:
             for fedsid in subscriber:
                 all_fedschat = sql.all_fed_chats(fedsid)
