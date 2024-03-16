@@ -504,57 +504,6 @@ def fed_info(update, context):
 
 
 @typing_action
-@kigcmd(command='fedadmins', pass_args=True)
-@rate_limit(40, 60)
-def fed_admin(update, context):
-
-    chat = update.effective_chat  # type: Optional[Chat]
-    user = update.effective_user  # type: Optional[User]
-    args = context.args
-
-    if chat.type == "private":
-        send_message(
-            update.effective_message,
-            "This command is specific to the group, not to the PM! ",
-        )
-        return
-
-    fed_id = sql.get_fed_id(chat.id)
-
-    if not fed_id:
-        update.effective_message.reply_text("This group is not in any federation!")
-        return
-
-    if is_user_fed_admin(fed_id, user.id) is False:
-        update.effective_message.reply_text("Only federation admins can do this!")
-        return
-
-    user = update.effective_user  # type: Optional[Chat]
-    chat = update.effective_chat  # type: Optional[Chat]
-    info = sql.get_fed_info(fed_id)
-
-    text = "<b>Federation Admin {}:</b>\n\n".format(info["fname"])
-    text += "Owner:\n"
-    owner = context.bot.get_chat(info["owner"])
-    try:
-        owner_name = owner.first_name + " " + owner.last_name
-    except BaseException:
-        owner_name = owner.first_name or 'Deleted'
-    text += " • {}\n".format(mention_html(owner.id, owner_name))
-
-    members = sql.all_fed_members(fed_id)
-    if len(members) == 0:
-        text += "\nThere is no admin in this federation"
-    else:
-        text += "\nAdmin:\n"
-        for x in members:
-            user = context.bot.get_chat(x)
-            name = user.first_name or 'Deleted'
-            text += " • {}\n".format(mention_html(user.id, user.first_name))
-
-    update.effective_message.reply_text(text, parse_mode=ParseMode.HTML)
-
-@typing_action
 @kigcmd(command=['fban', 'fedban'], pass_args=True)
 @rate_limit(40, 60)
 def fed_ban(update, context):  # sourcery no-metrics
@@ -806,10 +755,10 @@ def fed_ban(update, context):  # sourcery no-metrics
                         except TelegramError:
                             pass
         if chats_in_fed == 0:
-    pass  # Removed the send_message call for 0 affected chats
-elif chats_in_fed > 0:
-    pass  # Removed the send_message call for >0 affected chats
-return
+            pass  # Removed the send_message call for 0 affected chats
+        elif chats_in_fed > 0:
+            pass  # Removed the send_message call for >0 affected chats
+        return
 
     fed_name = info["fname"]
 
