@@ -837,7 +837,6 @@ if not x:
     message.reply_text("Failed to ban from the federation!")
     return
 
-
     fed_chats = sql.all_fed_chats(fed_id)
     # Will send to current chat
     context.bot.send_message(
