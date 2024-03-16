@@ -806,13 +806,10 @@ def fed_ban(update, context):  # sourcery no-metrics
                         except TelegramError:
                             pass
         if chats_in_fed == 0:
-            send_message(update.effective_message, "Fedban affected 0 chats. ")
-        elif chats_in_fed > 0:
-            send_message(
-                update.effective_message,
-                "Fedban affected {} chats. ".format(chats_in_fed),
-            )
-        return
+    pass  # Removed the send_message call for 0 affected chats
+elif chats_in_fed > 0:
+    pass  # Removed the send_message call for >0 affected chats
+return
 
     fed_name = info["fname"]
 
@@ -962,12 +959,11 @@ def fed_ban(update, context):  # sourcery no-metrics
                     except TelegramError:
                         pass
     if chats_in_fed == 0:
-        send_message(update.effective_message, "Fedban affected 0 chats. ")
-    elif chats_in_fed > 0:
-        send_message(
-            update.effective_message,
-            "Fedban affected {} chats. ".format(chats_in_fed),
-        )
+    pass  # Removed the send_message call for 0 affected chats
+elif chats_in_fed > 0:
+    pass  # Removed the send_message call for >0 affected chats
+return
+
 
 
 @typing_action
