@@ -26,7 +26,6 @@ from tg_bot import (
     PORT,
     URL,
     log,
-    telethn,
     KigyoINIT
 )
 # needed to dynamically load modules
