@@ -680,14 +680,8 @@ def main():
         KigyoINIT.bot_name = dispatcher.bot.first_name
         updater.start_polling(timeout=15, read_latency=4, allowed_updates=Update.ALL_TYPES,
                               drop_pending_updates=KInit.DROP_UPDATES)
-    telethn.run_until_disconnected()
-    updater.idle()
-
-
+    
 if __name__ == "__main__":
-    log.info("Successfully loaded modules: " + str(ALL_MODULES))
-    telethn.start(bot_token=TOKEN)
+    log.info("[KIGYO] Successfully loaded modules: " + str(ALL_MODULES))
     threading.Thread(target=main).start()
-
-
-
+    updater.idle()
