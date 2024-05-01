@@ -19,7 +19,7 @@ from tg_bot import (
     SARDEGNA_USERS,
     WHITELIST_USERS,
     INFOPIC,
-    sw,
+    #sw,
     StartTime
 )
 from tg_bot.__main__ import STATS, USER_INFO, TOKEN
