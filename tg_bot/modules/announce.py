@@ -13,8 +13,8 @@ from ..modules.helper_funcs.anonymous import user_admin as u_admin, AdminPerms
 
 @kigcmd(command="announce", pass_args=True)
 @u_admin(AdminPerms.CAN_CHANGE_INFO)
-@loggable
 @rate_limit(40, 60)
+@loggable
 def announcestat(update: Update, context: CallbackContext) -> str:
     args = context.args
     if len(args) > 0:
@@ -59,3 +59,4 @@ def announcestat(update: Update, context: CallbackContext) -> str:
 
 def __migrate__(old_chat_id, new_chat_id):
     sql.migrate_chat(old_chat_id, new_chat_id)
+    
