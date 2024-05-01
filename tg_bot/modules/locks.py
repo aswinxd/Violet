@@ -140,9 +140,9 @@ def locktypes(update, _):
 
 @kigcmd(command='lock', pass_args=True)
 @user_admin(AdminPerms.CAN_CHANGE_INFO)
+@rate_limit(40, 60)
 @loggable
 @typing_action
-@rate_limit(40, 60)
 def lock(update: Update, context: CallbackContext) -> str:  # sourcery no-metrics
     args = context.args
     chat = update.effective_chat
@@ -249,9 +249,9 @@ def lock(update: Update, context: CallbackContext) -> str:  # sourcery no-metric
 
 @kigcmd(command='unlock', pass_args=True)
 @user_admin(AdminPerms.CAN_CHANGE_INFO)
+@rate_limit(40, 60)
 @loggable
 @typing_action
-@rate_limit(40, 60)
 def unlock(update: Update, context: CallbackContext) -> str:  # sourcery no-metrics
     args = context.args
     chat = update.effective_chat
@@ -531,26 +531,4 @@ def get_permission_list(current, new):
 def __import_data__(chat_id, data):
     # set chat locks
     locks = data.get("locks", {})
-    for itemlock in locks:
-        if itemlock in LOCK_TYPES:
-            sql.update_lock(chat_id, itemlock, locked=True)
-        elif itemlock in LOCK_CHAT_RESTRICTION:
-            sql.update_restriction(chat_id, itemlock, locked=True)
-
-
-def __migrate__(old_chat_id, new_chat_id):
-    sql.migrate_chat(old_chat_id, new_chat_id)
-
-
-def __chat_settings__(chat_id, user_id):
-    return build_lock_message(chat_id)
-
-
-from tg_bot.modules.language import gs
-
-
-def get_help(chat):
-    return gs(chat, "locks_help")
-
-
-__mod_name__ = "Locks"
+    for iteml
