@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timezone
 from functools import wraps
 
 from telegram.ext import CallbackContext
@@ -24,7 +24,6 @@ if is_module_loaded(FILENAME):
     from tg_bot.modules.helper_funcs.chat_status import user_admin as u_admin, is_user_admin
     from tg_bot.modules.sql import log_channel_sql as sql
 
-
     def loggable(func):
         @wraps(func)
         def log_action(update, context, *args, **kwargs):
@@ -34,7 +33,8 @@ if is_module_loaded(FILENAME):
 
             if result:
                 datetime_fmt = "%H:%M - %d-%m-%Y"
-                result += f"\n<b>Event Stamp</b>: <code>{datetime.utcnow().strftime(datetime_fmt)}</code>"
+                result = str(result)
+                result += f"\n<b>Event Stamp</b>: <code>{datetime.now(timezone.utc).strftime(datetime_fmt)}</code>"
                 try:
                     if message.chat.type == chat.SUPERGROUP:
                         if message.chat.username:
@@ -63,7 +63,7 @@ if is_module_loaded(FILENAME):
             if result:
                 datetime_fmt = "%H:%M - %d-%m-%Y"
                 result += "\n<b>Event Stamp</b>: <code>{}</code>".format(
-                    datetime.utcnow().strftime(datetime_fmt)
+                    datetime.now(timezone.utc).strftime(datetime_fmt)
                 )
 
                 if message.chat.type == chat.SUPERGROUP and message.chat.username:
@@ -218,7 +218,7 @@ Setting the log channel is done by:
 • forwarding the `/setlog` to the group
 """
 
-    __mod_name__ = "Logs"
+    __mod_name__ = "Logger"
 
 else:
     # run anyway if module not loaded
@@ -277,7 +277,7 @@ def log_setting_callback(update: Update, context: CallbackContext):
     t = sql.get_chat_setting(chat.id)
     if setting == "warn":
         r = t.toggle_warn()
-        cb.answer("Warning log set to {}".format(r))
+        cb.answer(f"Warning log set to {r}")
         return
     if setting == "act":
         r = t.toggle_action()
@@ -285,11 +285,11 @@ def log_setting_callback(update: Update, context: CallbackContext):
         return
     if setting == "join":
         r = t.toggle_joins()
-        cb.answer("Join log set to {}".format(r))
+        cb.answer(f"Join log set to {r}")
         return
     if setting == "leave":
         r = t.toggle_leave()
-        cb.answer("Leave log set to {}".format(r))
+        cb.answer(f"Leave log set to {r}")
         return
     if setting == "rep":
         r = t.toggle_report()
@@ -297,3 +297,4 @@ def log_setting_callback(update: Update, context: CallbackContext):
         return
 
     cb.answer("Idk what to do")
+    
