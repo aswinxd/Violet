@@ -51,8 +51,8 @@ from telegram.ext import (
 from telegram.utils.helpers import escape_markdown, mention_html, mention_markdown
 import tg_bot.modules.sql.log_channel_sql as logsql
 from ..modules.helper_funcs.anonymous import user_admin, AdminPerms
-from .sibylsystem import sibylClient, does_chat_sibylban
-from SibylSystem import GeneralException
+#from .sibylsystem import sibylClient, does_chat_sibylban
+#from SibylSystem import GeneralException
 
 VALID_WELCOME_FORMATTERS = [
     "first",
