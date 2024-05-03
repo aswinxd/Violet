@@ -1,6 +1,6 @@
 import threading
 
-from AstrakoBot.modules.sql import BASE, SESSION
+from tg_bot.modules.sql import BASE, SESSION
 from sqlalchemy import Integer, String, Boolean, Column, UnicodeText
 
 
