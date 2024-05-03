@@ -14,7 +14,7 @@ from tg_bot import (
     SUDO_USERS,
     SUPPORT_USERS,
     WHITELIST_USERS,
-    #sw,
+    sw,
     dispatcher,
     JOIN_LOGGER,
 )
