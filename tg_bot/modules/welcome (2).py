@@ -1212,8 +1212,8 @@ def user_captcha_button(update: Update, context: CallbackContext):
             except:
                 pass
             kicked_msg = f"""
-            ❌ [{escape_markdown(join_usr_data.first_name)}](tg://user?id={join_user}) failed the captcha and was kicked.
-            """
+         """   ❌ [{escape_markdown(join_usr_data.first_name)}](tg://user?id={join_user}) failed the captcha and was kicked.
+            
             query.answer(text="Wrong answer")
             res = chat.unban_member(join_user)
             if res:
@@ -1223,8 +1223,7 @@ def user_captcha_button(update: Update, context: CallbackContext):
 
     else:
         query.answer(text="You're not allowed to do this!")
-""""
-
+"""
 WELC_HELP_TXT = (
     "Your group's welcome/goodbye messages can be personalised in multiple ways. If you want the messages"
     " to be individually generated, like the default welcome message is, you can use *these* variables:\n"
