@@ -18,7 +18,7 @@ from tg_bot import (
     dispatcher,
     JOIN_LOGGER,
 )
-from tg_bot.modules.helper_funcs.chat_status import (
+from tg_bot.modules.helper_funcs.chat_status1 import (
     is_user_ban_protected,
     user_admin,
 )
