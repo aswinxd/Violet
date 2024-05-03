@@ -88,16 +88,16 @@ class KigyoINIT:
         self.BOT_API_FILE_URL: str = self.parser.get('BOT_API_FILE_URL', "https://api.telegram.org/file/bot")
 
 
-    # def init_sw(self):
-    #     if self.spamwatch_api is None:
-    #         log.warning("SpamWatch API key is missing! Check your config.ini")
-    #         return None
-    #     else:
-    #         try:
-    #             return spamwatch.Client(spamwatch_api)
-    #         except Exception:
-    #             log.warning("Can't connect to SpamWatch!")
-    #             return None
+    def init_sw(self):
+         if self.spamwatch_api is None:
+             log.warning("SpamWatch API key is missing! Check your config.ini")
+             return None
+         else:
+             try:
+                 return spamwatch.Client(spamwatch_api)
+             except Exception:
+                 log.warning("Can't connect to SpamWatch!")
+                 return None
 
 
 KInit = KigyoINIT(parser=kigconfig)
