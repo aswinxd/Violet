@@ -86,7 +86,7 @@ class KigyoINIT:
         self.DROP_UPDATES: bool = self.parser.getboolean("DROP_UPDATES", True)
         self.BOT_API_URL: str = self.parser.get('BOT_API_URL', "https://api.telegram.org/bot")
         self.BOT_API_FILE_URL: str = self.parser.get('BOT_API_FILE_URL', "https://api.telegram.org/file/bot")
-
+        self.SUPPORT_CHAT: str = self.parser.get('SUPPORT_CHAT', "XENONSUPPORTCHAT")
 
     def init_sw(self):
          if self.spamwatch_api is None:
@@ -137,7 +137,7 @@ WALL_API = KInit.WALL_API
 LASTFM_API_KEY = KInit.LASTFM_API_KEY
 CF_API_KEY = KInit.CF_API_KEY
 sw = KInit.init_sw()
-
+SUPPORT_CHAT = KInit.SUPPORT_CHAT
 
 updater = tg.Updater(token=TOKEN, base_url=KInit.BOT_API_URL, base_file_url=KInit.BOT_API_FILE_URL, workers=min(32, os.cpu_count() + 4), request_kwargs={"read_timeout": 10, "connect_timeout": 10})
 dispatcher = updater.dispatcher
