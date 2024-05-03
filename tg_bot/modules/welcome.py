@@ -29,8 +29,7 @@ from tg_bot.modules.helper_funcs.string_handling import (
     markdown_parser,
 )
 from tg_bot.modules.log_channel import loggable
-from tg_bot.modules.sql.clear_cmd_sql import get_clearcmd
-from tg_bot.modules.sql.global_bans_sql import is_user_gbanned
+from tg_bot.modules.sql.cleaner_sql import get_clearcmd
 from telegram import (
     ChatPermissions,
     InlineKeyboardButton,
