@@ -5,32 +5,32 @@ import time
 from functools import partial
 from contextlib import suppress
 
-import AstrakoBot.modules.sql.welcome_sql as sql
-import AstrakoBot
-from AstrakoBot import (
+import tg_bot.modules.sql.welcome_sql as sql
+import tg_bot
+from tg_bot import (
     DEV_USERS,
     LOGGER,
     OWNER_ID,
     SUDO_USERS,
     SUPPORT_USERS,
     WHITELIST_USERS,
-    sw,
+    #sw,
     dispatcher,
     JOIN_LOGGER,
 )
-from AstrakoBot.modules.helper_funcs.chat_status import (
+from tg_bot.modules.helper_funcs.chat_status import (
     is_user_ban_protected,
     user_admin,
 )
-from AstrakoBot.modules.helper_funcs.misc import build_keyboard, delete, revert_buttons
-from AstrakoBot.modules.helper_funcs.msg_types import get_welcome_type
-from AstrakoBot.modules.helper_funcs.string_handling import (
+from tg_bot.modules.helper_funcs.misc import build_keyboard, delete, revert_buttons
+from tg_bot.modules.helper_funcs.msg_types import get_welcome_type
+from tg_bot.modules.helper_funcs.string_handling import (
     escape_invalid_curly_brackets,
     markdown_parser,
 )
-from AstrakoBot.modules.log_channel import loggable
-from AstrakoBot.modules.sql.clear_cmd_sql import get_clearcmd
-from AstrakoBot.modules.sql.global_bans_sql import is_user_gbanned
+from tg_bot.modules.log_channel import loggable
+from tg_bot.modules.sql.clear_cmd_sql import get_clearcmd
+from tg_bot.modules.sql.global_bans_sql import is_user_gbanned
 from telegram import (
     ChatPermissions,
     InlineKeyboardButton,
