@@ -1309,7 +1309,7 @@ from tg_bot.modules.language import gs
 def get_help(chat):
     return gs(chat, "greetings_help")
 
-
+__mod_name__ = "Greetings"
 # NEW_MEM_HANDLER = MessageHandler(
 #     Filters.status_update.new_chat_members, new_member, run_async=True
 # )
@@ -1381,7 +1381,7 @@ dispatcher.add_handler(BUTTON_VERIFY_HANDLER)
 dispatcher.add_handler(WELCOME_MUTE_HELP)
 dispatcher.add_handler(CAPTCHA_BUTTON_VERIFY_HANDLER)
 
-__mod_name__ = "Greetings"
+
 __command_list__ = []
 __handlers__ = [
     # NEW_MEM_HANDLER,
