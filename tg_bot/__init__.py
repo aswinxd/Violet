@@ -136,9 +136,7 @@ TIME_API_KEY = KInit.TIME_API_KEY
 WALL_API = KInit.WALL_API
 LASTFM_API_KEY = KInit.LASTFM_API_KEY
 CF_API_KEY = KInit.CF_API_KEY
-
-#SpamWatch
- sw = KInit.init_sw()
+sw = KInit.init_sw()
 
 
 updater = tg.Updater(token=TOKEN, base_url=KInit.BOT_API_URL, base_file_url=KInit.BOT_API_FILE_URL, workers=min(32, os.cpu_count() + 4), request_kwargs={"read_timeout": 10, "connect_timeout": 10})
