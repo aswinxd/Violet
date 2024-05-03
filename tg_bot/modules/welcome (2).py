@@ -88,7 +88,7 @@ WHITELISTED = (
     [OWNER_ID, SYS_ADMIN] + DEV_USERS + SUDO_USERS + SUPPORT_USERS + WHITELIST_USERS
 )
 
-""""
+'''
 # do not async
 def send(update, message, keyboard, backup_message):
     chat = update.effective_chat
@@ -1221,8 +1221,12 @@ def user_captcha_button(update: Update, context: CallbackContext):
                 )
 
     else:
-        query.answer(text="You're not allowed to do this!")
-""""
+        query.answer(text="You're not allowed to do this!") '''
+
+
+
+
+
 WELC_HELP_TXT = (
     "Your group's welcome/goodbye messages can be personalised in multiple ways. If you want the messages"
     " to be individually generated, like the default welcome message is, you can use *these* variables:\n"
