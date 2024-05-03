@@ -129,7 +129,7 @@ SARDEGNA_USERS = get_user_list("sardegnas")
 WHITELIST_USERS = get_user_list("whitelists")
 SPAMMERS = get_user_list("spammers")
 LOGGER = KInit.MESSAGE_DUMP
-
+JOIN_LOGGER = KInit.MESSAGE_DUMP
 # spamwatch_api = KInit.spamwatch_api
 CASH_API_KEY = KInit.CASH_API_KEY
 TIME_API_KEY = KInit.TIME_API_KEY
