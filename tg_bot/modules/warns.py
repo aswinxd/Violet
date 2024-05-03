@@ -9,8 +9,7 @@ from tg_bot.modules.helper_funcs.chat_status import (
     bot_admin,
     can_restrict,
     is_user_admin,
-    user_admin_no_reply,
-    is_anon
+    user_admin_no_reply
 )
 from tg_bot.modules.helper_funcs.decorators import rate_limit
 from tg_bot.modules.helper_funcs.extraction import (
