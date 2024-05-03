@@ -199,8 +199,6 @@ def new_member(update: Update, context: CallbackContext):
         if sw_ban:
             return
 
-    if is_user_gbanned(new_mem.id):
-        return
 
     if should_welc:
 
@@ -531,9 +529,6 @@ def left_member(update: Update, context: CallbackContext):
                 if sw_ban:
                     return
 
-            # Dont say goodbyes to gbanned users
-            if is_user_gbanned(left_mem.id):
-                return
 
             # Ignore bot being kicked
             if left_mem.id == bot.id:
