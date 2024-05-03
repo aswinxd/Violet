@@ -88,7 +88,7 @@ WHITELISTED = (
     [OWNER_ID, SYS_ADMIN] + DEV_USERS + SUDO_USERS + SUPPORT_USERS + WHITELIST_USERS
 )
 
-
+""""
 # do not async
 def send(update, message, keyboard, backup_message):
     chat = update.effective_chat
@@ -927,7 +927,8 @@ def reset_goodbye(update: Update, context: CallbackContext) -> str:
         f"Reset the goodbye message."
     )
 
-
+""""
+""""
 @user_admin(AdminPerms.CAN_CHANGE_INFO)
 @rate_limit(40, 60)
 @loggable
@@ -1222,7 +1223,7 @@ def user_captcha_button(update: Update, context: CallbackContext):
 
     else:
         query.answer(text="You're not allowed to do this!")
-
+""""
 
 WELC_HELP_TXT = (
     "Your group's welcome/goodbye messages can be personalised in multiple ways. If you want the messages"
