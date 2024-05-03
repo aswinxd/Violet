@@ -73,7 +73,7 @@ class KigyoINIT:
         self.GBAN_LOGS: int = self.parser.getint('GBAN_LOGS', None)
         self.NO_LOAD = self.parser.get("NO_LOAD").split()
         self.NO_LOAD: List[str] = list(map(str, self.NO_LOAD))
-        # self.spamwatch_api: str = self.parser.get('spamwatch_api', None)
+        self.spamwatch_api: str = self.parser.get('spamwatch_api', None)
         self.CASH_API_KEY: str = self.parser.get('CASH_API_KEY', None)
         self.TIME_API_KEY: str = self.parser.get('TIME_API_KEY', None)
         self.WALL_API: str = self.parser.get('WALL_API', None)
