@@ -1316,7 +1316,7 @@ def get_help(chat):
 # LEFT_MEM_HANDLER = MessageHandler(
 #     Filters.status_update.left_chat_member, left_member, run_async=True
 # )
-
+'''
 dispatcher.add_handler(
     ChatMemberHandler(welcomeFilter, ChatMemberHandler.CHAT_MEMBER, run_async=True),
     group=-100,
@@ -1400,3 +1400,4 @@ __handlers__ = [
     CAPTCHA_BUTTON_VERIFY_HANDLER,
     WELCOME_MUTE_HELP,
 ]
+'''
