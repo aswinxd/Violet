@@ -2,7 +2,7 @@ from time import perf_counter
 from functools import wraps
 from cachetools import TTLCache
 from threading import RLock
-from AstrakoBot import (
+from tg_bot import (
     DEL_CMDS,
     OWNER_ID,
     DEV_USERS,
