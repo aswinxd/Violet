@@ -22,7 +22,7 @@ from tg_bot.modules.helper_funcs.chat_status import (
     is_user_ban_protected,
     user_admin,
 )
-from tg_bot.modules.helper_funcs.misc import build_keyboard, delete, revert_buttons
+from tg_bot.modules.helper_funcs.misc import build_keyboard, revert_buttons
 from tg_bot.modules.helper_funcs.msg_types import get_welcome_type
 from tg_bot.modules.helper_funcs.string_handling import (
     escape_invalid_curly_brackets,
