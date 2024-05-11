@@ -672,7 +672,7 @@ def start_bot(token):
     # Add your existing command handlers here
 
     # Handler for the /clone command
-    def clone(update, context):
+def clone(update, context):
     # Check if the user has provided a bot token
     if len(context.args) > 0:
         # Extract the bot token from the message
