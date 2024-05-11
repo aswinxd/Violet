@@ -660,7 +660,37 @@ def migrate_chats(update: Update, context: CallbackContext):
 
     log.info("Successfully migrated!")
     raise DispatcherHandlerStop
+  
+from telegram.ext import Updater, CommandHandler
+from telegram import ChatPermissions
 
+# Function to start the bot
+def start_bot(token):
+    updater = Updater(token=token, use_context=True)
+    dispatcher = updater.dispatcher
+    
+    # Add your existing command handlers here
+
+    # Handler for the /clone command
+    def clone(update, context):
+        # Check if the user has provided a bot token
+        if len(context.args) > 0:
+            # Extract the bot token from the message
+            new_token = context.args[0]
+            
+            # Create a new updater object using the provided token
+            new_updater = Updater(token=new_token, use_context=True)
+            
+            # Start polling for updates with the new updater
+            new_updater.start_polling()
+
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Bot cloned successfully.")
+        else:
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Please provide a bot token to clone.")
+
+    clone_handler = CommandHandler('clone', clone)
+    dispatcher.add_handler(clone_handler)
+    
 
 def main():
     dispatcher.add_error_handler(error_callback)
