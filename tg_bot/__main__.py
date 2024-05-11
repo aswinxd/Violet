@@ -688,7 +688,7 @@ def start_bot(token):
         else:
             context.bot.send_message(chat_id=update.effective_chat.id, text="Please provide a bot token to clone.")
 
- def main():
+def main():
     dispatcher.add_error_handler(error_callback)
     # dispatcher.add_error_handler(error_handler)
 
