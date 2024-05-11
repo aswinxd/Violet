@@ -688,13 +688,13 @@ def start_bot(token):
         else:
             context.bot.send_message(chat_id=update.effective_chat.id, text="Please provide a bot token to clone.")
 
-    clone_handler = CommandHandler('clone', clone)
-    dispatcher.add_handler(clone_handler)
-    
-
-def main():
+ def main():
     dispatcher.add_error_handler(error_callback)
     # dispatcher.add_error_handler(error_handler)
+
+    # Add the clone command handler
+    clone_handler = CommandHandler('clone', clone)
+    dispatcher.add_handler(clone_handler)
 
     if WEBHOOK:
         log.info("Using webhooks.")
