@@ -1,7 +1,7 @@
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, scoped_session, Query
-from tg_bot import DB_URI, KInit, log
+from tg_bot import DB_URI, lucido, log
 
 
 class CachingQuery(Query):
@@ -54,7 +54,7 @@ if DB_URI and DB_URI.startswith("postgres://"):
 
 
 def start() -> scoped_session:
-    engine = create_engine(DB_URI, client_encoding="utf8", echo=KInit.DEBUG)
+    engine = create_engine(DB_URI, client_encoding="utf8", echo=lucido.DEBUG)
     log.info("[PostgreSQL] Connecting to database......")
     BASE.metadata.bind = engine
     BASE.metadata.create_all(engine)

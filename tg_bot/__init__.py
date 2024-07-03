@@ -100,46 +100,46 @@ class IvoryINIT:
                  return None
 
 
-KInit = IvoryINIT(parser=ivoryconf)
+lucido = IvoryINIT(parser=ivoryconf)
 
-SYS_ADMIN = KInit.SYS_ADMIN
-OWNER_ID = KInit.OWNER_ID
-OWNER_USERNAME = KInit.OWNER_USERNAME
-APP_ID = KInit.APP_ID
-API_HASH = KInit.API_HASH
-WEBHOOK = KInit.WEBHOOK
-URL = KInit.URL
-CERT_PATH = KInit.CERT_PATH
-PORT = KInit.PORT
-INFOPIC = KInit.INFOPIC
-DEL_CMDS = KInit.DEL_CMDS
-ALLOW_EXCL = KInit.ALLOW_EXCL
-CUSTOM_CMD = KInit.CUSTOM_CMD
-BAN_STICKER = KInit.BAN_STICKER
-TOKEN = KInit.TOKEN
-DB_URI = KInit.DB_URI
-LOAD = KInit.LOAD
-MESSAGE_DUMP = KInit.MESSAGE_DUMP
-GBAN_LOGS = KInit.GBAN_LOGS
-NO_LOAD = KInit.NO_LOAD
+SYS_ADMIN = lucido.SYS_ADMIN
+OWNER_ID = lucido.OWNER_ID
+OWNER_USERNAME = lucido.OWNER_USERNAME
+APP_ID = lucido.APP_ID
+API_HASH = lucido.API_HASH
+WEBHOOK = lucido.WEBHOOK
+URL = lucido.URL
+CERT_PATH = lucido.CERT_PATH
+PORT = lucido.PORT
+INFOPIC = lucido.INFOPIC
+DEL_CMDS = lucido.DEL_CMDS
+ALLOW_EXCL = lucido.ALLOW_EXCL
+CUSTOM_CMD = lucido.CUSTOM_CMD
+BAN_STICKER = lucido.BAN_STICKER
+TOKEN = lucido.TOKEN
+DB_URI = lucido.DB_URI
+LOAD = lucido.LOAD
+MESSAGE_DUMP = lucido.MESSAGE_DUMP
+GBAN_LOGS = lucido.GBAN_LOGS
+NO_LOAD = lucido.NO_LOAD
 SUDO_USERS = [OWNER_ID] + get_user_list("sudos")
 DEV_USERS = [OWNER_ID] + get_user_list("devs")
 SUPPORT_USERS = get_user_list("supports")
 SARDEGNA_USERS = get_user_list("sardegnas")
 WHITELIST_USERS = get_user_list("whitelists")
 SPAMMERS = get_user_list("spammers")
-LOGGER = KInit.MESSAGE_DUMP
-JOIN_LOGGER = KInit.MESSAGE_DUMP
-spamwatch_api = KInit.spamwatch_api
-CASH_API_KEY = KInit.CASH_API_KEY
-TIME_API_KEY = KInit.TIME_API_KEY
-WALL_API = KInit.WALL_API
-LASTFM_API_KEY = KInit.LASTFM_API_KEY
-CF_API_KEY = KInit.CF_API_KEY
-sw = KInit.init_sw()
-SUPPORT_CHAT = KInit.SUPPORT_CHAT
+LOGGER = lucido.MESSAGE_DUMP
+JOIN_LOGGER = lucido.MESSAGE_DUMP
+spamwatch_api = lucido.spamwatch_api
+CASH_API_KEY = lucido.CASH_API_KEY
+TIME_API_KEY = lucido.TIME_API_KEY
+WALL_API = lucido.WALL_API
+LASTFM_API_KEY = lucido.LASTFM_API_KEY
+CF_API_KEY = lucido.CF_API_KEY
+sw = lucido.init_sw()
+SUPPORT_CHAT = lucido.SUPPORT_CHAT
 
-updater = tg.Updater(token=TOKEN, base_url=KInit.BOT_API_URL, base_file_url=KInit.BOT_API_FILE_URL, workers=min(32, os.cpu_count() + 4), request_kwargs={"read_timeout": 10, "connect_timeout": 10})
+updater = tg.Updater(token=TOKEN, base_url=lucido.BOT_API_URL, base_file_url=lucido.BOT_API_FILE_URL, workers=min(32, os.cpu_count() + 4), request_kwargs={"read_timeout": 10, "connect_timeout": 10})
 dispatcher = updater.dispatcher
 
 

@@ -16,7 +16,7 @@ from telegram.ext.dispatcher import DispatcherHandlerStop
 from telegram.utils.helpers import escape_markdown
 
 from tg_bot import (
-    KInit,
+    lucido,
     dispatcher,
     updater,
     TOKEN,
@@ -671,7 +671,7 @@ def main():
     if WEBHOOK:
         log.info("Using webhooks.")
         updater.start_webhook(listen="0.0.0.0", port=PORT, url_path=TOKEN, allowed_updates=Update.ALL_TYPES, 
-                            webhook_url=URL+TOKEN, drop_pending_updates=KInit.DROP_UPDATES, 
+                            webhook_url=URL+TOKEN, drop_pending_updates=lucido.DROP_UPDATES, 
                             cert=CERT_PATH if CERT_PATH else None)
         log.info(f"started, Using webhooks. | BOT: [@{dispatcher.bot.username}]")
 
@@ -681,7 +681,7 @@ def main():
         IvoryINIT.bot_username = dispatcher.bot.username
         IvoryINIT.bot_name = dispatcher.bot.first_name
         updater.start_polling(timeout=15, read_latency=4, allowed_updates=Update.ALL_TYPES,
-                              drop_pending_updates=KInit.DROP_UPDATES)
+                              drop_pending_updates=lucido.DROP_UPDATES)
     
 if __name__ == "__main__":
     log.info("ivory Successfully loaded modules: " + str(ALL_MODULES))
