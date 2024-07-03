@@ -32,7 +32,7 @@ from tg_bot import (
 # NOTE: Module order is not guaranteed, specify that in the config file!
 from tg_bot.modules import ALL_MODULES
 from tg_bot.modules.helper_funcs.chat_status import is_user_admin
-from tg_bot.modules.helper_funcs.decorators import kigcmd, kigcallback, kigmsg, rate_limit
+from tg_bot.modules.helper_funcs.decorators import ivory, kigcallback, kigmsg, rate_limit
 from tg_bot.modules.helper_funcs.misc import paginate_modules
 from tg_bot.modules.language import gs
 
@@ -104,7 +104,7 @@ def send_help(chat_id, text, keyboard=None):
     )
 
 
-@kigcmd(command='text')
+@ivory(command='text')
 def test(update: Update, _: CallbackContext):
     """#TODO
 
@@ -119,7 +119,7 @@ def test(update: Update, _: CallbackContext):
 
 
 @kigcallback(pattern=r'start_back')
-@kigcmd(command='start', pass_args=True)
+@ivory(command='start', pass_args=True)
 @rate_limit(40, 60)
 def start(update: Update, context: CallbackContext):  # sourcery no-metrics
     """#TODO
@@ -329,7 +329,7 @@ def help_button(update: Update, context: CallbackContext):
         pass
 
 
-@kigcmd(command='help')
+@ivory(command='help')
 @rate_limit(40, 60)
 def get_help(update: Update, context: CallbackContext):
     '''#TODO
@@ -555,7 +555,7 @@ def settings_button(update: Update, context: CallbackContext):
             log.exception('Exception in settings buttons. %s', str(query.data))
 
 
-@kigcmd(command='settings')
+@ivory(command='settings')
 @rate_limit(40, 60)
 def get_settings(update: Update, context: CallbackContext):
     '''#TODO
@@ -594,7 +594,7 @@ def get_settings(update: Update, context: CallbackContext):
         text = "Click here to check your settings."
 
 
-@kigcmd(command='donate')
+@ivory(command='donate')
 @rate_limit(40, 60)
 def donate(update: Update, _: CallbackContext):
     """#TODO

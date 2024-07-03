@@ -16,7 +16,7 @@ from telegram.error import BadRequest
 from telegram.ext import CallbackContext
 from telegram.utils.helpers import mention_html
 from tg_bot.modules.language import gs
-from tg_bot.modules.helper_funcs.decorators import kigcmd, rate_limit
+from tg_bot.modules.helper_funcs.decorators import ivory, rate_limit
 
 from ..modules.helper_funcs.anonymous import user_admin, AdminPerms
 
@@ -41,7 +41,7 @@ def check_user(user_id: int, bot: Bot, update: Update) -> Optional[str]:
     return None
 
 
-@kigcmd(command='mute')
+@ivory(command='mute')
 @connection_status
 @bot_admin
 @can_restrict
@@ -94,7 +94,7 @@ def mute(update: Update, context: CallbackContext) -> str:
     return ""
 
 
-@kigcmd(command='unmute')
+@ivory(command='unmute')
 @connection_status
 @bot_admin
 @can_restrict
@@ -161,7 +161,7 @@ def unmute(update: Update, context: CallbackContext) -> str:
     return ""
 
 
-@kigcmd(command=['tmute', 'tempmute'])
+@ivory(command=['tmute', 'tempmute'])
 @connection_status
 @bot_admin
 @can_restrict

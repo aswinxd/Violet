@@ -12,14 +12,14 @@ from tg_bot.modules.helper_funcs.chat_status import (
     can_promote,
     connection_status,
 )
-from tg_bot.modules.helper_funcs.decorators import kigcmd, rate_limit
+from tg_bot.modules.helper_funcs.decorators import ivory, rate_limit
 from tg_bot.modules.helper_funcs.extraction import extract_user, extract_user_and_text
 from tg_bot.modules.language import gs
 from tg_bot.modules.log_channel import loggable
 from ..modules.helper_funcs.anonymous import user_admin, AdminPerms
 
 
-@kigcmd(command="promote", can_disable=False)
+@ivory(command="promote", can_disable=False)
 @connection_status
 @bot_admin
 @can_promote
@@ -104,7 +104,7 @@ def promote(update: Update, context: CallbackContext) -> Optional[str]:
     return log_message
 
 
-@kigcmd(command="demote", can_disable=False)
+@ivory(command="demote", can_disable=False)
 @connection_status
 @bot_admin
 @can_promote
@@ -181,7 +181,7 @@ def demote(update: Update, context: CallbackContext) -> Optional[str]:
 
 
 """
-@kigcmd(command="admincache", can_disable=False)
+@ivory(command="admincache", can_disable=False)
 @u_admin
 @rate_limit(40, 60)
 def refresh_admin(update, _):
@@ -190,7 +190,7 @@ def refresh_admin(update, _):
 """
 
 
-@kigcmd(command="title", can_disable=False)
+@ivory(command="title", can_disable=False)
 @connection_status
 @bot_admin
 @can_promote
@@ -256,7 +256,7 @@ def set_title(update: Update, context: CallbackContext):
     )
 
 
-@kigcmd(command="pin", can_disable=False)
+@ivory(command="pin", can_disable=False)
 @bot_admin
 @can_pin
 @user_admin(AdminPerms.CAN_PIN_MESSAGES)
@@ -299,7 +299,7 @@ def pin(update: Update, context: CallbackContext) -> str:
         return log_message
 
 
-@kigcmd(command="unpin", can_disable=False)
+@ivory(command="unpin", can_disable=False)
 @bot_admin
 @can_pin
 @user_admin(AdminPerms.CAN_PIN_MESSAGES)
@@ -327,7 +327,7 @@ def unpin(update: Update, context: CallbackContext) -> str:
     return log_message
 
 
-@kigcmd(command="invitelink", can_disable=False)
+@ivory(command="invitelink", can_disable=False)
 @bot_admin
 @user_admin(AdminPerms.CAN_INVITE_USERS)
 @connection_status
@@ -353,7 +353,7 @@ def invite(update: Update, context: CallbackContext):
         )
 
 
-@kigcmd(command=["admin", "admins"])
+@ivory(command=["admin", "admins"])
 @rate_limit(40, 60)
 def adminlist(update: Update, _):
     administrators = update.effective_chat.get_administrators()

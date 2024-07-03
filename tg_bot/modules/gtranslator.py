@@ -12,10 +12,10 @@ trans = SyncTranslator()
 
 from telegram import ParseMode, Update
 from telegram.ext import CallbackContext
-from tg_bot.modules.helper_funcs.decorators import kigcmd, rate_limit
+from tg_bot.modules.helper_funcs.decorators import ivory, rate_limit
 
 
-@kigcmd(command=["tr", "tl"])
+@ivory(command=["tr", "tl"])
 @rate_limit(40, 60)
 def translate(update: Update, context: CallbackContext) -> None:
     global to_translate
@@ -48,7 +48,7 @@ def translate(update: Update, context: CallbackContext) -> None:
     bot.send_message(text=reply, chat_id=message.chat.id, parse_mode=ParseMode.HTML)
 
 
-@kigcmd(command='langs')
+@ivory(command='langs')
 @rate_limit(40, 60)
 def languages(update: Update, context: CallbackContext) -> None:
     message = update.effective_message

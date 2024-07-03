@@ -2,7 +2,7 @@ from datetime import datetime, timezone
 from functools import wraps
 
 from telegram.ext import CallbackContext
-from tg_bot.modules.helper_funcs.decorators import kigcmd, kigcallback, rate_limit
+from tg_bot.modules.helper_funcs.decorators import ivory, kigcallback, rate_limit
 from tg_bot.modules.helper_funcs.misc import is_module_loaded
 from tg_bot.modules.language import gs
 
@@ -106,7 +106,7 @@ if is_module_loaded(FILENAME):
                 )
 
 
-    @kigcmd(command='logchannel')
+    @ivory(command='logchannel')
     @u_admin
     @rate_limit(40, 60)
     def logging(update: Update, context: CallbackContext):
@@ -127,7 +127,7 @@ if is_module_loaded(FILENAME):
             message.reply_text("No log channel has been set for this group!")
 
 
-    @kigcmd(command='setlog')
+    @ivory(command='setlog')
     @user_admin(AdminPerms.CAN_CHANGE_INFO)
     @rate_limit(40, 60)
     def setlog(update: Update, context: CallbackContext):
@@ -171,7 +171,7 @@ if is_module_loaded(FILENAME):
             )
 
 
-    @kigcmd(command='unsetlog')
+    @ivory(command='unsetlog')
     @user_admin(AdminPerms.CAN_CHANGE_INFO)
     @rate_limit(40, 60)
     def unsetlog(update: Update, context: CallbackContext):
@@ -230,7 +230,7 @@ else:
         return func
 
 
-@kigcmd("logsettings")
+@ivory("logsettings")
 @user_admin(AdminPerms.CAN_CHANGE_INFO)
 @rate_limit(40, 60)
 def log_settings(update: Update, _: CallbackContext):

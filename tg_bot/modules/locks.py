@@ -18,7 +18,7 @@ from tg_bot.modules.helper_funcs.chat_status import (
     is_bot_admin,
     user_admin as u_admin,
 )
-from tg_bot.modules.helper_funcs.decorators import kigcmd, kigmsg, rate_limit
+from tg_bot.modules.helper_funcs.decorators import ivory, kigmsg, rate_limit
 from tg_bot.modules.log_channel import loggable
 from tg_bot.modules.sql.approve_sql import is_approved
 from ..modules.helper_funcs.anonymous import user_admin, AdminPerms
@@ -127,7 +127,7 @@ def unrestr_members(
             pass
 
 
-@kigcmd(command='locktypes')
+@ivory(command='locktypes')
 @rate_limit(40, 60)
 def locktypes(update, _):
     update.effective_message.reply_text(
@@ -138,7 +138,7 @@ def locktypes(update, _):
     )
 
 
-@kigcmd(command='lock', pass_args=True)
+@ivory(command='lock', pass_args=True)
 @user_admin(AdminPerms.CAN_CHANGE_INFO)
 @rate_limit(40, 60)
 @loggable
@@ -247,7 +247,7 @@ def lock(update: Update, context: CallbackContext) -> str:  # sourcery no-metric
     return ""
 
 
-@kigcmd(command='unlock', pass_args=True)
+@ivory(command='unlock', pass_args=True)
 @user_admin(AdminPerms.CAN_CHANGE_INFO)
 @rate_limit(40, 60)
 @loggable
@@ -482,7 +482,7 @@ def build_lock_message(chat_id):
     return res
 
 
-@kigcmd(command='locks')
+@ivory(command='locks')
 @u_admin
 @typing_action
 @rate_limit(40, 60)

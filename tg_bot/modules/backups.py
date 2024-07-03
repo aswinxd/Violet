@@ -6,7 +6,7 @@ import tg_bot.modules.sql.notes_sql as sql
 from tg_bot import dispatcher, log as LOGGER, OWNER_ID
 from tg_bot.__main__ import DATA_IMPORT
 from tg_bot.modules.helper_funcs.alternate import typing_action
-from tg_bot.modules.helper_funcs.decorators import kigcmd, rate_limit
+from tg_bot.modules.helper_funcs.decorators import ivory, rate_limit
 # from tg_bot.modules.rules import get_rules
 import tg_bot.modules.sql.rules_sql as rulessql
 from tg_bot.modules.language import gs
@@ -26,7 +26,7 @@ def get_help(chat):
 
 __mod_name__ = "Backup"
 
-@kigcmd(command='import')
+@ivory(command='import')
 @user_admin(AdminPerms.CAN_CHANGE_INFO)
 @typing_action
 @rate_limit(40, 60)
@@ -120,7 +120,7 @@ def import_data(update, context):
             text = "Backup fully restored"
         msg.reply_text(text, parse_mode="markdown")
 
-@kigcmd(command='export')
+@ivory(command='export')
 @user_admin(AdminPerms.CAN_CHANGE_INFO)
 @rate_limit(40, 60)
 def export_data(update, context):  # sourcery no-metrics

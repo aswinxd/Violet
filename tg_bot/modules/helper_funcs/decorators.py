@@ -91,7 +91,7 @@ class KigyoTelegramHandler:
                     self._dispatcher.add_handler(
                         CommandHandler(command, func, filters=filters, run_async=run_async, pass_args=pass_args), group
                     )
-                log.debug(f"[KIGCMD] Loaded handler {command} for function {func.__name__} in group {group}")
+                log.debug(f"[IVORY] Loaded handler {command} for function {func.__name__} in group {group}")
             except TypeError:
                 if can_disable:
                     self._dispatcher.add_handler(
@@ -103,7 +103,7 @@ class KigyoTelegramHandler:
                         CommandHandler(command, func, filters=filters, run_async=run_async, pass_args=pass_args,
                                        pass_chat_data=pass_chat_data)
                     )
-                log.debug(f"[KIGCMD] Loaded handler {command} for function {func.__name__}")
+                log.debug(f"[IVORY] Loaded handler {command} for function {func.__name__}")
 
             return func
 
@@ -199,7 +199,7 @@ class KigyoTelegramHandler:
         return _inlinequery
 
 
-kigcmd = KigyoTelegramHandler(d).command
+ivory = KigyoTelegramHandler(d).command
 kigmsg = KigyoTelegramHandler(d).message
 kigcallback = KigyoTelegramHandler(d).callbackquery
 kiginline = KigyoTelegramHandler(d).inlinequery

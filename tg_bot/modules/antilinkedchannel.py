@@ -5,12 +5,12 @@ from telegram.ext import CallbackContext
 from telegram.ext.filters import Filters
 from tg_bot.modules.helper_funcs.chat_status import bot_admin, bot_can_delete
 
-from tg_bot.modules.helper_funcs.decorators import kigcmd, kigmsg, rate_limit
+from tg_bot.modules.helper_funcs.decorators import ivory, kigmsg, rate_limit
 from ..modules.helper_funcs.anonymous import user_admin, AdminPerms
 import tg_bot.modules.sql.antilinkedchannel_sql as sql
 
 
-@kigcmd(command="antilinkedchan", group=112)
+@ivory(command="antilinkedchan", group=112)
 @bot_can_delete
 @user_admin(AdminPerms.CAN_RESTRICT_MEMBERS)
 @rate_limit(40, 60)
@@ -49,7 +49,7 @@ def eliminate_linked_channel_msg(update: Update, _: CallbackContext):
     except TelegramError:
         return
 
-@kigcmd(command="antichannelpin", group=114)
+@ivory(command="antichannelpin", group=114)
 @bot_admin
 @user_admin(AdminPerms.CAN_RESTRICT_MEMBERS)
 @rate_limit(40, 60)

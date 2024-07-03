@@ -8,13 +8,13 @@ from telegram.utils.helpers import mention_html
 import tg_bot.modules.sql.approve_sql as sql
 from tg_bot import SUDO_USERS
 from tg_bot.modules.helper_funcs.chat_status import user_admin as u_admin
-from tg_bot.modules.helper_funcs.decorators import kigcmd, kigcallback, rate_limit
+from tg_bot.modules.helper_funcs.decorators import ivory, kigcallback, rate_limit
 from tg_bot.modules.helper_funcs.extraction import extract_user
 from tg_bot.modules.log_channel import loggable
 from ..modules.helper_funcs.anonymous import user_admin, AdminPerms
 
 
-@kigcmd(command='approve', filters=Filters.chat_type.groups)
+@ivory(command='approve', filters=Filters.chat_type.groups)
 @user_admin(AdminPerms.CAN_CHANGE_INFO)
 @rate_limit(40, 60)
 @loggable
@@ -60,7 +60,7 @@ def approve(update: Update, context: CallbackContext):
     return log_message
 
 
-@kigcmd(command='unapprove', filters=Filters.chat_type.groups)
+@ivory(command='unapprove', filters=Filters.chat_type.groups)
 @user_admin(AdminPerms.CAN_CHANGE_INFO)
 @rate_limit(40, 60)
 @loggable
@@ -92,7 +92,7 @@ def disapprove(update: Update, context: CallbackContext):
     return f"<b>{html.escape(chat.title)}:</b>\n#UNAPPROVED\n<b>Admin:</b> {mention_html(user.id, user.first_name)}\n<b>User:</b> {mention_html(member.user.id, member.user.first_name)}"
 
 
-@kigcmd(command='approved', filters=Filters.chat_type.groups)
+@ivory(command='approved', filters=Filters.chat_type.groups)
 @user_admin(AdminPerms.CAN_CHANGE_INFO)
 @rate_limit(40, 60)
 def approved(update: Update, _: CallbackContext):
@@ -111,7 +111,7 @@ def approved(update: Update, _: CallbackContext):
         message.reply_text(msg, parse_mode=ParseMode.MARKDOWN)
 
 
-@kigcmd(command='approval', filters=Filters.chat_type.groups)
+@ivory(command='approval', filters=Filters.chat_type.groups)
 @user_admin(AdminPerms.CAN_CHANGE_INFO)
 @rate_limit(40, 60)
 def approval(update, context):
@@ -136,7 +136,7 @@ def approval(update, context):
         )
 
 
-@kigcmd(command='unapproveall', filters=Filters.chat_type.groups)
+@ivory(command='unapproveall', filters=Filters.chat_type.groups)
 @rate_limit(40, 60)
 def unapproveall(update: Update, _: CallbackContext):
     chat = update.effective_chat

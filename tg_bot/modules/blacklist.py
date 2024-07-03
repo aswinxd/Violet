@@ -14,14 +14,14 @@ from tg_bot.modules.log_channel import loggable
 from tg_bot.modules.warns import warn
 from tg_bot.modules.helper_funcs.string_handling import extract_time
 from tg_bot.modules.connection import connected
-from tg_bot.modules.helper_funcs.decorators import kigcmd, kigmsg, rate_limit
+from tg_bot.modules.helper_funcs.decorators import ivory, kigmsg, rate_limit
 from tg_bot.modules.helper_funcs.alternate import send_message, typing_action
 
 from ..modules.helper_funcs.anonymous import user_admin, AdminPerms
 
 BLACKLIST_GROUP = -3
 
-@kigcmd(command="blacklist", pass_args=True, admin_ok=True)
+@ivory(command="blacklist", pass_args=True, admin_ok=True)
 @u_admin
 @typing_action
 @rate_limit(40, 60)
@@ -66,7 +66,7 @@ def blacklist(update, context):
             return
         send_message(update.effective_message, text, parse_mode=ParseMode.HTML)
 
-@kigcmd(command="addblacklist", pass_args=True)
+@ivory(command="addblacklist", pass_args=True)
 @user_admin(AdminPerms.CAN_DELETE_MESSAGES)
 @typing_action
 @rate_limit(40, 60)
@@ -125,7 +125,7 @@ def add_blacklist(update, context):
             "Tell me which words you would like to add in blacklist.",
         )
 
-@kigcmd(command="unblacklist", pass_args=True)
+@ivory(command="unblacklist", pass_args=True)
 @user_admin(AdminPerms.CAN_DELETE_MESSAGES)
 @typing_action
 @rate_limit(40, 60)
@@ -210,7 +210,7 @@ def unblacklist(update, context):
             "Tell me which words you would like to remove from blacklist!",
         )
 
-@kigcmd(command="blacklistmode", pass_args=True)
+@ivory(command="blacklistmode", pass_args=True)
 @rate_limit(40, 60)
 @loggable
 @user_admin(AdminPerms.CAN_RESTRICT_MEMBERS)

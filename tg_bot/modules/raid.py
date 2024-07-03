@@ -11,7 +11,7 @@ from telegram.utils.helpers import mention_html
 from .log_channel import loggable
 from .helper_funcs.anonymous import user_admin, AdminPerms
 from .helper_funcs.chat_status import bot_admin, connection_status, user_admin_no_reply
-from .helper_funcs.decorators import kigcmd, kigcallback, rate_limit
+from .helper_funcs.decorators import ivory, kigcallback, rate_limit
 from .. import log, updater
 
 import tg_bot.modules.sql.welcome_sql as sql
@@ -36,7 +36,7 @@ def get_readable_time(time: int) -> str:
     return "{} hour(s)".format(t[0]) if time >= 3600 else "{} minutes".format(t[1])
 
 
-@kigcmd(command="raid", pass_args=True)
+@ivory(command="raid", pass_args=True)
 @bot_admin
 @connection_status
 @rate_limit(40, 60)
@@ -178,7 +178,7 @@ def disable_raid_cb(update: Update, _: CallbackContext):
         parse_mode=ParseMode.HTML)
 
 
-@kigcmd(command="raidtime")
+@ivory(command="raidtime")
 @connection_status
 @loggable
 @user_admin(AdminPerms.CAN_CHANGE_INFO)
@@ -213,7 +213,7 @@ def raidtime(update: Update, context: CallbackContext) -> Optional[str]:
         msg.reply_text("Unknown time given, give me something like 5m or 1h", parse_mode=ParseMode.HTML)
 
 
-@kigcmd(command="raidactiontime", pass_args=True)
+@ivory(command="raidactiontime", pass_args=True)
 @connection_status
 @user_admin(AdminPerms.CAN_CHANGE_INFO)
 @rate_limit(40, 60)

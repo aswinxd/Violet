@@ -34,7 +34,7 @@ from tg_bot.modules.log_channel import loggable
 from tg_bot.modules.sql import antiflood_sql as sql
 from tg_bot.modules.connection import connected
 from tg_bot.modules.helper_funcs.alternate import send_message
-from tg_bot.modules.helper_funcs.decorators import kigcmd, kigmsg, kigcallback, rate_limit
+from tg_bot.modules.helper_funcs.decorators import ivory, kigmsg, kigcallback, rate_limit
 
 from ..modules.helper_funcs.anonymous import user_admin, AdminPerms
 
@@ -159,7 +159,7 @@ def flood_button(update: Update, context: CallbackContext):
             pass
 
 
-@kigcmd(command='setflood', pass_args=True, filters=Filters.chat_type.groups)
+@ivory(command='setflood', pass_args=True, filters=Filters.chat_type.groups)
 @connection_status
 @user_admin(AdminPerms.CAN_CHANGE_INFO)
 @can_restrict
@@ -256,7 +256,7 @@ def set_flood(update, context) -> str:  # sourcery no-metrics
     return ""
 
 
-@kigcmd(command="flood", filters=Filters.chat_type.groups)
+@ivory(command="flood", filters=Filters.chat_type.groups)
 @connection_status
 def flood(update, context):
     chat = update.effective_chat  # type: Optional[Chat]
@@ -299,7 +299,7 @@ def flood(update, context):
         )
 
 
-@kigcmd(command="setfloodmode", pass_args=True, filters=Filters.chat_type.groups)
+@ivory(command="setfloodmode", pass_args=True, filters=Filters.chat_type.groups)
 @user_admin(AdminPerms.CAN_CHANGE_INFO)
 def set_flood_mode(update, context):  # sourcery no-metrics
     global settypeflood

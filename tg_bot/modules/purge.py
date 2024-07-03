@@ -6,7 +6,7 @@ from telegram.ext import CallbackContext, CallbackQueryHandler
 from typing import List
 from tg_bot.modules.helper_funcs.anonymous import AdminPerms, user_admin
 from tg_bot.modules.helper_funcs.chat_status import bot_admin, is_user_admin_callback_query
-from tg_bot.modules.helper_funcs.decorators import rate_limit, kigcmd
+from tg_bot.modules.helper_funcs.decorators import rate_limit, ivory
 from tg_bot.modules.log_channel import loggable
 from pydantic import BaseModel
 from uuid import uuid4
@@ -64,7 +64,7 @@ def purge_confirm(update: Update, context: CallbackContext):
     return f"#PURGE_FAILED \n<b>Admin:</b> {query.from_user.first_name}\n<b>Chat:</b> {update.effective_chat.title}\n"
 
 
-@kigcmd(command='purge')
+@ivory(command='purge')
 @bot_admin
 @user_admin(AdminPerms.CAN_DELETE_MESSAGES)
 @rate_limit(40, 60)

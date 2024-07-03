@@ -44,7 +44,7 @@ from tg_bot.modules.helper_funcs.alternate import (
     typing_action,
     send_action,
 )
-from tg_bot.modules.helper_funcs.decorators import kigcmd, kigcallback, rate_limit
+from tg_bot.modules.helper_funcs.decorators import ivory, kigcallback, rate_limit
 
 # Hello bot owner, I spent many hours of my life for feds, Please don't remove this if you still respect MrYacha and peaktogoo and AyraHikari too
 # Federation by MrYacha 2018-2019
@@ -90,7 +90,7 @@ UNFBAN_ERRORS = {
 
 
 @typing_action
-@kigcmd(command='newfed')
+@ivory(command='newfed')
 @rate_limit(40, 60)
 def new_fed(update, context):
     chat = update.effective_chat  # type: Optional[Chat]
@@ -144,7 +144,7 @@ def new_fed(update, context):
 
 
 @typing_action
-@kigcmd(command='delfed', pass_args=True)
+@ivory(command='delfed', pass_args=True)
 @rate_limit(40, 60)
 def del_fed(update, context):
     chat = update.effective_chat  # type: Optional[Chat]
@@ -193,7 +193,7 @@ def del_fed(update, context):
 
 
 @typing_action
-@kigcmd(command='chatfed', pass_args=True)
+@ivory(command='chatfed', pass_args=True)
 @rate_limit(40, 60)
 def fed_chat(update, context):
     chat = update.effective_chat  # type: Optional[Chat]
@@ -220,7 +220,7 @@ def fed_chat(update, context):
 
 
 @typing_action
-@kigcmd(command='joinfed', pass_args=True)
+@ivory(command='joinfed', pass_args=True)
 @rate_limit(40, 60)
 def join_fed(update, context):
     chat = update.effective_chat  # type: Optional[Chat]
@@ -283,7 +283,7 @@ def join_fed(update, context):
 
 
 @typing_action
-@kigcmd(command='leavefed')
+@ivory(command='leavefed')
 @rate_limit(40, 60)
 def leave_fed(update, context):
     chat = update.effective_chat  # type: Optional[Chat]
@@ -326,7 +326,7 @@ def leave_fed(update, context):
 
 
 @typing_action
-@kigcmd(command='fpromote', pass_args=True)
+@ivory(command='fpromote', pass_args=True)
 @rate_limit(40, 60)
 def user_join_fed(update, context):
     chat = update.effective_chat
@@ -392,7 +392,7 @@ def user_join_fed(update, context):
 
 
 @typing_action
-@kigcmd(command='fdemote', pass_args=True)
+@ivory(command='fdemote', pass_args=True)
 @rate_limit(40, 60)
 def user_demote_fed(update, context):
     chat = update.effective_chat  # type: Optional[Chat]
@@ -454,7 +454,7 @@ def user_demote_fed(update, context):
 
 
 @typing_action
-@kigcmd(command='fedinfo', pass_args=True)
+@ivory(command='fedinfo', pass_args=True)
 @rate_limit(40, 60)
 def fed_info(update, context):
     chat = update.effective_chat  # type: Optional[Chat]
@@ -504,7 +504,7 @@ def fed_info(update, context):
 
 
 @typing_action
-@kigcmd(command=['fban', 'fedban'], pass_args=True)
+@ivory(command=['fban', 'fedban'], pass_args=True)
 @rate_limit(40, 60)
 def fed_ban(update, context):  # sourcery no-metrics
 
@@ -918,7 +918,7 @@ def fed_ban(update, context):  # sourcery no-metrics
 
 
 @typing_action
-@kigcmd(command=['unfban', 'rmfedban'], pass_args=True)
+@ivory(command=['unfban', 'rmfedban'], pass_args=True)
 def unfban(update, context):
     chat = update.effective_chat  # type: Optional[Chat]
     user = update.effective_user  # type: Optional[User]
@@ -1202,7 +1202,7 @@ def set_frules(update, context):
 
 
 @typing_action
-@kigcmd(command='frules', pass_args=True)
+@ivory(command='frules', pass_args=True)
 @rate_limit(40, 60)
 def get_frules(update, context):
     chat = update.effective_chat  # type: Optional[Chat]
@@ -1227,7 +1227,7 @@ def get_frules(update, context):
 
 
 @typing_action
-@kigcmd(command='fbroadcast', pass_args=True)
+@ivory(command='fbroadcast', pass_args=True)
 @rate_limit(40, 60)
 def fed_broadcast(update, context):
     msg = update.effective_message  # type: Optional[Message]
@@ -1288,7 +1288,7 @@ def fed_broadcast(update, context):
 
 
 @send_action(ChatAction.UPLOAD_DOCUMENT)
-@kigcmd(command='fbanlist', pass_args=True, pass_chat_data=True)
+@ivory(command='fbanlist', pass_args=True, pass_chat_data=True)
 @rate_limit(40, 60)
 def fed_ban_list(update, context):  # sourcery no-metrics
     chat = update.effective_chat  # type: Optional[Chat]
@@ -1469,7 +1469,7 @@ def fed_ban_list(update, context):  # sourcery no-metrics
 
 
 @typing_action
-@kigcmd(command='fednotif', pass_args=True)
+@ivory(command='fednotif', pass_args=True)
 @rate_limit(40, 60)
 def fed_notif(update, context):
     chat = update.effective_chat  # type: Optional[Chat]
@@ -1506,7 +1506,7 @@ def fed_notif(update, context):
 
 
 @typing_action
-@kigcmd(command='fedchats', pass_args=True)
+@ivory(command='fedchats', pass_args=True)
 @rate_limit(40, 60)
 def fed_chats(update, context):
     chat = update.effective_chat  # type: Optional[Chat]
@@ -1572,7 +1572,7 @@ def fed_chats(update, context):
 
 
 @typing_action
-@kigcmd(command='importfbans', pass_args=True, pass_chat_data=True)
+@ivory(command='importfbans', pass_args=True, pass_chat_data=True)
 @rate_limit(40, 60)
 def fed_import_bans(update, context):  # sourcery no-metrics
     chat = update.effective_chat  # type: Optional[Chat]
@@ -1818,7 +1818,7 @@ def del_fed_button(update, context):
 
 
 @typing_action
-@kigcmd(command='fbanstat', pass_args=True)
+@ivory(command='fbanstat', pass_args=True)
 @rate_limit(40, 60)
 def fed_stat_user(update, context):  # sourcery no-metrics
     user = update.effective_user  # type: Optional[User]
@@ -1928,7 +1928,7 @@ def fed_stat_user(update, context):  # sourcery no-metrics
 
 
 @typing_action
-@kigcmd(command='setfedlog', pass_args=True)
+@ivory(command='setfedlog', pass_args=True)
 @rate_limit(40, 60)
 def set_fed_log(update, context):
     chat = update.effective_chat  # type: Optional[Chat]
@@ -1971,7 +1971,7 @@ def set_fed_log(update, context):
 
 
 @typing_action
-@kigcmd(command='unsetfedlog', pass_args=True)
+@ivory(command='unsetfedlog', pass_args=True)
 @rate_limit(40, 60)
 def unset_fed_log(update, context):
     chat = update.effective_chat  # type: Optional[Chat]
@@ -2015,7 +2015,7 @@ def unset_fed_log(update, context):
 
 
 @typing_action
-@kigcmd('subfed', pass_args=True)
+@ivory('subfed', pass_args=True)
 @rate_limit(40, 60)
 def subs_feds(update, context):
     chat = update.effective_chat  # type: Optional[Chat]
@@ -2083,7 +2083,7 @@ def subs_feds(update, context):
 
 
 @typing_action
-@kigcmd(command='unsubfed', pass_args=True)
+@ivory(command='unsubfed', pass_args=True)
 @rate_limit(40, 60)
 def unsubs_feds(update, context):
     chat = update.effective_chat  # type: Optional[Chat]
@@ -2151,7 +2151,7 @@ def unsubs_feds(update, context):
 
 
 @typing_action
-@kigcmd(command='fedsubs', pass_args=True)
+@ivory(command='fedsubs', pass_args=True)
 @rate_limit(40, 60)
 def get_myfedsubs(update, context):
     chat = update.effective_chat  # type: Optional[Chat]
@@ -2201,7 +2201,7 @@ def get_myfedsubs(update, context):
 
 
 @typing_action
-@kigcmd(command='myfeds', pass_args=True)
+@ivory(command='myfeds', pass_args=True)
 @rate_limit(40, 60)
 def get_myfeds_list(update, context):
     chat = update.effective_chat  # type: Optional[Chat]

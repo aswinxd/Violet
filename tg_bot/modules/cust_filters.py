@@ -27,7 +27,7 @@ from tg_bot.modules.sql import cust_filters_sql as sql
 from tg_bot.modules.connection import connected
 
 from tg_bot.modules.helper_funcs.alternate import send_message, typing_action
-from tg_bot.modules.helper_funcs.decorators import kigcmd, kigmsg, kigcallback, rate_limit
+from tg_bot.modules.helper_funcs.decorators import ivory, kigmsg, kigcallback, rate_limit
 
 from ..modules.helper_funcs.anonymous import user_admin, AdminPerms
 
@@ -47,7 +47,7 @@ ENUM_FUNC_MAP = {
 
 
 @typing_action
-@kigcmd(command='filters', admin_ok=True)
+@ivory(command='filters', admin_ok=True)
 @rate_limit(40, 60)
 def list_handlers(update, context):
     chat = update.effective_chat
@@ -95,7 +95,7 @@ def list_handlers(update, context):
 
 
 # NOT ASYNC BECAUSE DISPATCHER HANDLER RAISED
-@kigcmd(command='filter', run_async=False)
+@ivory(command='filter', run_async=False)
 @user_admin(AdminPerms.CAN_CHANGE_INFO)
 @typing_action
 @rate_limit(40, 60)
@@ -220,7 +220,7 @@ def filters(update, context):  # sourcery no-metrics
 
 
 # NOT ASYNC BECAUSE DISPATCHER HANDLER RAISED
-@kigcmd(command='stop', run_async=False)
+@ivory(command='stop', run_async=False)
 @user_admin(AdminPerms.CAN_CHANGE_INFO)
 @typing_action
 @rate_limit(40, 60)
@@ -456,7 +456,7 @@ def reply_filter(update, context):  # sourcery no-metrics
             break
 
 
-@kigcmd(command="removeallfilters", filters=Filters.chat_type.groups)
+@ivory(command="removeallfilters", filters=Filters.chat_type.groups)
 @rate_limit(40, 60)
 def rmall_filters(update, _):
     chat = update.effective_chat

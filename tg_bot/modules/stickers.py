@@ -9,7 +9,7 @@ from telegram import (Bot, InlineKeyboardButton, InlineKeyboardMarkup, ParseMode
                       TelegramError, Update)
 from telegram.ext import CallbackContext
 from telegram.utils.helpers import mention_html
-from tg_bot.modules.helper_funcs.decorators import kigcmd, rate_limit
+from tg_bot.modules.helper_funcs.decorators import ivory, rate_limit
 
 def get_sticker_count(bot: Bot, packname: str) -> int:
     resp = bot._request.post(
@@ -20,7 +20,7 @@ def get_sticker_count(bot: Bot, packname: str) -> int:
     )
     return len(resp["stickers"])
 
-@kigcmd(command='stickerid')
+@ivory(command='stickerid')
 @rate_limit(40, 60)
 def stickerid(update: Update, context: CallbackContext):
     msg = update.effective_message
@@ -42,7 +42,7 @@ def stickerid(update: Update, context: CallbackContext):
         )
 
 
-@kigcmd(command='getsticker')
+@ivory(command='getsticker')
 @rate_limit(40, 60)
 def getsticker(update: Update, context: CallbackContext):
     msg = update.effective_message
@@ -70,7 +70,7 @@ def getsticker(update: Update, context: CallbackContext):
         )
 
 
-@kigcmd(command=["steal", "kang"])
+@ivory(command=["steal", "kang"])
 @rate_limit(40, 60)
 def kang(update: Update, context: CallbackContext):  # sourcery no-metrics
     global ppref

@@ -24,7 +24,7 @@ from telegram.ext import (
     Filters,
 )
 
-from tg_bot.modules.helper_funcs.decorators import kigcmd, kigmsg, kigcallback, rate_limit
+from tg_bot.modules.helper_funcs.decorators import ivory, kigmsg, kigcallback, rate_limit
 
 from ..modules.helper_funcs.anonymous import user_admin, AdminPerms
 
@@ -211,7 +211,7 @@ def get(update, context, notename, show_none=True, no_format=False):
         message.reply_text("This note doesn't exist")
 
 
-@kigcmd(command="get")
+@ivory(command="get")
 @connection_status
 @rate_limit(40, 60)
 def cmd_get(update: Update, context: CallbackContext):
@@ -251,7 +251,7 @@ def slash_get(update: Update, context: CallbackContext):
     except IndexError:
         update.effective_message.reply_text("Wrong Note ID 😾")
 
-@kigcmd(command='save')
+@ivory(command='save')
 @user_admin(AdminPerms.CAN_CHANGE_INFO)
 @connection_status
 @rate_limit(40, 60)
@@ -294,7 +294,7 @@ def save(update: Update, context: CallbackContext):
             )
         return
 
-@kigcmd(command='clear')
+@ivory(command='clear')
 @user_admin(AdminPerms.CAN_CHANGE_INFO)
 @connection_status
 @rate_limit(40, 60)
@@ -312,7 +312,7 @@ def clear(update: Update, context: CallbackContext):
         update.effective_message.reply_text("Provide a notename.")
 
 
-@kigcmd(command='removeallnotes')
+@ivory(command='removeallnotes')
 @rate_limit(40, 60)
 def clearall(update: Update, context: CallbackContext):
     chat = update.effective_chat
@@ -373,7 +373,7 @@ def clearall_btn(update: Update, context: CallbackContext):
             query.answer("You need to be admin to do this.")
 
 
-@kigcmd(command=["notes", "saved"])
+@ivory(command=["notes", "saved"])
 @connection_status
 @rate_limit(40, 60)
 def list_notes(update: Update, context: CallbackContext):

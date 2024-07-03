@@ -34,7 +34,7 @@ from psutil import cpu_percent, virtual_memory, disk_usage, boot_time
 import datetime
 import platform
 from platform import python_version
-from tg_bot.modules.helper_funcs.decorators import kigcmd, kigcallback, rate_limit
+from tg_bot.modules.helper_funcs.decorators import ivory, kigcallback, rate_limit
 
 MARKDOWN_HELP = f"""
 Markdown is a very powerful formatting tool supported by telegram. {dispatcher.bot.first_name} has some enhancements, to make sure that \
@@ -60,7 +60,7 @@ This will create two buttons on a single line, instead of one button per line.
 Keep in mind that your message <b>MUST</b> contain some text other than just a button!
 """
 
-@kigcmd(command='id', pass_args=True)
+@ivory(command='id', pass_args=True)
 @rate_limit(40, 60)
 def get_id(update: Update, context: CallbackContext):
     bot, args = context.bot, context.args
@@ -98,7 +98,7 @@ def get_id(update: Update, context: CallbackContext):
             f"This group's id is <code>{chat.id}</code>.", parse_mode=ParseMode.HTML
         )
 
-@kigcmd(command='gifid')
+@ivory(command='gifid')
 @rate_limit(40, 60)
 def gifid(update: Update, _):
     msg = update.effective_message
@@ -110,7 +110,7 @@ def gifid(update: Update, _):
     else:
         update.effective_message.reply_text("Please reply to a gif to get its ID.")
 
-@kigcmd(command='info', pass_args=True)
+@ivory(command='info', pass_args=True)
 @rate_limit(40, 60)
 def info(update: Update, context: CallbackContext):  # sourcery no-metrics
     bot = context.bot
@@ -268,7 +268,7 @@ def get_chat_info(user):
     return text
 
 
-@kigcmd(command='echo', pass_args=True, filters=Filters.chat_type.groups)
+@ivory(command='echo', pass_args=True, filters=Filters.chat_type.groups)
 @user_admin
 @rate_limit(40, 60)
 def echo(update: Update, _):
@@ -288,7 +288,7 @@ def shell(command):
     stdout, stderr = process.communicate()
     return (stdout, stderr)
 
-@kigcmd(command='markdownhelp', filters=Filters.chat_type.private)
+@ivory(command='markdownhelp', filters=Filters.chat_type.private)
 @rate_limit(40, 60)
 def markdown_help(update: Update, _):
     chat = update.effective_chat
@@ -328,7 +328,7 @@ def get_readable_time(seconds: int) -> str:
 
 stats_str = '''
 '''
-@kigcmd(command='stats', can_disable=False)
+@ivory(command='stats', can_disable=False)
 @sudo_plus
 @rate_limit(40, 60)
 def stats(update, context):

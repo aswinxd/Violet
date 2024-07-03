@@ -15,10 +15,10 @@ from tg_bot.__main__ import (
 from tg_bot.modules.helper_funcs.chat_status import dev_plus, sudo_plus
 from telegram import ParseMode, Update
 from telegram.ext import CallbackContext
-from tg_bot.modules.helper_funcs.decorators import kigcmd, rate_limit
+from tg_bot.modules.helper_funcs.decorators import ivory, rate_limit
 
 
-@kigcmd(command='load')
+@ivory(command='load')
 @dev_plus
 @rate_limit(40, 60)
 def load(update: Update, context: CallbackContext):
@@ -84,7 +84,7 @@ def load(update: Update, context: CallbackContext):
         "Successfully loaded module : <b>{}</b>".format(text), parse_mode=ParseMode.HTML
     )
 
-@kigcmd(command='unload')
+@ivory(command='unload')
 @dev_plus
 @rate_limit(40, 60)
 def unload(update: Update, context: CallbackContext):
@@ -152,7 +152,7 @@ def unload(update: Update, context: CallbackContext):
     )
 
 
-@kigcmd(command='listmodules')
+@ivory(command='listmodules')
 @sudo_plus
 @rate_limit(40, 60)
 def listmodules(update: Update, context: CallbackContext):
