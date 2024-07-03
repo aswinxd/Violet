@@ -47,7 +47,7 @@ if sys.version_info[0] < 3 or sys.version_info[1] < 7:
     quit(1)
 
 @dataclass
-class KigyoINIT:
+class IvoryINIT:
     def __init__(self, parser: ConfigParser):
         self.parser = parser
         self.SYS_ADMIN: int = self.parser.getint('SYS_ADMIN', 0)
@@ -100,7 +100,7 @@ class KigyoINIT:
                  return None
 
 
-KInit = KigyoINIT(parser=ivoryconf)
+KInit = IvoryINIT(parser=ivoryconf)
 
 SYS_ADMIN = KInit.SYS_ADMIN
 OWNER_ID = KInit.OWNER_ID

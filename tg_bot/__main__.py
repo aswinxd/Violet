@@ -26,7 +26,7 @@ from tg_bot import (
     PORT,
     URL,
     log,
-    KigyoINIT
+    IvoryINIT
 )
 # needed to dynamically load modules
 # NOTE: Module order is not guaranteed, specify that in the config file!
@@ -677,9 +677,9 @@ def main():
 
     else:
         log.info(f"started, Using long polling. | BOT: [@{dispatcher.bot.username}]")
-        KigyoINIT.bot_id = dispatcher.bot.id
-        KigyoINIT.bot_username = dispatcher.bot.username
-        KigyoINIT.bot_name = dispatcher.bot.first_name
+        IvoryINIT.bot_id = dispatcher.bot.id
+        IvoryINIT.bot_username = dispatcher.bot.username
+        IvoryINIT.bot_name = dispatcher.bot.first_name
         updater.start_polling(timeout=15, read_latency=4, allowed_updates=Update.ALL_TYPES,
                               drop_pending_updates=KInit.DROP_UPDATES)
     
