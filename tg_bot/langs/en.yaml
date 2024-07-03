@@ -9,7 +9,7 @@ set_chat_lang: "Great, {} it is from now on!"
 
 
 pm_start_text: |
-      Hey there! My name is Elsandra - I'm here to help you manage your groups! Hit /help to find out more about how to use me to my full potential.
+      Hey there! My name is Ivory- I'm here to help you manage your groups! Hit /help to find out more about how to use me to my full potential.
 
       Join my news channel to get information on all the latest updates.
 
@@ -32,8 +32,8 @@ admin_help: |
    • `/demote`*:* demotes the user replied to
    • `/title <title here>`*:* sets a custom title for an admin that the bot promoted
    • /antichannel <on/off>: Bans and deletes anyone who tries to talk as channel and forces em to talk as themselves
-   • /antilinkedchan <on/off>: Makes Elsandra automatically delete linked channel posts from chatroom
-   • /antichannelpin <on/off>: Makes Elsandra automatically unpin linked channel posts from chatroom
+   • /antilinkedchan <on/off>: Makes Ivoryautomatically delete linked channel posts from chatroom
+   • /antichannelpin <on/off>: Makes Ivoryautomatically unpin linked channel posts from chatroom
 
 
 antiflood_help: |
@@ -164,7 +164,7 @@ FED_USER_HELP: |
     • `/frules`*:* See Federation regulations
 
 formt_help_bse: |
-    Elsandra supports a large number of formatting options to make your messages more expressive. Take a look!
+    Ivorysupports a large number of formatting options to make your messages more expressive. Take a look!
 
 md_help: |
     <b>Markdown Formatting</b>

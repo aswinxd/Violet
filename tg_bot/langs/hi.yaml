@@ -9,7 +9,7 @@ set_chat_lang: "बढ़िया, {} यह अब से है!"
 
 
 pm_start_text: |
-      सुनो! मेरा नाम Elsandra है - मैं आपके समूहों को प्रबंधित करने में आपकी मदद करने के लिए यहां हूं! मैं अपनी पूरी क्षमता का उपयोग कैसे करूँ, इसके बारे में अधिक जानने के लिए /help पर क्लिक करें।
+      सुनो! मेरा नाम Ivoryहै - मैं आपके समूहों को प्रबंधित करने में आपकी मदद करने के लिए यहां हूं! मैं अपनी पूरी क्षमता का उपयोग कैसे करूँ, इसके बारे में अधिक जानने के लिए /help पर क्लिक करें।
 
       सभी नवीनतम अपडेट की जानकारी प्राप्त करने के लिए मेरे समाचार चैनल से जुड़ें।
 
@@ -17,7 +17,7 @@ pm_start_text: |
 grp_start_text: "हेया :) यदि आपके पास मेरा उपयोग करने के बारे में कोई प्रश्न है तो मुझे PM करें!"
 
 pm_help_text: |
-   यह Elsandra का सहायता मॉड्यूल है
+   यह Ivoryका सहायता मॉड्यूल है
    
     • /language: बॉट भाषा बदलें..
     विशिष्ट मॉड्यूल के बारे में दस्तावेज़ प्राप्त करने के लिए नीचे दिए गए बटन पर क्लिक करें!
@@ -33,8 +33,8 @@ admin_help: |
    • /title <शीर्षक यहां>*:* उस व्यवस्थापक के लिए एक कस्टम शीर्षक सेट करता है जिसे बॉट ने प्रचारित किया है
     Available commands:
    • /antichannel <on/off>: Bans and deletes anyone who tries to talk as channel and forces em to talk as themselves
-   • /antilinkedchan <on/off>: Makes Elsandra automatically delete linked channel posts from chatroom
-   • /antichannelpin <on/off>: Makes Elsandra automatically unpin linked channel posts from chatroom
+   • /antilinkedchan <on/off>: Makes Ivoryautomatically delete linked channel posts from chatroom
+   • /antichannelpin <on/off>: Makes Ivoryautomatically unpin linked channel posts from chatroom
 
 
 antiflood_help: |

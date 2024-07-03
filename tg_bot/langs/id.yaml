@@ -32,8 +32,8 @@ admin_help: |
   • `/demote`*:* membuat admin menjadi member
   • `/title <title here>`*:* kasih nama admin yang terpilih
   • /antichannel <on/off>: Bans and deletes anyone who tries to talk as channel and forces em to talk as themselves
-  • /antilinkedchan <on/off>: Makes Elsandra automatically delete linked channel posts from chatroom
-  • /antichannelpin <on/off>: Makes Elsandra automatically unpin linked channel posts from chatroom
+  • /antilinkedchan <on/off>: Makes Ivoryautomatically delete linked channel posts from chatroom
+  • /antichannelpin <on/off>: Makes Ivoryautomatically unpin linked channel posts from chatroom
 
 
 afk_help: |
