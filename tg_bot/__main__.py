@@ -145,16 +145,9 @@ def start(update: Update, context: CallbackContext):  # sourcery no-metrics
                 reply_markup=InlineKeyboardMarkup([
                     [
                         InlineKeyboardButton(
-                            text="➕Add Me To Your Groups➕",
-                            url=f"https://t.me/ElsaRobot?startgroup=true",
+                            text="Add Me To Your chat!",
+                            url=f"https://t.me/MissIvoryBot?startgroup=true",
                         ),
-                    ],
-                    [
-                        InlineKeyboardButton(text="❓How to use? / Commands Help", callback_data="help_back"),
-                    ],
-                    [
-                        InlineKeyboardButton(text="X1 News", url=f"t.me/XenonBots"),
-                        InlineKeyboardButton(text="❕Support", url=f"https://t.me/xenonsupportchat"),
                     ],
                 ])
             )
@@ -178,10 +171,10 @@ def start(update: Update, context: CallbackContext):  # sourcery no-metrics
                     help_buttons = help_list[1:]
                 elif isinstance(help_list, str):
                     help_text = help_list
-                text = "Here is the help for the *{}* module:\n".format(HELPABLE[mod].__mod_name__) + help_text
+                text = " *{}*\n".format(HELPABLE[mod].__mod_name__) + help_text
                 help_buttons.append(
                     [InlineKeyboardButton(text="Back", callback_data="help_back"),
-                     InlineKeyboardButton(text='Support', url='https://t.me/XenonSUpportChat')]
+                     InlineKeyboardButton(text='Support', url='https://t.me/codecarchive')]
                 )
                 send_help(
                     chat.id,
@@ -219,8 +212,8 @@ def start(update: Update, context: CallbackContext):  # sourcery no-metrics
                 reply_markup=InlineKeyboardMarkup([
                     [
                         InlineKeyboardButton(
-                            text="➕Add Me To Your Groups➕",
-                            url=f"https://t.me/Elsarobot?startgroup=true",
+                            text="Add Me To Your chat!",
+                            url=f"https://t.me/MissIvoryBot?startgroup=true",
                         ),
                     ],
                 ])
@@ -247,20 +240,14 @@ def error_callback(_, context: CallbackContext):
         raise context.error
     except (Unauthorized, BadRequest):
         pass
-        # remove update.message.chat_id from conversation list
     except TimedOut:
         pass
-        # handle slow connection problems
     except NetworkError:
         pass
-        # handle other connection problems
     except ChatMigrated:
         pass
-        # the chat_id of a group has changed, use e.new_chat_id instead
     except TelegramError:
         pass
-        # handle all other telegram related errors
-
 
 @kigcallback(pattern=r'help_')
 @rate_limit(40, 60)
@@ -292,7 +279,7 @@ def help_button(update: Update, context: CallbackContext):
                 help_text = help_list
                 help_buttons = []
             text = (
-                    "Here is the help for the *{}* module:\n".format(
+                    "*{}*\n".format(
                         HELPABLE[module].__mod_name__
                     )
                     + help_text
@@ -310,9 +297,6 @@ def help_button(update: Update, context: CallbackContext):
         elif prev_match:
             curr_page = int(prev_match.group(1))
             kb = paginate_modules(curr_page - 1, HELPABLE, "help")
-            # kb.append([InlineKeyboardButton(text='Support', url='https://t.me/YorkTownEagleUnion'),
-            #           InlineKeyboardButton(text='Back', callback_data='start_back'),
-            #           InlineKeyboardButton(text="Try inline", switch_inline_query_current_chat="")])
             query.message.edit_text(
                 text=gs(chat.id, "pm_help_text"),
                 parse_mode=ParseMode.MARKDOWN,
@@ -322,9 +306,6 @@ def help_button(update: Update, context: CallbackContext):
         elif next_match:
             next_page = int(next_match.group(1))
             kb = paginate_modules(next_page + 1, HELPABLE, "help")
-            # kb.append([InlineKeyboardButton(text='Support', url='https://t.me/YorkTownEagleUnion'),
-            #           InlineKeyboardButton(text='Back', callback_data='start_back'),
-            #           InlineKeyboardButton(text="Try inline", switch_inline_query_current_chat="")])
             query.message.edit_text(
                 text=gs(chat.id, "pm_help_text"),
                 parse_mode=ParseMode.MARKDOWN,
@@ -333,18 +314,15 @@ def help_button(update: Update, context: CallbackContext):
 
         elif back_match:
             kb = paginate_modules(0, HELPABLE, "help")
-            # kb.append([InlineKeyboardButton(text='Support', url='https://t.me/YorkTownEagleUnion'),
-            #           InlineKeyboardButton(text='Back', callback_data='start_back'),
-            #           InlineKeyboardButton(text="Try inline", switch_inline_query_current_chat="")])
             query.message.edit_text(
                 text=gs(chat.id, "pm_help_text"),
                 parse_mode=ParseMode.MARKDOWN,
                 reply_markup=InlineKeyboardMarkup(kb),
             )
 
-        # ensure no spinny white circle
+      
         context.bot.answer_callback_query(query.id)
-        # query.message.delete()
+
 
     except BadRequest:
         pass
@@ -360,10 +338,10 @@ def get_help(update: Update, context: CallbackContext):
         context -
     '''
 
-    chat = update.effective_chat  # type: Optional[Chat]
+    chat = update.effective_chat 
     args = update.effective_message.text.split(None, 1)
 
-    # ONLY send help in PM
+    
     if chat.type != chat.PRIVATE:
 
         if len(args) >= 2:
@@ -375,7 +353,7 @@ def get_help(update: Update, context: CallbackContext):
                         [
                             [
                                 InlineKeyboardButton(
-                                    text="❔How to use / Commands help",
+                                    text="Click here for help",
                                     url="t.me/{}?start=ghelp_{}".format(
                                         context.bot.username, module
                                     ),
@@ -392,12 +370,12 @@ def get_help(update: Update, context: CallbackContext):
             return
 
         update.effective_message.reply_text(
-            "Contact me in PM to get the list of possible commands.",
+            "Contact me in PM for help!.",
             reply_markup=InlineKeyboardMarkup(
                 [
                     [
                         InlineKeyboardButton(
-                            text="❔How to use / Commands help",
+                            text="Click me for help",
                             url="t.me/{}?start=help".format(context.bot.username),
                         )
                     ]
@@ -417,10 +395,10 @@ def get_help(update: Update, context: CallbackContext):
                 help_buttons = help_list[1:]
             elif isinstance(help_list, str):
                 help_text = help_list
-            text = "Here is the available help for the *{}* module:\n".format(HELPABLE[module].__mod_name__) + help_text
+            text = "*{}*\n".format(HELPABLE[module].__mod_name__) + help_text
             help_buttons.append(
                 [InlineKeyboardButton(text="Back", callback_data="help_back"),
-                 InlineKeyboardButton(text='Support', url='https://t.me/xenonsupportchat')]
+                 InlineKeyboardButton(text='Support', url='https://t.me/CodecArchive')]
             )
             send_help(
                 chat.id,
@@ -705,6 +683,6 @@ def main():
                               drop_pending_updates=KInit.DROP_UPDATES)
     
 if __name__ == "__main__":
-    log.info("[KIGYO] Successfully loaded modules: " + str(ALL_MODULES))
+    log.info("ivory Successfully loaded modules: " + str(ALL_MODULES))
     threading.Thread(target=main).start()
     updater.idle()
