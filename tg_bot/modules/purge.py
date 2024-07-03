@@ -19,7 +19,7 @@ class DeleteMessageCallback(BaseModel):
 
 DEL_MSG_CB_MAP: List[DeleteMessageCallback] = []
 
-# @kigcallback(pattern=r"purge.*")
+# @ivorycallback(pattern=r"purge.*")
 @is_user_admin_callback_query
 @bot_admin
 @rate_limit(40, 60)

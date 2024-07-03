@@ -11,7 +11,7 @@ from telegram.utils.helpers import mention_html
 from .log_channel import loggable
 from .helper_funcs.anonymous import user_admin, AdminPerms
 from .helper_funcs.chat_status import bot_admin, connection_status, user_admin_no_reply
-from .helper_funcs.decorators import ivory, kigcallback, rate_limit
+from .helper_funcs.decorators import ivory, ivorycallback, rate_limit
 from .. import log, updater
 
 import tg_bot.modules.sql.welcome_sql as sql
@@ -101,7 +101,7 @@ def setRaid(update: Update, context: CallbackContext) -> Optional[str]:
             msg.reply_text("Unknown time given, give me something like 5m or 1h", parse_mode=ParseMode.HTML)
 
 
-@kigcallback(pattern="enable_raid=")
+@ivorycallback(pattern="enable_raid=")
 @rate_limit(40, 60)
 @connection_status
 @user_admin_no_reply
@@ -139,7 +139,7 @@ def enable_raid_cb(update: Update, ctx: CallbackContext) -> Optional[str]:
     )
 
 
-@kigcallback(pattern="disable_raid=")
+@ivorycallback(pattern="disable_raid=")
 @connection_status
 @user_admin_no_reply
 @rate_limit(40, 60)
@@ -166,7 +166,7 @@ def disable_raid_cb(update: Update, _: CallbackContext) -> Optional[str]:
     return logmsg
 
 
-@kigcallback(pattern="cancel_raid=")
+@ivorycallback(pattern="cancel_raid=")
 @connection_status
 @user_admin_no_reply
 @rate_limit(40, 60)

@@ -44,7 +44,7 @@ from tg_bot.modules.helper_funcs.alternate import (
     typing_action,
     send_action,
 )
-from tg_bot.modules.helper_funcs.decorators import ivory, kigcallback, rate_limit
+from tg_bot.modules.helper_funcs.decorators import ivory, ivorycallback, rate_limit
 
 # Hello bot owner, I spent many hours of my life for feds, Please don't remove this if you still respect MrYacha and peaktogoo and AyraHikari too
 # Federation by MrYacha 2018-2019
@@ -1795,7 +1795,7 @@ def fed_import_bans(update, context):  # sourcery no-metrics
         send_message(update.effective_message, text)
 
 
-@kigcallback(pattern=r"rmfed_")
+@ivorycallback(pattern=r"rmfed_")
 @rate_limit(40, 60)
 def del_fed_button(update, context):
     query = update.callback_query
@@ -2343,7 +2343,7 @@ def fed_user_help(update: Update, context: CallbackContext):
     )
 
 
-@kigcallback(pattern=r"fed_help_")
+@ivorycallback(pattern=r"fed_help_")
 @rate_limit(40, 60)
 def fed_help(update: Update, context: CallbackContext):
     query = update.callback_query

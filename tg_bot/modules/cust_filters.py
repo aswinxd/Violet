@@ -27,7 +27,7 @@ from tg_bot.modules.sql import cust_filters_sql as sql
 from tg_bot.modules.connection import connected
 
 from tg_bot.modules.helper_funcs.alternate import send_message, typing_action
-from tg_bot.modules.helper_funcs.decorators import ivory, kigmsg, kigcallback, rate_limit
+from tg_bot.modules.helper_funcs.decorators import ivory, kigmsg, ivorycallback, rate_limit
 
 from ..modules.helper_funcs.anonymous import user_admin, AdminPerms
 
@@ -484,7 +484,7 @@ def rmall_filters(update, _):
         )
 
 
-@kigcallback(pattern=r"filters_.*")
+@ivorycallback(pattern=r"filters_.*")
 @rate_limit(40, 60)
 def rmall_callback(update, _):
     query = update.callback_query

@@ -2,7 +2,7 @@ from datetime import datetime, timezone
 from functools import wraps
 
 from telegram.ext import CallbackContext
-from tg_bot.modules.helper_funcs.decorators import ivory, kigcallback, rate_limit
+from tg_bot.modules.helper_funcs.decorators import ivory, ivorycallback, rate_limit
 from tg_bot.modules.helper_funcs.misc import is_module_loaded
 from tg_bot.modules.language import gs
 
@@ -260,7 +260,7 @@ def log_settings(update: Update, _: CallbackContext):
 from tg_bot.modules.sql import log_channel_sql as sql
 
 
-@kigcallback(pattern=r"log_tog_.*")
+@ivorycallback(pattern=r"log_tog_.*")
 @rate_limit(40, 60)
 def log_setting_callback(update: Update, context: CallbackContext):
     cb = update.callback_query

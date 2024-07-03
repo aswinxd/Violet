@@ -24,7 +24,7 @@ from telegram.ext import (
     Filters,
 )
 
-from tg_bot.modules.helper_funcs.decorators import ivory, kigmsg, kigcallback, rate_limit
+from tg_bot.modules.helper_funcs.decorators import ivory, kigmsg, ivorycallback, rate_limit
 
 from ..modules.helper_funcs.anonymous import user_admin, AdminPerms
 
@@ -340,7 +340,7 @@ def clearall(update: Update, context: CallbackContext):
         )
 
 
-@kigcallback(pattern=r"notes_.*")
+@ivorycallback(pattern=r"notes_.*")
 @rate_limit(40, 60)
 def clearall_btn(update: Update, context: CallbackContext):
     query = update.callback_query

@@ -12,7 +12,7 @@ from telegram.ext import (
 )
 import tg_bot.modules.sql.log_channel_sql as logsql
 from telegram.utils.helpers import mention_html
-from tg_bot.modules.helper_funcs.decorators import ivory, kigmsg, kigcallback, rate_limit
+from tg_bot.modules.helper_funcs.decorators import ivory, kigmsg, ivorycallback, rate_limit
 
 from ..modules.helper_funcs.anonymous import user_admin, AdminPerms
 
@@ -288,7 +288,7 @@ def __user_settings__(user_id):
         return "You will *not* receive reports from chats you're admin."
 
 
-@kigcallback(pattern=r"report_")
+@ivorycallback(pattern=r"report_")
 def buttons(update: Update, context: CallbackContext):
     bot = context.bot
     query = update.callback_query

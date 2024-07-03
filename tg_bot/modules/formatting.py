@@ -1,4 +1,4 @@
-from tg_bot.modules.helper_funcs.decorators import kigcallback, rate_limit
+from tg_bot.modules.helper_funcs.decorators import ivorycallback, rate_limit
 from telegram import (
     ParseMode,
     Update,
@@ -24,7 +24,7 @@ def fmt_filling_help(update: Update, context: CallbackContext):
 
 
 
-@kigcallback(pattern=r"fmt_help_")
+@ivorycallback(pattern=r"fmt_help_")
 @rate_limit(40, 60)
 def fmt_help(update: Update, context: CallbackContext):
     query = update.callback_query

@@ -32,7 +32,7 @@ from tg_bot import (
 # NOTE: Module order is not guaranteed, specify that in the config file!
 from tg_bot.modules import ALL_MODULES
 from tg_bot.modules.helper_funcs.chat_status import is_user_admin
-from tg_bot.modules.helper_funcs.decorators import ivory, kigcallback, kigmsg, rate_limit
+from tg_bot.modules.helper_funcs.decorators import ivory, ivorycallback, kigmsg, rate_limit
 from tg_bot.modules.helper_funcs.misc import paginate_modules
 from tg_bot.modules.language import gs
 
@@ -118,7 +118,7 @@ def test(update: Update, _: CallbackContext):
     print(update.effective_message)
 
 
-@kigcallback(pattern=r'start_back')
+@ivorycallback(pattern=r'start_back')
 @ivory(command='start', pass_args=True)
 @rate_limit(40, 60)
 def start(update: Update, context: CallbackContext):  # sourcery no-metrics
@@ -249,7 +249,7 @@ def error_callback(_, context: CallbackContext):
     except TelegramError:
         pass
 
-@kigcallback(pattern=r'help_')
+@ivorycallback(pattern=r'help_')
 @rate_limit(40, 60)
 def help_button(update: Update, context: CallbackContext):
     """#TODO
@@ -463,7 +463,7 @@ def send_settings(chat_id: int, user_id: int, user=False):
         )
 
 
-@kigcallback(pattern=r"stngs_")
+@ivorycallback(pattern=r"stngs_")
 @rate_limit(40, 60)
 def settings_button(update: Update, context: CallbackContext):
     '''#TODO

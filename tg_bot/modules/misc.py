@@ -34,7 +34,7 @@ from psutil import cpu_percent, virtual_memory, disk_usage, boot_time
 import datetime
 import platform
 from platform import python_version
-from tg_bot.modules.helper_funcs.decorators import ivory, kigcallback, rate_limit
+from tg_bot.modules.helper_funcs.decorators import ivory, ivorycallback, rate_limit
 
 MARKDOWN_HELP = f"""
 Markdown is a very powerful formatting tool supported by telegram. {dispatcher.bot.first_name} has some enhancements, to make sure that \

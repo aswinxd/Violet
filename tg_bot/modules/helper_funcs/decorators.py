@@ -167,7 +167,7 @@ class KigyoTelegramHandler:
         """
         def _callbackquery(func):
             self._dispatcher.add_handler(CallbackQueryHandler(pattern=pattern, callback=func, run_async=run_async))
-            log.debug(f'[KIGCALLBACK] Loaded callbackquery handler with pattern {pattern} for function {func.__name__}')
+            log.debug(f'[IVORYCALLBACK] Loaded callbackquery handler with pattern {pattern} for function {func.__name__}')
             return func
 
         return _callbackquery
@@ -201,5 +201,5 @@ class KigyoTelegramHandler:
 
 ivory = KigyoTelegramHandler(d).command
 kigmsg = KigyoTelegramHandler(d).message
-kigcallback = KigyoTelegramHandler(d).callbackquery
+ivorycallback = KigyoTelegramHandler(d).callbackquery
 kiginline = KigyoTelegramHandler(d).inlinequery
