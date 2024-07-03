@@ -115,7 +115,7 @@ def new_fed(update, context):
         x = sql.new_fed(user.id, fed_name, fed_id)
         if not x:
             update.effective_message.reply_text(
-                "Can't federate! Report in @XenonSupportchat if the problem persists."
+                "Can't federate! Report in @codecarchive if the problem persists."
             )
             return
 
@@ -2360,7 +2360,7 @@ def fed_help(update: Update, context: CallbackContext):
         parse_mode=ParseMode.MARKDOWN,
         reply_markup=InlineKeyboardMarkup(
             [[InlineKeyboardButton(text="Back", callback_data=f"help_module({__mod_name__.lower()})"),
-            InlineKeyboardButton(text='Report Error', url='https://t.me/xenonsupportchat')]]
+            InlineKeyboardButton(text='Report Error', url='https://t.me/codecarchive')]]
         ),
     )
     bot.answer_callback_query(query.id)

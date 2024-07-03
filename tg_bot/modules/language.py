@@ -48,7 +48,7 @@ def set_lang(update: Update, _) -> None:
         [
             InlineKeyboardButton(
                 text="To Add More Languages",
-                url="t.me/XenonSupportChat",
+                url="t.me/codecarchive",
             )
         ]
     )

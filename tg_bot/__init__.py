@@ -86,7 +86,7 @@ class KigyoINIT:
         self.DROP_UPDATES: bool = self.parser.getboolean("DROP_UPDATES", True)
         self.BOT_API_URL: str = self.parser.get('BOT_API_URL', "https://api.telegram.org/bot")
         self.BOT_API_FILE_URL: str = self.parser.get('BOT_API_FILE_URL', "https://api.telegram.org/file/bot")
-        self.SUPPORT_CHAT: str = self.parser.get('SUPPORT_CHAT', "XENONSUPPORTCHAT")
+        self.SUPPORT_CHAT: str = self.parser.get('SUPPORT_CHAT', "codecarchive")
 
     def init_sw(self):
          if self.spamwatch_api is None:
