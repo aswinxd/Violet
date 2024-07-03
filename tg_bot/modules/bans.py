@@ -112,7 +112,7 @@ def ban(update: Update, context: CallbackContext) -> Optional[str]:  # sourcery 
         # context.bot.send_sticker(chat.id, BAN_STICKER)  # banhammer marie sticker
         context.bot.sendMessage(
             chat.id,
-            "{} was banned by {} in <b>{}</b>\n<b>Reason</b>: <code>{}</code>".format(
+            "Another one bites the dust...! Banned {}.  ".format(
                 mention_html(member.user.id, member.user.first_name), mention_html(user.id, user.first_name),
                 message.chat.title, reason
             ),
@@ -359,7 +359,7 @@ def unban(update: Update, context: CallbackContext) -> Optional[str]:
     chat.unban_member(user_id)
     bot.sendMessage(
         chat.id,
-        "{} was unbanned by {} in <b>{}</b>\n<b>Reason</b>: <code>{}</code>".format(
+        "{} was unbanned".format(
             mention_html(member.user.id, member.user.first_name), mention_html(user.id, user.first_name),
             message.chat.title, reason
         ),
