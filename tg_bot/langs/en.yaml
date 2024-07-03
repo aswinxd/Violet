@@ -1,7 +1,7 @@
 # Language name in their native
 language: "English 🇺🇲"
 # name of people(s) who worked on this translation
-authors: "@AIIRACK"
+authors: "drxew"
 
 # languages
 curr_chat_lang: "Hey. Your current language is {}, select the one you want from the buttons below :)"
@@ -9,17 +9,22 @@ set_chat_lang: "Great, {} it is from now on!"
 
 
 pm_start_text: |
-      Hey there! My name is Ivory- I'm here to help you manage your groups! Hit /help to find out more about how to use me to my full potential.
+      Hey there! My name is Ivory - I'm here to help you manage your groups! Use /help to find out more about how to use me to my full potential.
 
-      Join my news channel to get information on all the latest updates.
+      Join my [news channel](http://t.me/CodecBots) to get information on all the latest updates.
 
-       Use the /language command to change bot language
 grp_start_text: "Heya :) PM me if you have any questions on how to use me!"
 
 pm_help_text: |
-   This is the help module of elsandra
-    • /language: Change bot language..
-    Click on the buttons below to get documentation about specific modules!
+   Hey! My name is Ivory. I am a group management bot, here to help you get around and keep the order in your groups!
+   I have lots of handy features, such as flood control, a warning system, a note keeping system, and even predetermined replies on certain keywords.
+
+  Helpful commands:
+  - /start: Starts me! You've probably already used this.
+  - /help: Sends this message; I'll tell you more about myself!
+  
+  If you have any bugs or questions on how to use me, have a look at [Group](t.me/codecArchive).
+  All commands can be used with the following: / ! 
 
 admin_help: |
    • `/admins`*:* list of admins in the chat
