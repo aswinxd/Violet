@@ -7,17 +7,18 @@ import spamwatch
 import telegram.ext as tg
 from configparser import ConfigParser
 from logging.handlers import RotatingFileHandler
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 
 StartTime = time.time()
 
+
 flag = """
-\033[37m┌─────────────────────────────────────────────┐\033[0m\n\033[37m│\033[44m\033[97m★\033[0m\033[44m \033[97m★\033[0m\033[44m \033[97m★\033[0m\033[44m \033[97m★\033[0m\033[44m \033[97m★\033[0m\033[44m \033[97m★\033[0m\033[44m \033[97m★\033[0m\033[44m \033[97m★\033[0m\033[44m \033[97m★\033[0m\033[44m \033[97m★\033[0m\033[44m \033[0m\033[91;101m#########################\033[0m\033[37m│\n\033[37m│\033[44m \033[97m★\033[0m\033[44m \033[97m★\033[0m\033[44m \033[97m★\033[0m\033[44m \033[97m★\033[0m\033[44m \033[97m★\033[0m\033[44m \033[97m★\033[0m\033[44m \033[97m★\033[0m\033[44m \033[97m★\033[0m\033[44m \033[97m★\033[0m\033[44m  \033[0m\033[97;107m:::::::::::::::::::::::::\033[0m\033[37m│\n\033[37m│\033[44m\033[97m★\033[0m\033[44m \033[97m★\033[0m\033[44m \033[97m★\033[0m\033[44m \033[97m★\033[0m\033[44m \033[97m★\033[0m\033[44m \033[97m★\033[0m\033[44m \033[97m★\033[0m\033[44m \033[97m★\033[0m\033[44m \033[97m★\033[0m\033[44m \033[97m★\033[0m\033[44m \033[0m\033[91;101m#########################\033[0m\033[37m│\n\033[37m│\033[44m \033[97m★\033[0m\033[44m \033[97m★\033[0m\033[44m \033[97m★\033[0m\033[44m \033[97m★\033[0m\033[44m \033[97m★\033[0m\033[44m \033[97m★\033[0m\033[44m \033[97m★\033[0m\033[44m \033[97m★\033[0m\033[44m  \033[0m\033[97;107m:::::::::::::::::::::::::\033[0m\033[37m│\n\033[37m│\033[44m\033[97m★\033[0m\033[44m \033[97m★\033[0m\033[44m \033[97m★\033[0m\033[44m \033[97m★\033[0m\033[44m \033[97m★\033[0m\033[44m \033[97m★\033[0m\033[44m \033[97m★\033[0m\033[44m \033[97m★\033[0m\033[44m \033[97m★\033[0m\033[44m \033[97m★\033[0m\033[44m \033[0m\033[91;101m#########################\033[0m\033[37m│      \033[1mUnited we stand, Divided we fall\033[0m\n\033[37m│\033[97;107m:::::::::::::::::::::::::::::::::::::::::::::\033[0m\033[37m│ \033[1mKigyo Project, a tribute to USS Enterprise.\033[0m\n\033[37m│\033[91;101m#############################################\033[0m\033[37m│\n\033[37m│\033[97;107m:::::::::::::::::::::::::::::::::::::::::::::\033[0m\033[37m│\n\033[37m│\033[91;101m#############################################\033[0m\033[37m│\n\033[37m│\033[97;107m:::::::::::::::::::::::::::::::::::::::::::::\033[0m\033[37m│\n\033[37m│\033[91;101m#############################################\033[0m\033[37m│\n\033[37m└─────────────────────────────────────────────┘\033[0m\n
+\033[37m┌─────────────────────────────────────────────┐\033[0m\n\033[37m│\033[44m\033[97m★\033[0m\033[44m \033[97m★\033[0m\033[44m \033[97m★\033[0m\033[44m \033[97m★\033[0m\033[44m \033[97m★\033[0m\033[44m \033[97m★\033[0m\033[44m \033[97m★\033[0m\033[44m \033[97m★\033[0m\033[44m \033[97m★\033[0m\033[44m \033[97m★\033[0m\033[44m \033[0m\033[91;101m#########################\033[0m\033[37m│\n\033[37m│\033[44m \033[97m★\033[0m\033[44m \033[97m★\033[0m\033[44m \033[97m★\033[0m\033[44m \033[97m★\033[0m\033[44m \033[97m★\033[0m\033[44m \033[97m★\033[0m\033[44m \033[97m★\033[0m\033[44m \033[97m★\033[0m\033[44m \033[97m★\033[0m\033[44m  \033[0m\033[97;107m:::::::::::::::::::::::::\033[0m\033[37m│\n\033[37m│\033[44m\033[97m★\033[0m\033[44m \033[97m★\033[0m\033[44m \033[97m★\033[0m\033[44m \033[97m★\033[0m\033[44m \033[97m★\033[0m\033[44m \033[97m★\033[0m\033[44m \033[97m★\033[0m\033[44m \033[97m★\033[0m\033[44m \033[97m★\033[0m\033[44m \033[97m★\033[0m\033[44m \033[0m\033[91;101m#########################\033[0m\033[37m│\n\033[37m│\033[44m \033[97m★\033[0m\033[44m \033[97m★\033[0m\033[44m \033[97m★\033[0m\033[44m \033[97m★\033[0m\033[44m \033[97m★\033[0m\033[44m \033[97m★\033[0m\033[44m \033[97m★\033[0m\033[44m \033[97m★\033[0m\033[44m \033[97m★\033[0m\033[44m  \033[0m\033[97;107m:::::::::::::::::::::::::\033[0m\033[37m│\n\033[37m│\033[44m\033[97m★\033[0m\033[44m \033[97m★\033[0m\033[44m \033[97m★\033[0m\033[44m \033[97m★\033[0m\033[44m \033[97m★\033[0m\033[44m \033[97m★\033[0m\033[44m \033[97m★\033[0m\033[44m \033[97m★\033[0m\033[44m \033[97m★\033[0m\033[44m \033[97m★\033[0m\033[44m \033[0m\033[91;101m#########################\033[0m\033[37m│\n\033[37m│\033[44m \033[97m★\033[0m\033[44m \033[97m★\033[0m\033[44m \033[97m★\033[0m\033[44m \033[97m★\033[0m\033[44m \033[97m★\033[0m\033[44m \033[97m★\033[0m\033[44m \033[97m★\033[0m\033[44m \033[97m★\033[0m\033[44m \033[97m★\033[0m\033[44m  \033[0m\033[97;107m:::::::::::::::::::::::::\033[0m\033[37m│\n\033[37m│\033[44m\033[97m★\033[0m\033[44m \033[97m★\033[0m\033[44m \033[97m★\033[0m\033[44m \033[97m★\033[0m\033[44m \033[97m★\033[0m\033[44m \033[97m★\033[0m\033[44m \033[97m★\033[0m\033[44m \033[97m★\033[0m\033[44m \033[97m★\033[0m\033[44m \033[97m★\033[0m\033[44m \033[0m\033[91;101m#########################\033[0m\033[37m│      \033[1mUnited we stand, Divided we fall\033[0m\n\033[37m│\033[97;107m:::::::::::::::::::::::::::::::::::::::::::::\033[0m\033[37m│ \033[1mKigyo Project, a tribute to USS Enterprise.\033[0m\n\033[37m│\033[91;101m#############################################\033[0m\033[37m│\n\033[37m│\033[97;107m:::::::::::::::::::::::::::::::::::::::::::::\033[0m\033[37m│\n\033[37m│\033[91;101m#############################################\033[0m\033[37m│\n\033[37m│\033[97;107m:::::::::::::::::::::::::::::::::::::::::::::\033[0m\033[37m│\n\033[37m│\033[91;101m#############################################\033[0m\033[37m│\n\033[37m└─────────────────────────────────────────────┘\033[0m\n
 """
 
 parser = ConfigParser()
 parser.read("config.ini")
-ivoryconf = parser["ivoryconf"]
+kigconfig = parser["kigconfig"]
 
 def get_user_list(key):
     # Import here to evade a circular import
@@ -28,7 +29,7 @@ def get_user_list(key):
 logging.basicConfig(
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
     handlers=[RotatingFileHandler('kigyo.log', maxBytes=1024*1024, backupCount=5), logging.StreamHandler()],
-    level=logging.DEBUG if ivoryconf.getboolean("IS_DEBUG", False) else logging.WARN,
+    level= kigconfig.getboolean("IS_DEBUG", False) and logging.DEBUG or logging.WARN,
 )
 
 #print(flag)
@@ -46,91 +47,114 @@ if sys.version_info[0] < 3 or sys.version_info[1] < 7:
     quit(1)
 
 @dataclass
-class IvoryINIT:
-    parser: ConfigParser
-    SYS_ADMIN: int = field(init=False)
-    OWNER_ID: int = field(init=False)
-    OWNER_USERNAME: str = field(init=False)
-    APP_ID: str = field(init=False)
-    API_HASH: str = field(init=False)
-    WEBHOOK: bool = field(init=False)
-    URL: str = field(init=False)
-    CERT_PATH: str = field(init=False)
-    PORT: int = field(init=False)
-    INFOPIC: bool = field(init=False)
-    DEL_CMDS: bool = field(init=False)
-    STRICT_GBAN: bool = field(init=False)
-    ALLOW_EXCL: bool = field(init=False)
-    CUSTOM_CMD: List[str] = field(default_factory=lambda: ['/', '!'])
-    BAN_STICKER: str = field(init=False)
-    TOKEN: str = field(init=False)
-    DB_URI: str = field(init=False)
-    LOAD: List[str] = field(init=False)
-    MESSAGE_DUMP: int = field(init=False)
-    GBAN_LOGS: int = field(init=False)
-    NO_LOAD: List[str] = field(init=False)
-    spamwatch_api: str = field(init=False)
-    CASH_API_KEY: str = field(init=False)
-    TIME_API_KEY: str = field(init=False)
-    WALL_API: str = field(init=False)
-    LASTFM_API_KEY: str = field(init=False)
-    CF_API_KEY: str = field(init=False)
-    bot_id: int = 0  # placeholder
-    bot_name: str = "ivory"  # placeholder
-    bot_username: str = "missivoryBot"  # placeholder
-    bot: tg.Bot = field(init=False)
-    update_queue: tg.UpdateQueue = field(init=False)
-    dispatcher: tg.Dispatcher = field(init=False)
-    updater: tg.Updater = field(init=False)
-    spamwtc: spamwatch.Client = field(init=False)
+class KigyoINIT:
+    def __init__(self, parser: ConfigParser):
+        self.parser = parser
+        self.SYS_ADMIN: int = self.parser.getint('SYS_ADMIN', 0)
+        self.OWNER_ID: int = self.parser.getint('OWNER_ID')
+        self.OWNER_USERNAME: str = self.parser.get('OWNER_USERNAME', None)
+        self.APP_ID: str = self.parser.getint("APP_ID")
+        self.API_HASH: str = self.parser.get("API_HASH")
+        self.WEBHOOK: bool = self.parser.getboolean('WEBHOOK', False)
+        self.URL: str = self.parser.get('URL', None)
+        self.CERT_PATH: str = self.parser.get('CERT_PATH', None)
+        self.PORT: int = self.parser.getint('PORT', None)
+        self.INFOPIC: bool = self.parser.getboolean('INFOPIC', False)
+        self.DEL_CMDS: bool = self.parser.getboolean("DEL_CMDS", False)
+        self.STRICT_GBAN: bool = self.parser.getboolean("STRICT_GBAN", False)
+        self.ALLOW_EXCL: bool = self.parser.getboolean("ALLOW_EXCL", False)
+        self.CUSTOM_CMD: List[str] = ['/', '!']
+        self.BAN_STICKER: str = self.parser.get("BAN_STICKER", None)
+        self.TOKEN: str = self.parser.get("TOKEN")
+        self.DB_URI: str = self.parser.get("SQLALCHEMY_DATABASE_URI")
+        self.LOAD = self.parser.get("LOAD").split()
+        self.LOAD: List[str] = list(map(str, self.LOAD))
+        self.MESSAGE_DUMP: int = self.parser.getint('MESSAGE_DUMP', None)
+        self.GBAN_LOGS: int = self.parser.getint('GBAN_LOGS', None)
+        self.NO_LOAD = self.parser.get("NO_LOAD").split()
+        self.NO_LOAD: List[str] = list(map(str, self.NO_LOAD))
+        self.spamwatch_api: str = self.parser.get('spamwatch_api', None)
+        self.CASH_API_KEY: str = self.parser.get('CASH_API_KEY', None)
+        self.TIME_API_KEY: str = self.parser.get('TIME_API_KEY', None)
+        self.WALL_API: str = self.parser.get('WALL_API', None)
+        self.LASTFM_API_KEY: str = self.parser.get('LASTFM_API_KEY', None)
+        self.CF_API_KEY: str =  self.parser.get("CF_API_KEY", None)
+        self.bot_id = 0 #placeholder
+        self.bot_name = "Kigyo" #placeholder
+        self.bot_username = "KigyoRobot" #placeholder
+        self.DEBUG: bool = self.parser.getboolean("IS_DEBUG", False)
+        self.DROP_UPDATES: bool = self.parser.getboolean("DROP_UPDATES", True)
+        self.BOT_API_URL: str = self.parser.get('BOT_API_URL', "https://api.telegram.org/bot")
+        self.BOT_API_FILE_URL: str = self.parser.get('BOT_API_FILE_URL', "https://api.telegram.org/file/bot")
+        self.SUPPORT_CHAT: str = self.parser.get('SUPPORT_CHAT', "XENONSUPPORTCHAT")
 
-    def __post_init__(self):
-        ivory = self.parser["ivoryconf"]
-        self.SYS_ADMIN = ivory.getint("SYS_ADMIN")
-        self.OWNER_ID = ivory.getint("OWNER_ID")
-        self.OWNER_USERNAME = ivory["OWNER_USERNAME"]
-        self.APP_ID = ivory["APP_ID"]
-        self.API_HASH = ivory["API_HASH"]
-        self.WEBHOOK = ivory.getboolean("WEBHOOK")
-        self.URL = ivory["URL"]
-        self.CERT_PATH = ivory["CERT_PATH"]
-        self.PORT = ivory.getint("PORT")
-        self.INFOPIC = ivory.getboolean("INFOPIC")
-        self.DEL_CMDS = ivory.getboolean("DEL_CMDS")
-        self.STRICT_GBAN = ivory.getboolean("STRICT_GBAN")
-        self.ALLOW_EXCL = ivory.getboolean("ALLOW_EXCL")
-        self.BAN_STICKER = ivory["BAN_STICKER"]
-        self.TOKEN = ivory["TOKEN"]
-        self.DB_URI = ivory["SQLALCHEMY_DATABASE_URI"]
-        self.LOAD = ivory["LOAD"].split()
-        self.NO_LOAD = ivory["NO_LOAD"].split()
-        self.MESSAGE_DUMP = ivory.getint("MESSAGE_DUMP")
-        self.GBAN_LOGS = ivory.getint("GBAN_LOGS")
-        self.spamwatch_api = ivory["SPAMWATCH_API"]
-        self.CASH_API_KEY = ivory["CASH_API_KEY"]
-        self.TIME_API_KEY = ivory["TIME_API_KEY"]
-        self.WALL_API = ivory["WALL_API"]
-        self.LASTFM_API_KEY = ivory["LASTFM_API_KEY"]
-        self.CF_API_KEY = ivory["CF_API_KEY"]
-        
-        if self.spamwatch_api:
-            self.spamwtc = spamwatch.Client(self.spamwatch_api)
-        else:
-            self.spamwtc = None
+    def init_sw(self):
+         if self.spamwatch_api is None:
+             log.warning("SpamWatch API key is missing! Check your config.ini")
+             return None
+         else:
+             try:
+                 return spamwatch.Client(spamwatch_api)
+             except Exception:
+                 log.warning("Can't connect to SpamWatch!")
+                 return None
 
-        persistence = tg.PicklePersistence(filepath="ivory")
-        self.updater = tg.Updater(token=self.TOKEN, persistence=persistence, use_context=True)
-        self.bot = self.updater.bot
-        self.update_queue = self.updater.update_queue
-        self.dispatcher = self.updater.dispatcher
-        self.bot_id = self.bot.id
-        self.bot_name = self.bot.first_name
-        self.bot_username = self.bot.username
 
-ivory = IvoryINIT(parser)
-print(flag)
+KInit = KigyoINIT(parser=kigconfig)
 
-log.info("[IVORY] Telegraph Vars loaded.")
+SYS_ADMIN = KInit.SYS_ADMIN
+OWNER_ID = KInit.OWNER_ID
+OWNER_USERNAME = KInit.OWNER_USERNAME
+APP_ID = KInit.APP_ID
+API_HASH = KInit.API_HASH
+WEBHOOK = KInit.WEBHOOK
+URL = KInit.URL
+CERT_PATH = KInit.CERT_PATH
+PORT = KInit.PORT
+INFOPIC = KInit.INFOPIC
+DEL_CMDS = KInit.DEL_CMDS
+ALLOW_EXCL = KInit.ALLOW_EXCL
+CUSTOM_CMD = KInit.CUSTOM_CMD
+BAN_STICKER = KInit.BAN_STICKER
+TOKEN = KInit.TOKEN
+DB_URI = KInit.DB_URI
+LOAD = KInit.LOAD
+MESSAGE_DUMP = KInit.MESSAGE_DUMP
+GBAN_LOGS = KInit.GBAN_LOGS
+NO_LOAD = KInit.NO_LOAD
+SUDO_USERS = [OWNER_ID] + get_user_list("sudos")
+DEV_USERS = [OWNER_ID] + get_user_list("devs")
+SUPPORT_USERS = get_user_list("supports")
+SARDEGNA_USERS = get_user_list("sardegnas")
+WHITELIST_USERS = get_user_list("whitelists")
+SPAMMERS = get_user_list("spammers")
+LOGGER = KInit.MESSAGE_DUMP
+JOIN_LOGGER = KInit.MESSAGE_DUMP
+spamwatch_api = KInit.spamwatch_api
+CASH_API_KEY = KInit.CASH_API_KEY
+TIME_API_KEY = KInit.TIME_API_KEY
+WALL_API = KInit.WALL_API
+LASTFM_API_KEY = KInit.LASTFM_API_KEY
+CF_API_KEY = KInit.CF_API_KEY
+sw = KInit.init_sw()
+SUPPORT_CHAT = KInit.SUPPORT_CHAT
 
-    # tg_bot import main
-    #main()
+updater = tg.Updater(token=TOKEN, base_url=KInit.BOT_API_URL, base_file_url=KInit.BOT_API_FILE_URL, workers=min(32, os.cpu_count() + 4), request_kwargs={"read_timeout": 10, "connect_timeout": 10})
+dispatcher = updater.dispatcher
+
+
+
+# Load at end to ensure all prev variables have been set
+from tg_bot.modules.helper_funcs.handlers import CustomCommandHandler
+
+if CUSTOM_CMD and len(CUSTOM_CMD) >= 1:
+    tg.CommandHandler = CustomCommandHandler
+
+
+def spamfilters(text, user_id, chat_id):
+    # print("{} | {} | {}".format(text, user_id, chat_id))
+    if int(user_id) not in SPAMMERS:
+        return False
+
+    print("This user is a spammer!")
+    return True
