@@ -488,7 +488,7 @@ def fed_info(update, context):
     chat = update.effective_chat  # type: Optional[Chat]
     info = sql.get_fed_info(fed_id)
 
-    text = "<b>ℹ️ Federation Information:</b>"
+    text = "<b>Federation Information:</b>"
     text += "\nFedID: <code>{}</code>".format(fed_id)
     text += "\nName: {}".format(info["fname"])
     text += "\nCreator: {}".format(mention_html(owner.id, owner_name))
@@ -629,7 +629,7 @@ def fed_ban(update, context):  # sourcery no-metrics
         # Will send to current chat
         context.bot.send_message(
             chat.id,
-            "<b>New FederationBan</b>"
+            "<b>New Federation Ban</b>"
             "\n<b>Federation:</b> {}"
             "\n<b>Federation Admin:</b> {}"
             "\n<b>User:</b> {}"
