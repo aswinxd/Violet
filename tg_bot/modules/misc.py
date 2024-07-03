@@ -370,7 +370,7 @@ def stats(update, context):
             "\n*Bot statistics*:\n"
             + "\n".join([mod.__stats__() for mod in STATS]) +
             "\n\n[support](t.me/codecarchive) | [channe](senonbots)\n\n" +
-            "[xenon](t.me/xenonbots)\n",
+            "[codec](t.me/codecbots)\n",
         parse_mode=ParseMode.MARKDOWN, reply_markup=InlineKeyboardMarkup(kb), disable_web_page_preview=True)
     except BaseException:
         update.effective_message.reply_text(
@@ -380,7 +380,7 @@ def stats(update, context):
                         "\n*Bot statistics*:\n"
                         + "\n".join(mod.__stats__() for mod in STATS)
                     )
-                    + "\n\n[support](t.me/codecarchive) | [channel](t.me/xenonbots)\n\n"
+                    + "\n\n[support](t.me/codecarchive) | [channel](t.me/codecbots)\n\n"
                 )
                 + "by [aiirack](t.me/lavosandre)\n"
             ),
