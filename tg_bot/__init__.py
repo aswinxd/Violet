@@ -18,7 +18,7 @@ flag = """
 
 parser = ConfigParser()
 parser.read("config.ini")
-kigconfig = parser["kigconfig"]
+ivoryconf = parser["ivoryconf"]
 
 def get_user_list(key):
     # Import here to evade a circular import
@@ -29,7 +29,7 @@ def get_user_list(key):
 logging.basicConfig(
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
     handlers=[RotatingFileHandler('kigyo.log', maxBytes=1024*1024, backupCount=5), logging.StreamHandler()],
-    level= kigconfig.getboolean("IS_DEBUG", False) and logging.DEBUG or logging.WARN,
+    level= ivoryconf.getboolean("IS_DEBUG", False) and logging.DEBUG or logging.WARN,
 )
 
 #print(flag)
@@ -100,7 +100,7 @@ class KigyoINIT:
                  return None
 
 
-KInit = KigyoINIT(parser=kigconfig)
+KInit = KigyoINIT(parser=ivoryconf)
 
 SYS_ADMIN = KInit.SYS_ADMIN
 OWNER_ID = KInit.OWNER_ID
