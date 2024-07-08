@@ -43,7 +43,7 @@ admin_help: |
    • /antichannelpin <on/off>: Makes Ivoryautomatically unpin linked channel posts from chatroom
 
 
-captcha_heelp: |
+captcha_help: |
 
    You can get the bot to mute new people who join your group and hence prevent spambots from flooding your group. 
     The following options are possible:
