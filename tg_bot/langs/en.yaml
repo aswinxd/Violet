@@ -10,8 +10,10 @@ set_chat_lang: "Great, {} it is from now on!"
 
 pm_start_text: |
       Hey there! My name is Ivory - I'm here to help you manage your groups! Use /help to find out more about how to use me to my full potential.
-
+      
       Join my [news channel](http://t.me/CodecBots) to get information on all the latest updates.
+
+      Use the /privacy command to view the privacy policy, and red how we interact with your data.
 
 grp_start_text: "Heya :) PM me if you have any questions on how to use me!"
 
@@ -40,6 +42,11 @@ admin_help: |
    • /antilinkedchan <on/off>: Makes Ivoryautomatically delete linked channel posts from chatroom
    • /antichannelpin <on/off>: Makes Ivoryautomatically unpin linked channel posts from chatroom
 
+privacy_help: |
+  The privacy module allows you to see the bot privacy policy, as well as view and delete the data the bot stores about you.
+  
+  The single command which can only be used in PM:
+  - /privacy: Provides all the tools relating to privacy, such as listing the privacy policy.
 
 antiflood_help: |
     Antiflood allows you to take action on users that send more than x messages in a row. Exceeding the set flood
