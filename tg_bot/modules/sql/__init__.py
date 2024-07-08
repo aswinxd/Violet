@@ -6,13 +6,6 @@ from tg_bot import DB_URI, KInit, log
 class CachingQuery(Query):
     """
     A subclass of Query that implements caching using the cache-aside caching pattern.
-
-    Attributes:
-        cache (dict): A dictionary used for caching query results.
-
-    Methods:
-        __iter__(): Overrides the __iter__ method of the parent class to implement caching.
-        cache_key(): Generates a cache key based on the query's SQL statement and parameters.
     """
 
     def __init__(self, *args, cache=None, **kwargs):
@@ -22,9 +15,6 @@ class CachingQuery(Query):
     def __iter__(self):
         """
         Overrides the __iter__ method of the parent class to implement caching.
-
-        Returns:
-            iter: An iterator over the cached query results.
         """
         cache_key = self.cache_key()
         result = self.cache.get(cache_key)
@@ -38,9 +28,6 @@ class CachingQuery(Query):
     def cache_key(self):
         """
         Generates a cache key based on the query's SQL statement and parameters.
-
-        Returns:
-            str: The cache key.
         """
         stmt = self.with_labels().statement
         compiled = stmt.compile()
@@ -51,7 +38,7 @@ class CachingQuery(Query):
 DB_URI = 'mysql+mysqldb://mysql:f417e82e0ee831fcfdef@tg_channel:3306/tg'
 
 def start() -> scoped_session:
-    engine = create_engine(DB_URI, client_encoding="utf8", echo=KInit.DEBUG)
+    engine = create_engine(DB_URI, echo=KInit.DEBUG)
     log.info("[MySQL] Connecting to database......")
     BASE.metadata.bind = engine
     BASE.metadata.create_all(engine)
