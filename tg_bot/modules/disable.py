@@ -25,77 +25,7 @@ if is_module_loaded(FILENAME):
         is_user_admin,
     )
 
-    from tg_bot.modules.sql import disable_sql as sql
-
-    DISABLE_CMDS = []
-    DISABLE_OTHER = []
-    ADMIN_CMDS = []
-
-    class DisableAbleCommandHandler(CommandHandler):
-        def __init__(self, command, callback, run_async=True, admin_ok=False, **kwargs):
-            super().__init__(command, callback, run_async=run_async, **kwargs)
-            self.admin_ok = admin_ok
-            if isinstance(command, string_types):
-                DISABLE_CMDS.append(command)
-                if admin_ok:
-                    ADMIN_CMDS.append(command)
-            else:
-                DISABLE_CMDS.extend(command)
-                if admin_ok:
-                    ADMIN_CMDS.extend(command)
-
-        def check_update(self, update):
-            if not isinstance(update, Update) or not update.effective_message:
-                return
-            message = update.effective_message
-
-            if message.text and len(message.text) > 1:
-                fst_word = message.text.split(None, 1)[0]
-                if len(fst_word) > 1 and any(
-                    fst_word.startswith(start) for start in CMD_STARTERS
-                ):
-                    args = message.text.split()[1:]
-                    command = fst_word[1:].split("@")
-                    command.append(message.bot.username)
-
-                    if not (
-                        command[0].lower() in self.command
-                        and command[1].lower() == message.bot.username.lower()
-                    ):
-                        return None
-
-                    filter_result = self.filters(update)
-                    if filter_result:
-                        chat = update.effective_chat
-                        user = update.effective_user
-                        # disabled, admincmd, user admin
-                        if sql.is_command_disabled(chat.id, command[0].lower()):
-                            # check if command was disabled
-                            is_disabled = command[
-                                0
-                            ] in ADMIN_CMDS and is_user_admin(update, user.id)
-                            if not is_disabled:
-                                return None
-                            else:
-                                return args, filter_result
-
-                        return args, filter_result
-                    else:
-                        return False
-
-    class DisableAbleMessageHandler(MessageHandler):
-        def __init__(self, pattern, callback, run_async=True, friendly="", **kwargs):
-            super().__init__(pattern, callback, run_async=run_async, **kwargs)
-            DISABLE_OTHER.append(friendly or pattern)
-            self.friendly = friendly or pattern
-
-        def check_update(self, update):
-            if isinstance(update, Update) and update.effective_message:
-                chat = update.effective_chat
-                return self.filters(update) and not sql.is_command_disabled(
-                    chat.id, self.friendly
-                )
-                
+   
     @user_admin
     @typing_action
     def disable(update, context):

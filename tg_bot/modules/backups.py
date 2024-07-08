@@ -12,7 +12,7 @@ import tg_bot.modules.sql.rules_sql as rulessql
 from tg_bot.modules.language import gs
 # from tg_bot.modules.sql import warns_sql as warnssql
 import tg_bot.modules.sql.blacklist_sql as blacklistsql
-from tg_bot.modules.sql import disable_sql as disabledsql
+#from tg_bot.modules.sql import disable_sql as disabledsql
 
 # from tg_bot.modules.sql import cust_filters_sql as filtersql
 # import tg_bot.modules.sql.welcome_sql as welcsql
