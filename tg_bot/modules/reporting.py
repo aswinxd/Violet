@@ -20,58 +20,12 @@ REPORT_GROUP = 12
 REPORT_IMMUNE_USERS = SUDO_USERS + SARDEGNA_USERS + WHITELIST_USERS
 
 
-@ivory(command='reports')
-@user_admin(AdminPerms.CAN_CHANGE_INFO)
-@rate_limit(40, 60)
-def report_setting(update: Update, context: CallbackContext):
-    bot, args = context.bot, context.args
-    chat = update.effective_chat
-    msg = update.effective_message
-
-    if chat.type == chat.PRIVATE:
-        if len(args) >= 1:
-            if args[0] in ("yes", "on"):
-                sql.set_user_setting(chat.id, True)
-                msg.reply_text(
-                    "Turned on reporting! You'll be notified whenever anyone reports something."
-                )
-
-            elif args[0] in ("no", "off"):
-                sql.set_user_setting(chat.id, False)
-                msg.reply_text("Turned off reporting! You wont get any reports.")
-        else:
-            msg.reply_text(
-                f"Your current report preference is: `{sql.user_should_report(chat.id)}`",
-                parse_mode=ParseMode.MARKDOWN,
-            )
-
-    elif len(args) >= 1:
-        if args[0] in ("yes", "on"):
-            sql.set_chat_setting(chat.id, True)
-            msg.reply_text(
-                "Turned on reporting! Admins who have turned on reports will be notified when /report "
-                "or @admin is called."
-            )
-
-        elif args[0] in ("no", "off"):
-            sql.set_chat_setting(chat.id, False)
-            msg.reply_text(
-                "Turned off reporting! No admins will be notified on /report or @admin."
-            )
-    else:
-        msg.reply_text(
-            f"This group's current setting is: `{sql.chat_should_report(chat.id)}`",
-            parse_mode=ParseMode.MARKDOWN,
-        )
-
-
 @ivory(command='report', filters=Filters.chat_type.groups, group=REPORT_GROUP)
 @kigmsg((Filters.regex(r"(?i)@admin(s)?")), group=REPORT_GROUP)
 @user_not_admin
 @rate_limit(40, 60)
 @loggable
 def report(update: Update, context: CallbackContext) -> str:
-    # sourcery no-metrics
     global reply_markup
     bot = context.bot
     args = context.args
@@ -138,11 +92,11 @@ def report(update: Update, context: CallbackContext) -> str:
             ]
             reply_markup = InlineKeyboardMarkup(keyboard)
         else:
-             reported = (
+            reported = (
                 f"{mention_html(user.id, user.first_name)} reported "
                 f"{mention_html(reported_user.id, reported_user.first_name)} to the admins!"
             )
-            msg = f'{mention_html(user.id, user.first_name)} is calling for admins in "{html.escape(chat_name)}"xd!'
+            msg = f'{mention_html(user.id, user.first_name)} is calling for admins in "{html.escape(chat_name)}"!'
             link = ""
             should_forward = True
 
@@ -199,7 +153,6 @@ def report(update: Update, context: CallbackContext) -> str:
                 f"{mention_html(user.id, user.first_name)} reported "
                 f"{mention_html(reported_user.id, reported_user.first_name)} to the admins!"
             )
-
             msg = f'{mention_html(user.id, user.first_name)} is calling for admins in "{html.escape(chat_name)}"!'
             link = ""
             should_forward = True
