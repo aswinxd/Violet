@@ -142,7 +142,6 @@ def report(update: Update, context: CallbackContext) -> str:
                 f"{mention_html(user.id, user.first_name)} reported "
                 f"{mention_html(reported_user.id, reported_user.first_name)} to the admins!"
             )
-
             msg = f'{mention_html(user.id, user.first_name)} is calling for admins in "{html.escape(chat_name)}"xd!'
             link = ""
             should_forward = True
