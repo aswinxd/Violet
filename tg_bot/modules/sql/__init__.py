@@ -35,7 +35,7 @@ class CachingQuery(Query):
         return " ".join([str(compiled)] + [str(params[k]) for k in sorted(params)])
 
 # Ensure the DB_URI is correctly set for MySQL
-DB_URI = 'mysql+mysqldb://mysql:f417e82e0ee831fcfdef@tg_channel:3306/tg'
+DB_URI = 'mysql+mysqldb://mysql:f417e82e0ee831fcfdef@104.251.216.208:3306/tg'
 
 def start() -> scoped_session:
     engine = create_engine(DB_URI, echo=KInit.DEBUG)
