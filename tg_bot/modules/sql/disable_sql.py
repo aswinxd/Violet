@@ -6,7 +6,7 @@ from sqlalchemy import create_engine
 from tg_bot import DB_URI, KInit, log
 
 # Import CachingQuery from your previous script
-from path.to.your.previous.script import CachingQuery
+from .caching_query import CachingQuery  # Adjust the path accordingly
 
 BASE = declarative_base()
 DISABLE_INSERTION_LOCK = threading.RLock()
