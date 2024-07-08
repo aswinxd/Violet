@@ -3,7 +3,7 @@ import time
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import CallbackContext, CommandHandler, CallbackQueryHandler
 from tg_bot.modules.language import gs
-
+from tg_bot.modules.helper_funcs.decorators import ivory, kigmsg, ivorycallback, rate_limit
 privacy_responses = {
     "info_collect": "We collect the following user data:\n- First Name\n- Last Name\n- Username\n- User ID\n- Messages sent by users\n- User bio if it is visible to the public\nThese are public Telegram details that everyone can see.",
     "why_collect": "The collected data is used solely for improving your experience with the bot and for processing the bot stats and to avoid spammers.",
