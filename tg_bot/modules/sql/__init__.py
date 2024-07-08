@@ -1,8 +1,7 @@
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, scoped_session, Query
-from tg_bot import DB_URI,  KInit, log
-
+from tg_bot import DB_URI, KInit, log
 
 class CachingQuery(Query):
     """
@@ -48,27 +47,23 @@ class CachingQuery(Query):
         params = compiled.params
         return " ".join([str(compiled)] + [str(params[k]) for k in sorted(params)])
 
-
-if DB_URI and DB_URI.startswith("postgres://"):
-    DB_URI = DB_URI.replace("postgres://", "postgresql://", 1)
-
+# Ensure the DB_URI is correctly set for MySQL
+DB_URI = 'mysql+mysqldb://mysql:f417e82e0ee831fcfdef@tg_channel:3306/tg'
 
 def start() -> scoped_session:
-    engine = create_engine(DB_URI, client_encoding="utf8", echo= KInit.DEBUG)
-    log.info("[PostgreSQL] Connecting to database......")
+    engine = create_engine(DB_URI, client_encoding="utf8", echo=KInit.DEBUG)
+    log.info("[MySQL] Connecting to database......")
     BASE.metadata.bind = engine
     BASE.metadata.create_all(engine)
     return scoped_session(
         sessionmaker(bind=engine, autoflush=False, query_cls=CachingQuery)
     )
 
-
 BASE = declarative_base()
 try:
     SESSION: scoped_session = start()
 except Exception as e:
-    log.exception(f"[PostgreSQL] Failed to connect due to {e}")
+    log.exception(f"[MySQL] Failed to connect due to {e}")
     exit()
 
-log.info("[PostgreSQL] Connection successful, session started.")
-        
+log.info("[MySQL] Connection successful, session started.")
