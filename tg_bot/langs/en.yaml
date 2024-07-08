@@ -115,10 +115,10 @@ blacklist_help: |
      • `/blacklistmode <off/del/warn/ban/kick/mute/tban/tmute>`*:* Action to perform when someone sends blacklisted words.
 
 cleaner_help: |
-    - /cleanbluetext <on/off/yes/no> - clean commands after sending
-    - /ignorecleanbluetext <word> - prevent auto cleaning of the command
-    - /unignorecleanbluetext <word> - remove prevent auto cleaning of the command
-    - /listcleanbluetext - list currently whitelisted commands
+    - /cleancommand <on/off/yes/no> - clean commands after sending
+    - /ignorecommand <word> - prevent auto cleaning of the command
+    - /unignorecommand <word> - remove prevent auto cleaning of the command
+    - /listclean - list currently whitelisted commands
 
 connections_help: |
     - /connect: connect a chat (Can be done in a group by /connect or /connect <chat id> in PM)
