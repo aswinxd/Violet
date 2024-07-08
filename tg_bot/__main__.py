@@ -701,19 +701,20 @@ def clone(update, context):
     else:
         context.bot.send_message(chat_id=update.effective_chat.id, text="Please provide a bot token to clone.")
 
-def main():
+async def main():
     dispatcher.add_error_handler(error_callback)
-    # dispatcher.add_error_handler(error_handler)
+  
+        @client.on(events.NewMessage(pattern='/privacy'))
+        async def handle_privacy(event):
+            await privacy_command(event)
 
-    # Add the clone command handler
-    clone_handler = CommandHandler('clone', clone)
-    dispatcher.add_handler(clone_handler)
-  
-    privacy_command = commandhandler('privacy',  privacy_command)
-    dispatcher.add_handler( privacy_command)
-  
-      ##
-  
+        @client.on(events.CallbackQuery)
+        async def callback_query_handler(event):
+            await handle_callback_query(event)
+
+        @client.on(events.NewMessage)
+        async def handle_new_message(event):
+            await queue.put(event)
 
     if WEBHOOK:
         log.info("Using webhooks.")
