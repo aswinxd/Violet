@@ -53,28 +53,35 @@ privacy_responses = {
     "what_we_do_not_do": "We do not share your data with any third parties.",
     "right_to_process": "You have the right to access, correct, or delete your data. [Contact us](t.me/drxew) for any privacy-related inquiries."
 }
-async def privacy_command(event):
-    privacy_button = [
-        [Button.inline("Privacy Policy", b"privacy_policy")]
-    ]
-    await event.respond("Select one of the below options for more information about how the bot handles your privacy.", buttons=privacy_button)
 
-async def handle_callback_query(event):
-    data = event.data.decode("utf-8")
+# Privacy command
+@ivory(command='privacy')
+async def privacy_command(update: Update, context: CallbackContext):
+    privacy_button = [
+        [InlineKeyboardButton("Privacy Policy", callback_data="privacy_policy")]
+    ]
+    await update.message.reply_text("Select one of the options below for more information about how the bot handles your privacy.", 
+                                    reply_markup=InlineKeyboardMarkup(privacy_button))
+
+@ivorycallback(pattern=r'privacy_policy')
+async def handle_callback_query(update: Update, context: CallbackContext):
+    query = update.callback_query
+    data = query.data
     if data == "privacy_policy":
         buttons = [
-            [Button.inline("What Information We Collect", b"info_collect")],
-            [Button.inline("Why We Collect", b"why_collect")],
-            [Button.inline("What We Do", b"what_we_do")],
-            [Button.inline("What We Do Not Do", b"what_we_do_not_do")],
-            [Button.inline("Right to Process", b"right_to_process")]
+            [InlineKeyboardButton("What Information We Collect", callback_data="info_collect")],
+            [InlineKeyboardButton("Why We Collect", callback_data="why_collect")],
+            [InlineKeyboardButton("What We Do", callback_data="what_we_do")],
+            [InlineKeyboardButton("What We Do Not Do", callback_data="what_we_do_not_do")],
+            [InlineKeyboardButton("Right to Process", callback_data="right_to_process")]
         ]
-        await event.edit("Our contact details\nName: MissIvoryBot \nTelegram: https://t.me/CodecArchive\nThe bot has been made to protect and preserve privacy as best as possible.\nOur privacy policy may change from time to time. If we make any material changes to our policies, we will place a prominent notice on https://t.me/CodecBots.", buttons=buttons)
+        await query.message.edit_text("Our contact details\nName: MissIvoryBot \nTelegram: https://t.me/CodecArchive\nThe bot has been made to protect and preserve privacy as best as possible.\nOur privacy policy may change from time to time. If we make any material changes to our policies, we will place a prominent notice on https://t.me/CodecBots.", 
+                                      reply_markup=InlineKeyboardMarkup(buttons))
     elif data in privacy_responses:
         back_button = [
-            [Button.inline("Back", b"privacy_policy")]
+            [InlineKeyboardButton("Back", callback_data="privacy_policy")]
         ]
-        await event.edit(privacy_responses[data], buttons=back_button)
+        await query.message.edit_text(privacy_responses[data], reply_markup=InlineKeyboardMarkup(back_button))
 
 async def worker(name, client, queue, user_cache, cache_duration):
     while True:
@@ -86,7 +93,6 @@ async def worker(name, client, queue, user_cache, cache_duration):
             if queue.empty():
                 break
         await asyncio.gather(*[check_user_bio(client, event, user_cache, cache_duration) for event in event_batch])
-
 
 
 for module_name in ALL_MODULES:
@@ -685,36 +691,13 @@ def start_bot(token):
     # Add your existing command handlers here
 
     # Handler for the /clone command
-def clone(update, context):
-    # Check if the user has provided a bot token
-    if len(context.args) > 0:
-        # Extract the bot token from the message
-        new_token = context.args[0]
-        
-        # Create a new updater object using the provided token
-        new_updater = Updater(token=new_token, use_context=True)
-        
-        # Start polling for updates with the new updater
-        new_updater.start_polling()
 
-        context.bot.send_message(chat_id=update.effective_chat.id, text="Bot cloned successfully.")
-    else:
-        context.bot.send_message(chat_id=update.effective_chat.id, text="Please provide a bot token to clone.")
-
-async def main():
-    dispatcher.add_error_handler(error_callback)
-  
-        @client.on(events.NewMessage(pattern='/privacy'))
-        async def handle_privacy(event):
-            await privacy_command(event)
-
-        @client.on(events.CallbackQuery)
-        async def callback_query_handler(event):
-            await handle_callback_query(event)
-
-        @client.on(events.NewMessage)
-        async def handle_new_message(event):
-            await queue.put(event)
+def start_bot(token):
+    updater = Updater(token=token, use_context=True)
+    dispatcher = updater.dispatcher
+    
+    # Add your existing command handlers here
+    dispatcher.add_handler(CommandHandler("privacy", privacy_command))
 
     if WEBHOOK:
         log.info("Using webhooks.")
