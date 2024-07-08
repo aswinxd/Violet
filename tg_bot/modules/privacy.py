@@ -18,7 +18,8 @@ def privacy_command(update: Update, context: CallbackContext) -> None:
         [[InlineKeyboardButton("Privacy Policy", callback_data="privacy_policy")]]
     )
     update.message.reply_text("Select one of the below options for more information about how the bot handles your privacy.", reply_markup=privacy_button)
-
+    
+@ivorycallback(pattern=r"privacy_policy")
 def handle_callback_query(update: Update, context: CallbackContext) -> None:
     query = update.callback_query
     query.answer()
