@@ -1027,9 +1027,9 @@ WELC_HELP_TXT = (
 WELC_MUTE_HELP_TXT = (
     "You can get the bot to mute new people who join your group and hence prevent spambots from flooding your group. "
     "The following options are possible:\n"
-    "• `/welcomemute soft`*:* restricts new members from sending media for 24 hours.\n"
-    "• `/welcomemute strong`*:* mutes new members till they tap on a button thereby verifying they're human.\n"
-    "• `/welcomemute off`*:* turns off welcomemute.\n"
+    "• `/captcha soft`*:* restricts new members from sending media for 24 hours.\n"
+    "• `/captcha strong`*:* mutes new members till they tap on a button thereby verifying they're human.\n"
+    "• `/captcha off`*:* turns off welcomemute.\n"
     "*Note:* Strong mode kicks a user from the chat if they dont verify in 60 seconds. They can always rejoin though"
 )
 
@@ -1090,7 +1090,6 @@ __help__ = """
  • `/resetwelcome`*:* reset to the default welcome message.
  • `/resetgoodbye`*:* reset to the default goodbye message.
  • `/cleanwelcome <on/off>`*:* On new member, try to delete the previous welcome message to avoid spamming the chat.
- • `/welcomemutehelp`*:* gives information about welcome mutes.
  • `/cleanservice <on/off`*:* deletes telegrams welcome/left service messages. 
  *Example:*
 user joined chat, user left chat.
@@ -1118,9 +1117,9 @@ WELCOMEMUTE_HANDLER = CommandHandler("welcomemute", welcomemute, filters=Filters
 CLEAN_SERVICE_HANDLER = CommandHandler(
     "cleanservice", cleanservice, filters=Filters.chat_type.groups, run_async=True
 )
-CLEAN_WELCOME = CommandHandler("cleanwelcome", clean_welcome, filters=Filters.chat_type.groups, run_async=True)
+CLEAN_WELCOME = CommandHandler("captcha", clean_welcome, filters=Filters.chat_type.groups, run_async=True)
 WELCOME_HELP = CommandHandler("welcomehelp", welcome_help, run_async=True)
-WELCOME_MUTE_HELP = CommandHandler("welcomemutehelp", welcome_mute_help, run_async=True)
+WELCOME_MUTE_HELP = CommandHandler("captchahelp", welcome_mute_help, run_async=True)
 BUTTON_VERIFY_HANDLER = CallbackQueryHandler(user_button, pattern=r"user_join_", run_async=True)
 
 dispatcher.add_handler(WELC_PREF_HANDLER)
