@@ -11,7 +11,7 @@ set_chat_lang: "Great, {} it is from now on!"
 pm_start_text: |
       Hey there! My name is Ivory - I'm here to help you manage your groups! Use /help to find out more about how to use me to my full potential.
       
-      Join my [news channel](http://t.me/CodecBots) to get information on all the latest updates.
+      Join my [news channel](t.me/CodecBots) to get information on all the latest updates.
 
       Use the /privacy command to view the privacy policy, and red how we interact with your data.
 
