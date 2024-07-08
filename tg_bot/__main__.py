@@ -692,11 +692,7 @@ def start_bot(token):
 
     # Handler for the /clone command
 def main():
-#def start_bot(token):
-    updater = Updater(token=token, use_context=True)
-    dispatcher = updater.dispatcher
-    
-    # Add your existing command handlers here
+
     dispatcher.add_handler(CommandHandler("privacy", privacy_command))
 
     if WEBHOOK:
