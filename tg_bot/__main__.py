@@ -121,21 +121,22 @@ def test(update: Update, _: CallbackContext):
 @ivory(command='start', pass_args=True)
 @rate_limit(40, 60)
 def start(update: Update, context: CallbackContext):  # sourcery no-metrics
-    """#TODO
+    """Handles the /start command and related callbacks.
 
     Params:
-        update: Update           -
-        context: CallbackContext -
+        update: Update           - The update containing the command or callback query.
+        context: CallbackContext - The context of the callback or command.
     """
     chat = update.effective_chat
     args = context.args
 
+    # Handle callback queries
     if hasattr(update, 'callback_query'):
         query = update.callback_query
         if hasattr(query, 'id'):
             first_name = update.effective_user.first_name
             update.effective_message.edit_text(
-                text=gs(chat.id, "pm_start_text").format(
+                text=gs(chat.id, "").format(
                     escape_markdown(first_name),
                     escape_markdown(context.bot.first_name),
                     OWNER_ID,
@@ -144,7 +145,7 @@ def start(update: Update, context: CallbackContext):  # sourcery no-metrics
                 reply_markup=InlineKeyboardMarkup([
                     [
                         InlineKeyboardButton(
-                            text="Add Me To Your chat!",
+                            text="Add me to your group!",
                             url=f"https://t.me/MissIvoryBot?startgroup=true",
                         ),
                     ],
@@ -153,53 +154,24 @@ def start(update: Update, context: CallbackContext):  # sourcery no-metrics
             context.bot.answer_callback_query(query.id)
             return
 
+    # Handle /start command in private chat
     if update.effective_chat.type == "private":
         if args and len(args) >= 1:
+            # Specific argument-based commands
             if args[0].lower() == "help":
-                send_help(update.effective_chat.id, (gs(chat.id, "pm_help_text")))
+                send_help(update.effective_chat.id, gs(chat.id, "pm_help_text"))
             elif args[0].lower().startswith("ghelp_"):
-                query = update.callback_query
-                mod = args[0].lower().split("_", 1)[1]
-                if not HELPABLE.get(mod, False):
-                    return
-                help_list = HELPABLE[mod].get_help(chat.id)
-                help_text = []
-                help_buttons = []
-                if isinstance(help_list, list):
-                    help_text = help_list[0]
-                    help_buttons = help_list[1:]
-                elif isinstance(help_list, str):
-                    help_text = help_list
-                text = " *{}*\n".format(HELPABLE[mod].__mod_name__) + help_text
-                help_buttons.append(
-                    [InlineKeyboardButton(text="Back", callback_data="help_back"),
-                     InlineKeyboardButton(text='Support', url='https://t.me/codecarchive')]
-                )
-                send_help(
-                    chat.id,
-                    text,
-                    InlineKeyboardMarkup(help_buttons),
-                )
-
-                if hasattr(query, "id"):
-                    context.bot.answer_callback_query(query.id)
+                handle_ghelp_command(update, context, chat, args)
             elif args[0].lower() == "markdownhelp":
                 IMPORTED["extras"].markdown_help_sender(update)
             elif args[0].lower() == "nations":
                 IMPORTED["nations"].send_nations(update)
             elif args[0].lower().startswith("stngs_"):
-                match = re.match("stngs_(.*)", args[0].lower())
-                chat = dispatcher.bot.getChat(match.group(1))
-
-                if is_user_admin(update, update.effective_user.id):
-                    send_settings(match.group(1), update.effective_user.id, False)
-                else:
-                    send_settings(match.group(1), update.effective_user.id, True)
-
+                handle_stngs_command(update, context, args)
             elif args[0][1:].isdigit() and "rules" in IMPORTED:
                 IMPORTED["rules"].send_rules(update, args[0], from_pm=True)
-
         else:
+            # Default /start message
             first_name = update.effective_user.first_name
             update.effective_message.reply_text(
                 text=gs(chat.id, "pm_start_text").format(
@@ -211,19 +183,61 @@ def start(update: Update, context: CallbackContext):  # sourcery no-metrics
                 reply_markup=InlineKeyboardMarkup([
                     [
                         InlineKeyboardButton(
-                            text="Add Me To Your chat!",
+                            text="Add me to your chat!",
                             url=f"https://t.me/MissIvoryBot?startgroup=true",
                         ),
                     ],
                 ])
             )
     else:
+        # /start command in a group chat
         update.effective_message.reply_text(gs(chat.id, "grp_start_text"))
 
+    # Answer callback queries
     if hasattr(update, 'callback_query'):
         query = update.callback_query
         if hasattr(query, 'id'):
             context.bot.answer_callback_query(query.id)
+
+
+def handle_ghelp_command(update: Update, context: CallbackContext, chat, args):
+    """Handle the ghelp_ command."""
+    query = update.callback_query
+    mod = args[0].lower().split("_", 1)[1]
+    if not HELPABLE.get(mod, False):
+        return
+    help_list = HELPABLE[mod].get_help(chat.id)
+    help_text = []
+    help_buttons = []
+    if isinstance(help_list, list):
+        help_text = help_list[0]
+        help_buttons = help_list[1:]
+    elif isinstance(help_list, str):
+        help_text = help_list
+    text = " *{}*\n".format(HELPABLE[mod].__mod_name__) + help_text
+    help_buttons.append(
+        [InlineKeyboardButton(text="Back", callback_data="help_back"),
+         InlineKeyboardButton(text='Support', url='https://t.me/codecarchive')]
+    )
+    send_help(
+        chat.id,
+        text,
+        InlineKeyboardMarkup(help_buttons),
+    )
+
+    if hasattr(query, "id"):
+        context.bot.answer_callback_query(query.id)
+
+
+def handle_stngs_command(update: Update, context: CallbackContext, args):
+    """Handle the stngs_ command."""
+    match = re.match("stngs_(.*)", args[0].lower())
+    chat = dispatcher.bot.getChat(match.group(1))
+
+    if is_user_admin(update, update.effective_user.id):
+        send_settings(match.group(1), update.effective_user.id, False)
+    else:
+        send_settings(match.group(1), update.effective_user.id, True)
 
 
 # for test purposes
