@@ -20,11 +20,11 @@ pm_help_text: |
    I have lots of handy features, such as flood control, a warning system, a note keeping system, and even predetermined replies on certain keywords.
 
   Helpful commands:
-  - /start: Starts me! You've probably already used this.
-  - /help: Sends this message; I'll tell you more about myself!
+   - /start: Starts me! You've probably already used this.
+   - /help: Sends this message; I'll tell you more about myself!
   
-  If you have any bugs or questions on how to use me, have a look at [Group](t.me/codecArchive).
-  All commands can be used with the following: / ! 
+   If you have any bugs or questions on how to use me, have a look at [Group](t.me/codecArchive).
+   All commands can be used with the following: / ! 
 
 admin_help: |
    • `/admins`*:* list of admins in the chat
@@ -46,11 +46,11 @@ antiflood_help: |
     will result in restricting that user.
      This will mute users if they send more than 10 messages in a row, bots are ignored.
      • `/flood`*:* Get the current flood control setting
-    • *Admins only:*
+     • *Admins only:*
      • `/setflood <int/'no'/'off'>`*:* enables or disables flood control
      *Example:* `/setflood 10`
      • `/setfloodmode <ban/kick/mute/tban/tmute> <value>`*:* Action to perform when user have exceeded flood limit. ban/kick/mute/tmute/tban
-    • *Note:*
+     • *Note:*
      • Value must be filled for tban and tmute!!
      It can be:
      `5m` = 5 minutes
