@@ -36,6 +36,13 @@ def handle_callback_query(update: Update, context: CallbackContext) -> None:
         )
         query.edit_message_text(privacy_responses[data], reply_markup=back_button)
 
+__mod_name__ = "Federations"
+
+def get_help(chat):
+    return gs(chat, "admin_help")
+
 def add_privacy_handlers(dispatcher) -> None:
     dispatcher.add_handler(CommandHandler("privacy", privacy_command))
     dispatcher.add_handler(CallbackQueryHandler(handle_callback_query))
+
+
