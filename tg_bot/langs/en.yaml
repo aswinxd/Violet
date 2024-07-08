@@ -42,6 +42,17 @@ admin_help: |
    • /antilinkedchan <on/off>: Makes Ivoryautomatically delete linked channel posts from chatroom
    • /antichannelpin <on/off>: Makes Ivoryautomatically unpin linked channel posts from chatroom
 
+
+captcha_heelp: |
+
+   You can get the bot to mute new people who join your group and hence prevent spambots from flooding your group. 
+    The following options are possible:
+    • `/captcha soft`*:* restricts new members from sending media for 24 hours.
+    • `/captcha strong`*:* mutes new members till they tap on a button thereby verifying they're human.
+    • `/captcha` captcha *:*  mutes new members till they solve a button captcha thereby verifying they're human.
+    • `/captcha off`*:* turns off welcomemute.
+    *Note:* Strong mode kicks a user from the chat if they dont verify in 120seconds. They can always rejoin though
+
 privacy_help: |
   The privacy module allows you to see the bot privacy policy, as well as view and delete the data the bot stores about you.
   
