@@ -687,13 +687,9 @@ from telegram import ChatPermissions
 def start_bot(token):
     updater = Updater(token=token, use_context=True)
     dispatcher = updater.dispatcher
-    
-    # Add your existing command handlers here
-
-    # Handler for the /clone command
-def main():
-
     dispatcher.add_handler(CommandHandler("privacy", privacy_command))
+
+def main():
 
     if WEBHOOK:
         log.info("Using webhooks.")
