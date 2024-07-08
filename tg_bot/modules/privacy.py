@@ -12,6 +12,7 @@ privacy_responses = {
     "right_to_process": "You have the right to access, correct, or delete your data. [Contact us](t.me/drxew) for any privacy-related inquiries."
 }
 
+@ivory(command='privacy', pass_args=True)
 def privacy_command(update: Update, context: CallbackContext) -> None:
     privacy_button = InlineKeyboardMarkup(
         [[InlineKeyboardButton("Privacy Policy", callback_data="privacy_policy")]]
@@ -37,7 +38,7 @@ def handle_callback_query(update: Update, context: CallbackContext) -> None:
         )
         query.edit_message_text(privacy_responses[data], reply_markup=back_button)
 
-__mod_name__ = "Federations"
+__mod_name__ = "Privacy"
 
 def get_help(chat):
     return gs(chat, "admin_help")
