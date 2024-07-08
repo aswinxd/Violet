@@ -286,8 +286,7 @@ def help_button(update: Update, context: CallbackContext):
             )
             help_buttons.append(
                 [InlineKeyboardButton(text="Back", callback_data="help_back"),
-                 InlineKeyboardButton(text='Support', url='https://t.me/codecarchive
-                ')]
+                 InlineKeyboardButton(text='Support', url='https://t.me/codecarchive')]
             )
             query.message.edit_text(
                 text=text,
