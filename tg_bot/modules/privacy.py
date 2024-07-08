@@ -50,4 +50,4 @@ def handle_callback_query(update: Update, context: CallbackContext) -> None:
 __mod_name__ = "Privacy"
 
 def get_help(chat):
-    return gs(chat, "admin_help")
+    return gs(chat, "privacy_help")
