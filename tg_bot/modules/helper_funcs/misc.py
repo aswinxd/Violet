@@ -45,11 +45,11 @@ def split_message(msg: str) -> List[str]:
     return result
 
 
-def paginate_modules(page_n: int, module_dict: Dict, prefix, chat=None) -> List:
+def paginate_modules(page_n: int, module_dict: Dict, prefix, chat=None) -> List[List[InlineKeyboardButton]]:
     if not chat:
         modules = sorted(
             [
-                EqInlineKeyboardButton(
+                InlineKeyboardButton(
                     x.__mod_name__,
                     callback_data="{}_module({})".format(
                         prefix, x.__mod_name__.lower()
@@ -61,7 +61,7 @@ def paginate_modules(page_n: int, module_dict: Dict, prefix, chat=None) -> List:
     else:
         modules = sorted(
             [
-                EqInlineKeyboardButton(
+                InlineKeyboardButton(
                     x.__mod_name__,
                     callback_data="{}_module({},{})".format(
                         prefix, chat, x.__mod_name__.lower()
@@ -81,40 +81,10 @@ def paginate_modules(page_n: int, module_dict: Dict, prefix, chat=None) -> List:
     max_num_pages = ceil(len(pairs) / 13)
     modulo_page = page_n % max_num_pages
 
-    # can only have a certain amount of buttons side by side
     if len(pairs) > 3:
-        pairs = pairs[modulo_page * 13 : 13 * (modulo_page + 1)] + [
-            (
-                EqInlineKeyboardButton(
-                    "🔙", callback_data="start_back"),
-            ),
-        ]
-
-    else:
-        pairs += [[EqInlineKeyboardButton("🔙", callback_data="start_back")]]
+        pairs = pairs[modulo_page * 13 : 13 * (modulo_page + 1)]
 
     return pairs
-
-def article(
-    title: str = "",
-    description: str = "",
-    message_text: str = "",
-    thumb_url: str = None,
-    reply_markup: InlineKeyboardMarkup = None,
-    disable_web_page_preview: bool = False,
-) -> InlineQueryResultArticle:
-
-    return InlineQueryResultArticle(
-        id=uuid4(),
-        title=title,
-        description=description,
-        thumb_url=thumb_url,
-        input_message_content=InputTextMessageContent(
-            message_text=message_text,
-            disable_web_page_preview=disable_web_page_preview,
-        ),
-        reply_markup=reply_markup,
-    )
 
 def send_to_list(
     bot: Bot, send_to: list, message: str, markdown=False, html=False
