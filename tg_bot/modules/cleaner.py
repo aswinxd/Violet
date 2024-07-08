@@ -225,13 +225,13 @@ def get_help(chat):
     return gs(chat, "cleaner_help")
 
 SET_CLEAN_BLUE_TEXT_HANDLER = CommandHandler(
-    "cleanbluetext", set_blue_text_must_click, pass_args=True, run_async=True
+    "cleancommand", set_blue_text_must_click, pass_args=True, run_async=True
 )
 ADD_CLEAN_BLUE_TEXT_HANDLER = CommandHandler(
-    "ignorecleanbluetext", add_bluetext_ignore, pass_args=True, run_async=True
+    "ignorecommand", add_bluetext_ignore, pass_args=True, run_async=True
 )
 REMOVE_CLEAN_BLUE_TEXT_HANDLER = CommandHandler(
-    "unignorecleanbluetext", remove_bluetext_ignore, pass_args=True, run_async=True
+    "unignorecommand", remove_bluetext_ignore, pass_args=True, run_async=True
 )
 ADD_CLEAN_BLUE_TEXT_GLOBAL_HANDLER = CommandHandler(
     "ignoreglobalcleanbluetext",
@@ -246,7 +246,7 @@ REMOVE_CLEAN_BLUE_TEXT_GLOBAL_HANDLER = CommandHandler(
     run_async=True,
 )
 LIST_CLEAN_BLUE_TEXT_HANDLER = CommandHandler(
-    "listcleanbluetext", bluetext_ignore_list, run_async=True
+    "listclean", bluetext_ignore_list, run_async=True
 )
 CLEAN_BLUE_TEXT_HANDLER = MessageHandler(
     Filters.command & Filters.chat_type.groups,
@@ -262,7 +262,7 @@ dispatcher.add_handler(REMOVE_CLEAN_BLUE_TEXT_GLOBAL_HANDLER)
 dispatcher.add_handler(LIST_CLEAN_BLUE_TEXT_HANDLER)
 dispatcher.add_handler(CLEAN_BLUE_TEXT_HANDLER, BLUE_TEXT_CLEAN_GROUP)
 
-__mod_name__ = "CleanBlue"
+__mod_name__ = "Clean command"
 __handlers__ = [
     SET_CLEAN_BLUE_TEXT_HANDLER,
     ADD_CLEAN_BLUE_TEXT_HANDLER,
