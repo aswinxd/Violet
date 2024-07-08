@@ -7,10 +7,10 @@ from tg_bot.modules.helper_funcs.decorators import ivory, kigmsg, ivorycallback,
 
 # Dictionary for privacy responses
 privacy_responses = {
-    "info_collect": "We collect the following user data:\n- First Name\n- Last Name\n- Username\n- User ID\n- Messages sent by users\n- User bio if it is visible to the public\nThese are public Telegram details that everyone can see.",
-    "why_collect": "The collected data is used solely for improving your experience with the bot and for processing the bot stats and to avoid spammers.",
-    "what_we_do": "We use the data to personalize your experience and provide better services.",
-    "what_we_do_not_do": "We do not share your data with any third parties.",
+    "info_collect": "We currently collect and process the following information:\n• Telegram UserID, firstname, lastname, username (Note: These are your public telegram details. We do not know your real details.)\n• Chat memberships (The list of all chats you have been seen interacting in)\n• Settings or configurations as set through any commands (For example, welcome settings, notes, filters, etc)",
+    "why_collect": "How we get the personal information and why we have it\nMost of the personal information we process is provided to us directly by you for one of the following reasons:\n• You've messaged the bot directly. This can be to read the complete a CAPTCHA, read the documentation, etc.\n• You've opted to save your messages through the bot.\nWe also receive personal information indirectly, from the following sources in the following scenarios\n:• You're part of a group, or channel, which uses this bot.",
+    "what_we_do": "What we do with the personal information\nWe use the information that you have given us in order to support various bot features. This can include:\n• User ID/username pairing, which allows the bot to resolve usernames to valid user ids.\n• Chat memberships, which allows for federations to know where to ban from, and determine which bans are of importance to you.\n• Storing certain messages that have been explicitly saved. (eg through notes, filters, welcomes, etc)",
+    "what_we_do_not_do": "What we DO NOT do with the personal information\nWe DO NOT:\n• store any messages, unless explicitly saved (eg through notes, filters, welcomes etc).\n• use technologies like beacons or unique device identifiers to identify you or your device.\n• knowingly contact or collect personal information from children under 13. If you believe we have inadvertently collected such information, please contact us so we can promptly obtain parental consent or remove the information.\n• share any sensitive information with any other organisations or individuals.",
     "right_to_process": "You have the right to access, correct, or delete your data. [Contact us](t.me/drxew) for any privacy-related inquiries."
 }
 
@@ -38,7 +38,7 @@ def handle_callback_query(update: Update, context: CallbackContext) -> None:
             [InlineKeyboardButton("Right to Process", callback_data="right_to_process")]
         ]
         query.edit_message_text(
-            "Our contact details\nName: MissIvoryBot\nTelegram: https://t.me/CodecArchive\nThe bot has been made to protect and preserve privacy as best as possible.\nOur privacy policy may change from time to time. If we make any material changes to our policies, we will place a prominent notice on https://t.me/CodecBots.",
+            "Our contact details\nName: MissIvoryBot\nTelegram: @CodecArchive\nThe bot has been made to protect and preserve privacy as best as possible.\nOur privacy policy may change from time to time. If we make any material changes to our policies, we will place a prominent notice on @CodecBots.",
             reply_markup=InlineKeyboardMarkup(buttons)
         )
     elif data in privacy_responses:
