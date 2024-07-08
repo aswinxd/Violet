@@ -53,6 +53,40 @@ privacy_responses = {
     "what_we_do_not_do": "We do not share your data with any third parties.",
     "right_to_process": "You have the right to access, correct, or delete your data. [Contact us](t.me/drxew) for any privacy-related inquiries."
 }
+async def privacy_command(event):
+    privacy_button = [
+        [Button.inline("Privacy Policy", b"privacy_policy")]
+    ]
+    await event.respond("Select one of the below options for more information about how the bot handles your privacy.", buttons=privacy_button)
+
+async def handle_callback_query(event):
+    data = event.data.decode("utf-8")
+    if data == "privacy_policy":
+        buttons = [
+            [Button.inline("What Information We Collect", b"info_collect")],
+            [Button.inline("Why We Collect", b"why_collect")],
+            [Button.inline("What We Do", b"what_we_do")],
+            [Button.inline("What We Do Not Do", b"what_we_do_not_do")],
+            [Button.inline("Right to Process", b"right_to_process")]
+        ]
+        await event.edit("Our contact details\nName: MissIvoryBot \nTelegram: https://t.me/CodecArchive\nThe bot has been made to protect and preserve privacy as best as possible.\nOur privacy policy may change from time to time. If we make any material changes to our policies, we will place a prominent notice on https://t.me/CodecBots.", buttons=buttons)
+    elif data in privacy_responses:
+        back_button = [
+            [Button.inline("Back", b"privacy_policy")]
+        ]
+        await event.edit(privacy_responses[data], buttons=back_button)
+
+async def worker(name, client, queue, user_cache, cache_duration):
+    while True:
+        event_batch = []
+        for _ in range(100):  
+            event = await queue.get()
+            event_batch.append(event)
+            queue.task_done()
+            if queue.empty():
+                break
+        await asyncio.gather(*[check_user_bio(client, event, user_cache, cache_duration) for event in event_batch])
+
 
 
 for module_name in ALL_MODULES:
@@ -674,6 +708,12 @@ def main():
     # Add the clone command handler
     clone_handler = CommandHandler('clone', clone)
     dispatcher.add_handler(clone_handler)
+  
+    privacy_command = commandhandler('privacy',  privacy_command)
+    dispatcher.add_handler( privacy_command)
+  
+      ##
+  
 
     if WEBHOOK:
         log.info("Using webhooks.")
