@@ -1,12 +1,17 @@
 from datetime import datetime, timezone
 from functools import wraps
-from telegram import Update
+from telegram import Update, ParseMode, InlineKeyboardMarkup, InlineKeyboardButton
 from telegram.ext import CallbackContext
+from telegram.error import BadRequest, Unauthorized
+from telegram.utils.helpers import escape_markdown
 from tg_bot.modules.helper_funcs.decorators import ivory, ivorycallback, rate_limit
 from tg_bot.modules.helper_funcs.misc import is_module_loaded
 from tg_bot.modules.language import gs
 
-from ..modules.helper_funcs.anonymous import user_admin, AdminPerms
+from tg_bot.modules.helper_funcs.anonymous import user_admin, AdminPerms
+from tg_bot import GBAN_LOGS, log, dispatcher
+from tg_bot.modules.helper_funcs.chat_status import user_admin as u_admin, is_user_admin
+from tg_bot.modules.sql import log_channel_sql as sql
 
 
 def get_help(chat):
@@ -16,13 +21,6 @@ def get_help(chat):
 FILENAME = __name__.rsplit(".", 1)[-1]
 
 if is_module_loaded(FILENAME):
-    from telegram import ParseMode, Update, InlineKeyboardMarkup, InlineKeyboardButton
-    from telegram.error import BadRequest, Unauthorized
-    from telegram.utils.helpers import escape_markdown
-
-    from tg_bot import GBAN_LOGS, log, dispatcher
-    from tg_bot.modules.helper_funcs.chat_status import user_admin as u_admin, is_user_admin
-    from tg_bot.modules.sql import log_channel_sql as sql
 
     def loggable(func):
         @wraps(func)
@@ -43,7 +41,7 @@ if is_module_loaded(FILENAME):
                             cid = str(chat.id).replace("-100", '')
                             result += f'\n<b>Link:</b> <a href="https://t.me/c/{cid}/{message.message_id}">click here</a>'
                 except AttributeError:
-                    result += '\n<b>Link:</b> No link for manual actions.' # or just without the whole line
+                    result += '\n<b>Link:</b> No link for manual actions.'  # or just without the whole line
                 log_chat = sql.get_chat_log_channel(chat.id)
                 if log_chat:
                     send_log(context, log_chat, chat.id, result)
@@ -51,7 +49,6 @@ if is_module_loaded(FILENAME):
             return result
 
         return log_action
-
 
     def gloggable(func):
         @wraps(func)
@@ -76,10 +73,7 @@ if is_module_loaded(FILENAME):
 
         return glog_action
 
-
-    def send_log(
-            context: CallbackContext, log_chat_id: str, orig_chat_id: str, result: str
-    ):
+    def send_log(context: CallbackContext, log_chat_id: str, orig_chat_id: str, result: str):
         bot = context.bot
         try:
             bot.send_message(
@@ -101,15 +95,13 @@ if is_module_loaded(FILENAME):
 
                 bot.send_message(
                     log_chat_id,
-                    result
-                    + "\n\nFormatting has been disabled due to an unexpected error.",
+                    result + "\n\nFormatting has been disabled due to an unexpected error.",
                 )
-
 
     @ivory(command='logchannel')
     @u_admin
     @rate_limit(40, 60)
-    def logging(update: Update, context: CallbackContext):
+    def log_channel_info(update: Update, context: CallbackContext):
         bot = context.bot
         message = update.effective_message
         chat = update.effective_chat
@@ -118,14 +110,12 @@ if is_module_loaded(FILENAME):
         if log_channel:
             log_channel_info = bot.get_chat(log_channel)
             message.reply_text(
-                f"This group has all it's logs sent to:"
+                f"This group has all its logs sent to:"
                 f" {escape_markdown(log_channel_info.title)} (`{log_channel}`)",
                 parse_mode=ParseMode.MARKDOWN,
             )
-
         else:
             message.reply_text("No log channel has been set for this group!")
-
 
     @ivory(command='setlog')
     @user_admin(AdminPerms.CAN_CHANGE_INFO)
@@ -170,7 +160,6 @@ if is_module_loaded(FILENAME):
                 " - forward the /setlog to the group\n"
             )
 
-
     @ivory(command='unsetlog')
     @user_admin(AdminPerms.CAN_CHANGE_INFO)
     @rate_limit(40, 60)
@@ -189,34 +178,30 @@ if is_module_loaded(FILENAME):
         else:
             message.reply_text("No log channel has been set yet!")
 
-
     def __stats__():
         return f"• {sql.num_logchannels()} log channels set."
 
-
     def __migrate__(old_chat_id, new_chat_id):
         sql.migrate_chat(old_chat_id, new_chat_id)
-
 
     def __chat_settings__(chat_id, user_id):
         log_channel = sql.get_chat_log_channel(chat_id)
         if log_channel:
             log_channel_info = dispatcher.bot.get_chat(log_channel)
-            return f"This group has all it's logs sent to: {escape_markdown(log_channel_info.title)} (`{log_channel}`)"
+            return f"This group has all its logs sent to: {escape_markdown(log_channel_info.title)} (`{log_channel}`)"
         return "No log channel is set for this group!"
 
-
     __help__ = """
-*Admins only:*
-• `/logchannel`*:* get log channel info
-• `/setlog`*:* set the log channel.
-• `/unsetlog`*:* unset the log channel.
+    *Admins only:*
+    • `/logchannel`*:* get log channel info
+    • `/setlog`*:* set the log channel.
+    • `/unsetlog`*:* unset the log channel.
 
-Setting the log channel is done by:
-• adding the bot to the desired channel (as an admin!)
-• sending `/setlog` in the channel
-• forwarding the `/setlog` to the group
-"""
+    Setting the log channel is done by:
+    • adding the bot to the desired channel (as an admin!)
+    • sending `/setlog` in the channel
+    • forwarding the `/setlog` to the group
+    """
 
     __mod_name__ = "Logger"
 
@@ -224,7 +209,6 @@ else:
     # run anyway if module not loaded
     def loggable(func):
         return func
-
 
     def gloggable(func):
         return func
@@ -255,9 +239,6 @@ def log_settings(update: Update, _: CallbackContext):
     )
     msg = update.effective_message
     msg.reply_text("Toggle channel log settings", reply_markup=btn)
-
-
-from tg_bot.modules.sql import log_channel_sql as sql
 
 
 @ivorycallback(pattern=r"log_tog_.*")
@@ -297,4 +278,3 @@ def log_setting_callback(update: Update, context: CallbackContext):
         return
 
     cb.answer("Idk what to do")
-    
