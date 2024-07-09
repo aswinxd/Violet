@@ -199,20 +199,11 @@ def temp_mute(update: Update, context: CallbackContext) -> str:
             )
         else:
             message.reply_text("This user is already muted.")
-
-    except BadRequest as excp:
+            
         if excp.message == "Reply message not found":
             # Do not reply
             message.reply_text(f"Muted for {time_val}!", quote=False)
         else:
-            log.warning(update)
-            log.exception(
-                "ERROR muting user %s in chat %s (%s) due to %s",
-                user_id,
-                chat.title,
-                chat.id,
-                excp.message,
-            )
             message.reply_text("Well damn, I can't mute that user.")
 
     return ""
