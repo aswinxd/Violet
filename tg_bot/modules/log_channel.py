@@ -1,6 +1,6 @@
 from datetime import datetime, timezone
 from functools import wraps
-
+from telegram import Update
 from telegram.ext import CallbackContext
 from tg_bot.modules.helper_funcs.decorators import ivory, ivorycallback, rate_limit
 from tg_bot.modules.helper_funcs.misc import is_module_loaded
