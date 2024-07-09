@@ -1,7 +1,7 @@
 import html
 
 from tg_bot import ALLOW_EXCL, CustomCommandHandler, dispatcher
-from tg_bot.modules.disable import DisableAbleCommandHandler
+#from tg_bot.modules.disable import DisableAbleCommandHandler
 from tg_bot.modules.helper_funcs.chat_status import (
     bot_can_delete,
     connection_status,
