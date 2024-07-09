@@ -1,7 +1,7 @@
 import time
 from cachetools import LRUCache
 from telegram import Update
-from tg_bot.modules.disable import DisableAbleCommandHandler, DisableAbleMessageHandler
+#from tg_bot.modules.disable import DisableAbleCommandHandler, DisableAbleMessageHandler
 from telegram.ext import CommandHandler, MessageHandler, CallbackQueryHandler, InlineQueryHandler, CallbackContext
 from telegram.ext.filters import BaseFilter, Filters
 from tg_bot import dispatcher as d, log
