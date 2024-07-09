@@ -15,8 +15,7 @@ from tg_bot.modules.helper_funcs.chat_status import (
 from tg_bot.modules.helper_funcs.decorators import ivory, rate_limit
 from tg_bot.modules.helper_funcs.extraction import extract_user, extract_user_and_text
 from tg_bot.modules.language import gs
-#from tg_bot.modules.log_channel import loggable
-from ..modules.helper_funcs.anonymous import user_admin, AdminPerms
+from tg_bot.modules.helper_funcs.anonymous import user_admin, AdminPerms
 
 
 @ivory(command="promote", can_disable=False)
@@ -31,17 +30,7 @@ def promote(update: Update, context: CallbackContext) -> Optional[str]:
 
     message = update.effective_message
     chat = update.effective_chat
-    user = update.effective_user
 
-    # promoter = chat.get_member(user.id)
-    """
-    if (
-            not (promoter.can_promote_members or promoter.status == "creator")
-            and not user.id in SUDO_USERS
-    ):
-        message.reply_text("You don't have the necessary rights to do that!")
-        return
-    """
     user_id = extract_user(message, args)
 
     if not user_id:
@@ -63,7 +52,6 @@ def promote(update: Update, context: CallbackContext) -> Optional[str]:
         message.reply_text("I can't promote myself! Get an admin to do it for me.")
         return
 
-    # set same perms as bot - bot can't assign higher perms than itself!
     bot_member = chat.get_member(bot.id)
 
     try:
@@ -75,7 +63,6 @@ def promote(update: Update, context: CallbackContext) -> Optional[str]:
             can_edit_messages=bot_member.can_edit_messages,
             can_delete_messages=bot_member.can_delete_messages,
             can_invite_users=bot_member.can_invite_users,
-            # can_promote_members=bot_member.can_promote_members,
             can_restrict_members=bot_member.can_restrict_members,
             can_pin_messages=bot_member.can_pin_messages,
             can_manage_voice_chats=bot_member.can_manage_voice_chats,
@@ -84,7 +71,7 @@ def promote(update: Update, context: CallbackContext) -> Optional[str]:
         if err.message == "User_not_mutual_contact":
             message.reply_text("I can't promote someone who isn't in the group.")
         else:
-            message.reply_text("An error occured while promoting.")
+            message.reply_text("An error occurred while promoting.")
         return
 
     bot.sendMessage(
@@ -101,14 +88,12 @@ def promote(update: Update, context: CallbackContext) -> Optional[str]:
 @can_promote
 @user_admin(AdminPerms.CAN_PROMOTE_MEMBERS)
 @rate_limit(40, 60)
-#@loggable
 def demote(update: Update, context: CallbackContext) -> Optional[str]:
     bot = context.bot
     args = context.args
 
     chat = update.effective_chat
     message = update.effective_message
-    user = update.effective_user
 
     user_id = extract_user(message, args)
     if not user_id:
@@ -162,16 +147,6 @@ def demote(update: Update, context: CallbackContext) -> Optional[str]:
         return
 
 
-"""
-@ivory(command="admincache", can_disable=False)
-@u_admin
-@rate_limit(40, 60)
-def refresh_admin(update, _):
-    ADMIN_CACHE.pop(update.effective_chat.id)
-    update.effective_message.reply_text("Admins cache refreshed!")
-"""
-
-
 @ivory(command="title", can_disable=False)
 @connection_status
 @bot_admin
@@ -199,7 +174,7 @@ def set_title(update: Update, context: CallbackContext):
 
     if user_member.status == "creator":
         message.reply_text(
-            "This person CREATED the chat, how can i set custom title for him?"
+            "This person CREATED the chat, how can I set a custom title for them?"
         )
         return
 
@@ -211,29 +186,30 @@ def set_title(update: Update, context: CallbackContext):
 
     if user_id == bot.id:
         message.reply_text(
-            "I can't set my own title myself! Get the one who made me admin to do it for me."
+            "I can't set my own title! Get the one who made me admin to do it for me."
         )
         return
 
     if not title:
-        message.reply_text("Setting blank title doesn't do anything!")
+        message.reply_text("Setting a blank title doesn't do anything!")
         return
 
     if len(title) > 16:
+        title = title[:16]
         message.reply_text(
-            "The title length is longer than 16 characters.\nTruncating it to 16 characters."
+            "The title length is longer than 16 characters. Truncating it to 16 characters."
         )
 
     try:
         bot.setChatAdministratorCustomTitle(chat.id, user_id, title)
     except BadRequest:
-        message.reply_text("I can't set custom title for admins that I didn't promote!")
+        message.reply_text("I can't set a custom title for admins that I didn't promote!")
         return
 
     bot.sendMessage(
         chat.id,
-        f"Sucessfully set title for <code>{user_member.user.first_name or user_id}</code> "
-        f"to <code>{html.escape(title[:16])}</code>!",
+        f"Successfully set title for <code>{user_member.user.first_name or user_id}</code> "
+        f"to <code>{html.escape(title)}</code>!",
         parse_mode=ParseMode.HTML,
     )
 
@@ -243,26 +219,16 @@ def set_title(update: Update, context: CallbackContext):
 @can_pin
 @user_admin(AdminPerms.CAN_PIN_MESSAGES)
 @rate_limit(40, 60)
-#@loggable
 def pin(update: Update, context: CallbackContext) -> str:
     bot = context.bot
     args = context.args
 
-    user = update.effective_user
     chat = update.effective_chat
-
-    is_group = chat.type != "private" and chat.type != "channel"
     prev_message = update.effective_message.reply_to_message
 
-    is_silent = True
-    if len(args) >= 1:
-        is_silent = (
-                args[0].lower() != "notify"
-                or args[0].lower() == "loud"
-                or args[0].lower() == "violent"
-        )
+    is_silent = not (len(args) >= 1 and args[0].lower() in ["notify", "loud", "violent"])
 
-    if prev_message and is_group:
+    if prev_message and chat.type in ["group", "supergroup"]:
         try:
             bot.pinChatMessage(
                 chat.id, prev_message.message_id, disable_notification=is_silent
@@ -277,11 +243,9 @@ def pin(update: Update, context: CallbackContext) -> str:
 @can_pin
 @user_admin(AdminPerms.CAN_PIN_MESSAGES)
 @rate_limit(40, 60)
-#@loggable
 def unpin(update: Update, context: CallbackContext) -> str:
     bot = context.bot
     chat = update.effective_chat
-    user = update.effective_user
 
     try:
         bot.unpinChatMessage(chat.id)
@@ -320,14 +284,12 @@ def invite(update: Update, context: CallbackContext):
 @rate_limit(40, 60)
 def adminlist(update: Update, _):
     administrators = update.effective_chat.get_administrators()
-    text = "Admins in *{}*:".format(update.effective_chat.title or "this chat")
+    text = f"Admins in *{update.effective_chat.title or 'this chat'}*:"
     for admin in administrators:
         if not admin.is_anonymous:
             user = admin.user
             name = user.mention_markdown()
-            text += "\n -> {} • `{}` • `{}` • `{}`".format(name, user.id, admin.status,
-                                                           escape_markdown(
-                                                               admin.custom_title) if admin.custom_title else "")
+            text += f"\n -> {name} • `{user.id}` • `{admin.status}` • `{escape_markdown(admin.custom_title) if admin.custom_title else ''}`"
 
     update.effective_message.reply_text(text, parse_mode=ParseMode.MARKDOWN)
 
