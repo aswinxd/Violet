@@ -25,7 +25,6 @@ from ..modules.helper_funcs.anonymous import user_admin, AdminPerms
 @can_promote
 @user_admin(AdminPerms.CAN_PROMOTE_MEMBERS)
 @rate_limit(40, 60)
-@loggable
 def promote(update: Update, context: CallbackContext) -> Optional[str]:
     bot = context.bot
     args = context.args
@@ -93,15 +92,7 @@ def promote(update: Update, context: CallbackContext) -> Optional[str]:
         f"<b>{user_member.user.first_name or user_id}</b> was promoted by <b>{message.from_user.first_name}</b> in <b>{chat.title}</b>",
         parse_mode=ParseMode.HTML,
     )
-
-    log_message = (
-        f"<b>{html.escape(chat.title)}:</b>\n"
-        f"#PROMOTED\n"
-        f"<b>Admin:</b> {mention_html(user.id, user.first_name)}\n"
-        f"<b>User:</b> {mention_html(user_member.user.id, user_member.user.first_name)}"
-    )
-
-    return log_message
+    return
 
 
 @ivory(command="demote", can_disable=False)
@@ -110,7 +101,7 @@ def promote(update: Update, context: CallbackContext) -> Optional[str]:
 @can_promote
 @user_admin(AdminPerms.CAN_PROMOTE_MEMBERS)
 @rate_limit(40, 60)
-@loggable
+#@loggable
 def demote(update: Update, context: CallbackContext) -> Optional[str]:
     bot = context.bot
     args = context.args
@@ -163,15 +154,6 @@ def demote(update: Update, context: CallbackContext) -> Optional[str]:
             f"<b>{user_member.user.first_name or user_id or None}</b> was demoted by <b>{message.from_user.first_name or None}</b> in <b>{chat.title or None}</b>",
             parse_mode=ParseMode.HTML,
         )
-
-        log_message = (
-            f"<b>{html.escape(chat.title)}:</b>\n"
-            f"#DEMOTED\n"
-            f"<b>Admin:</b> {mention_html(user.id, user.first_name)}\n"
-            f"<b>User:</b> {mention_html(user_member.user.id, user_member.user.first_name)}"
-        )
-
-        return log_message
     except BadRequest:
         message.reply_text(
             "Could not demote. I might not be admin, or the admin status was appointed by another"
@@ -261,7 +243,7 @@ def set_title(update: Update, context: CallbackContext):
 @can_pin
 @user_admin(AdminPerms.CAN_PIN_MESSAGES)
 @rate_limit(40, 60)
-@loggable
+#@loggable
 def pin(update: Update, context: CallbackContext) -> str:
     bot = context.bot
     args = context.args
@@ -288,15 +270,6 @@ def pin(update: Update, context: CallbackContext) -> str:
         except BadRequest as excp:
             if excp.message == "Chat_not_modified":
                 pass
-            else:
-                raise
-        log_message = (
-            f"<b>{html.escape(chat.title)}:</b>\n"
-            f"#PINNED\n"
-            f"<b>Admin:</b> {mention_html(user.id, html.escape(user.first_name))}"
-        )
-
-        return log_message
 
 
 @ivory(command="unpin", can_disable=False)
@@ -304,7 +277,7 @@ def pin(update: Update, context: CallbackContext) -> str:
 @can_pin
 @user_admin(AdminPerms.CAN_PIN_MESSAGES)
 @rate_limit(40, 60)
-@loggable
+#@loggable
 def unpin(update: Update, context: CallbackContext) -> str:
     bot = context.bot
     chat = update.effective_chat
@@ -315,16 +288,6 @@ def unpin(update: Update, context: CallbackContext) -> str:
     except BadRequest as excp:
         if excp.message == "Chat_not_modified":
             pass
-        else:
-            raise
-
-    log_message = (
-        f"<b>{html.escape(chat.title)}:</b>\n"
-        f"#UNPINNED\n"
-        f"<b>Admin:</b> {mention_html(user.id, html.escape(user.first_name))}"
-    )
-
-    return log_message
 
 
 @ivory(command="invitelink", can_disable=False)
