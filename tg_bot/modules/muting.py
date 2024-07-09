@@ -46,7 +46,7 @@ def check_user(user_id: int, bot: Bot, update: Update) -> Optional[str]:
 @bot_admin
 @can_restrict
 @user_admin(AdminPerms.CAN_RESTRICT_MEMBERS)
-@loggable
+#@loggable
 @rate_limit(40, 60)
 def mute(update: Update, context: CallbackContext) -> str:
     bot = context.bot
@@ -65,13 +65,6 @@ def mute(update: Update, context: CallbackContext) -> str:
 
     member = chat.get_member(user_id)
 
-    log = (
-        f"<b>{html.escape(chat.title)}:</b>\n"
-        f"#MUTE\n"
-        f"<b>Admin:</b> {mention_html(user.id, user.first_name)}\n"
-        f"<b>User:</b> {mention_html(member.user.id, member.user.first_name)}"
-    )
-
     if reason:
         log += f"\n<b>Reason:</b> {reason}"
 
@@ -86,8 +79,6 @@ def mute(update: Update, context: CallbackContext) -> str:
             ),
             parse_mode=ParseMode.HTML,
         )
-        return log
-
     else:
         message.reply_text("This user is already muted!")
 
@@ -99,7 +90,7 @@ def mute(update: Update, context: CallbackContext) -> str:
 @bot_admin
 @can_restrict
 @user_admin(AdminPerms.CAN_RESTRICT_MEMBERS)
-@loggable
+#@loggable
 @rate_limit(40, 60)
 def unmute(update: Update, context: CallbackContext) -> str:
     bot, args = context.bot, context.args
@@ -195,18 +186,7 @@ def temp_mute(update: Update, context: CallbackContext) -> str:
 
     if not mutetime:
         return ""
-
-    log = (
-        f"<b>{html.escape(chat.title)}:</b>\n"
-        f"#TEMP MUTED\n"
-        f"<b>Admin:</b> {mention_html(user.id, user.first_name)}\n"
-        f"<b>User:</b> {mention_html(member.user.id, member.user.first_name)}\n"
-        f"<b>Time:</b> {time_val}"
-    )
-    if reason:
-        log += f"\n<b>Reason:</b> {reason}"
-
-    try:
+    else:
         if member.can_send_messages is None or member.can_send_messages:
             chat_permissions = ChatPermissions(can_send_messages=False)
             bot.restrict_chat_member(
@@ -217,7 +197,6 @@ def temp_mute(update: Update, context: CallbackContext) -> str:
                 f"Muted <b>{html.escape(member.user.first_name)}</b> for {time_val}!\n<b>Reason</b>: <code>{reason}</code>",
                 parse_mode=ParseMode.HTML,
             )
-            return log
         else:
             message.reply_text("This user is already muted.")
 
@@ -225,7 +204,6 @@ def temp_mute(update: Update, context: CallbackContext) -> str:
         if excp.message == "Reply message not found":
             # Do not reply
             message.reply_text(f"Muted for {time_val}!", quote=False)
-            return log
         else:
             log.warning(update)
             log.exception(
