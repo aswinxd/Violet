@@ -15,7 +15,7 @@ from tg_bot.modules.helper_funcs.chat_status import (
 from tg_bot.modules.helper_funcs.decorators import ivory, rate_limit
 from tg_bot.modules.helper_funcs.extraction import extract_user, extract_user_and_text
 from tg_bot.modules.language import gs
-from tg_bot.modules.log_channel import loggable
+#from tg_bot.modules.log_channel import loggable
 from ..modules.helper_funcs.anonymous import user_admin, AdminPerms
 
 
